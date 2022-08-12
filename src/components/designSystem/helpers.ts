@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Dimensions, Platform, ViewStyle } from 'react-native';
 
 import { colors } from './colors';
@@ -21,7 +20,7 @@ export const isIphoneX = (): boolean => {
 
 export const getElevation = (elevation: number): ViewStyle => ({
   elevation,
-  shadowColor: colors.shadow,
+  shadowColor: colors.disabledLight,
   shadowOffset: {
     width: 0,
     height: Math.round(1 + elevation / 4),

@@ -35,12 +35,12 @@ const Root = createStackNavigator<TRootNavigatorParams>();
 
 export const RootNavigator = () => {
   useEffect(() => {
-    RNBootSplash.hide({ fade: true });
+    RNBootSplash.hide();
   }, []);
 
   return (
     <NavigationContainer>
-      <Root.Navigator>
+      <Root.Navigator screenOptions={{ headerShown: false }}>
         <Root.Screen name="Welcome" component={WelcomeScreen} />
       </Root.Navigator>
     </NavigationContainer>

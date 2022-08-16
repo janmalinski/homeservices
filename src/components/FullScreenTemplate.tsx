@@ -41,7 +41,6 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
         extraScrollHeight={Platform.select({ ios: 32, android: 0 })}
         keyboardShouldPersistTaps={keyboardShouldPersistTaps}
         contentContainerStyle={[
-          styles.contentContainer,
           padded && styles.padded,
           bottomNavigationPad && styles.bottomNavigationPad,
           contentContainerStyle,
@@ -64,7 +63,6 @@ interface IStyles {
   mainContainer: ViewStyle;
   container: ViewStyle;
   containerNoScroll: ViewStyle;
-  contentContainer: ViewStyle;
   padded: ViewStyle;
   bottomNavigationPad: ViewStyle;
   loadingContainer: ViewStyle;
@@ -80,9 +78,6 @@ const stylesDef: IStyles = {
   },
   containerNoScroll: {
     flex: 1,
-  },
-  contentContainer: {
-    flexGrow: 1,
   },
   padded: {
     padding: spacing.large,

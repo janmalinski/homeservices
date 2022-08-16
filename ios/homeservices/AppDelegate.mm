@@ -1,3 +1,5 @@
+#import <GoogleMaps/GoogleMaps.h>
+
 #import "AppDelegate.h"
 #import "RNBootSplash.h"
 
@@ -32,6 +34,8 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+[GMSServices provideAPIKey:@"AIzaSyB5fzf_DF6kP-lFP2Js4cihGQTF4s4gUUY"];
+
   RCTAppSetupPrepareApp(application);
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];

@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Image, { ImageStyle } from 'react-native-fast-image';
+import { useTranslation } from 'react-i18next';
 
 import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 import { Button, Text } from '@src/components';
@@ -16,6 +17,7 @@ import { WelcomeScreenStyles as styles } from './WelcomeScreenStyles';
 
 export const WelcomeScreen = () => {
   const navigation = useNavigation<StackNavigationProp<TRootNavigatorParams>>();
+  const [t] = useTranslation();
 
   const navigateSignInScreen = useCallback(() => {
     navigation.navigate('SignIn');
@@ -32,7 +34,7 @@ export const WelcomeScreen = () => {
           source={require('../assets/bootsplash_logo.png')}
           style={styles.brand as StyleProp<ImageStyle>}
         />
-        <Text style={styles.headerText}>Hire Home Help</Text>
+        <Text style={styles.headerText}>{t('welcome.hireHomeHelp')}</Text>
       </SafeAreaView>
     </View>
   );
@@ -46,17 +48,19 @@ export const WelcomeScreen = () => {
       style={styles.imageBackground}>
       <View style={styles.container}>
         {Header}
-        <Text style={styles.title}>Find home help in 10 minutes</Text>
+        <Text style={styles.title}>{t('welcome.findHomeHelp')}</Text>
         <View style={styles.subContainer}>
           <Button
-            title="Start"
-            isFullWidth
+            buttonStyle={styles.button}
+            title={t('welcome.start')}
             onPress={navigateToLocationScreen}
           />
           <TouchableOpacity style={styles.row} onPress={navigateSignInScreen}>
-            <Text style={styles.paragraph}>Already have an account?</Text>
+            <Text style={styles.paragraph}>
+              {t('welcome.alreadyHaveAccount')}
+            </Text>
             <View style={styles.linkContainer}>
-              <Text style={styles.paragraph}>Log In</Text>
+              <Text style={styles.paragraph}>{t('common.logIn')}</Text>
             </View>
           </TouchableOpacity>
         </View>

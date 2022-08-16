@@ -25,6 +25,7 @@ const stylesDef: IStyles = {
   headerText: {
     ...typography.header1,
     color: colors.white,
+    textAlign: 'center',
   },
   headerInner: {
     paddingTop: spacing.xLarge,
@@ -66,7 +67,7 @@ const stylesDef: IStyles = {
     borderBottomWidth: 1,
   },
   button: {
-    marginTop: 100,
+    width: 256,
   },
 };
 

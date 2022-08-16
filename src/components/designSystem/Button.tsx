@@ -7,6 +7,7 @@ import {
   View,
   GestureResponderEvent,
   TextStyle,
+  StyleProp,
 } from 'react-native';
 import { Spinner } from '../Spinner';
 
@@ -19,6 +20,8 @@ interface IButton extends Omit<TouchableOpacityProps, 'style'> {
   variant?: 'PRIMARY' | 'SECONDARY' | 'TERTIARY' | 'FULLWIDTH';
   isFullWidth?: boolean;
   isLoading?: boolean;
+  buttonStyle?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
 }
 
 const getBtnStyle = (
@@ -42,6 +45,8 @@ export const Button = ({
   accessibilityRole,
   activeOpacity,
   isLoading,
+  buttonStyle,
+  titleStyle,
   onPress,
   ...touchableOpacityProps
 }: IButton) => {
@@ -60,7 +65,7 @@ export const Button = ({
 
   return (
     <TouchableOpacity
-      style={[styles.btn, btnStyle, widthStyle]}
+      style={[styles.btn, btnStyle, widthStyle, buttonStyle]}
       accessibilityRole={accessibilityRole || 'button'}
       activeOpacity={activeOpacity || 0.7}
       disabled={disabled}
@@ -75,7 +80,7 @@ export const Button = ({
           </View>
         )}
 
-        {!isLoading && <Text style={styles.title}>{title}</Text>}
+        {!isLoading && <Text style={[styles.title, titleStyle]}>{title}</Text>}
       </>
     </TouchableOpacity>
   );
@@ -101,7 +106,7 @@ const stylesDef: Tstyles = {
   btn: {
     borderWidth: 1,
     borderRadius: spacing.small,
-    paddingHorizontal: 33,
+    paddingHorizontal: 15,
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 56,

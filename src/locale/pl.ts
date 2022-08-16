@@ -1,9 +1,13 @@
 const translations = {
   common: {
     cancel: 'Anuluj',
+    logIn: 'Zaloguj się',
   },
-  signIn: {
-    signIn: 'Zaloguj się',
+  welcome: {
+    hireHomeHelp: 'Wyszukaj pomoc domową',
+    start: 'Rozpocznij',
+    findHomeHelp: 'Znajdź pomoc domową w 10 minut',
+    alreadyHaveAccount: 'Masz już konto?',
   },
   adList: {
     contentList: 'Treści',

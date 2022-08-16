@@ -15,6 +15,13 @@ const translations = {
     yes: 'Yes',
     no: 'No',
     save: 'Save',
+    logIn: 'Log In',
+  },
+  welcome: {
+    hireHomeHelp: 'Hire Home Help',
+    start: 'Start',
+    findHomeHelp: 'Find home help in 10 minutes',
+    alreadyHaveAccount: 'Already have an account?',
   },
   adCreate: {
     createAd: 'Create Ad',
@@ -73,9 +80,8 @@ const translations = {
     whereAreYouLookingForHelp: 'Where are you looking for home help?',
     whichAreYouWantToWork: 'Which area you want to work?',
   },
-  signIn: {
-    signIn: 'Log In',
-    signInButton: 'Log In',
+  logIn: {
+    logInButton: 'Log In',
     signUpTip: "don't have an account?",
     forgotPassword: 'Forgot password?',
   },

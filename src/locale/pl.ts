@@ -1,3 +1,5 @@
+import appConfig from '../../app.json';
+
 const translations = {
   common: {
     cancel: 'Anuluj',
@@ -39,6 +41,12 @@ const translations = {
     searchOrMoveTheMap: 'Search or move the map',
     whereAreYouLookingForHelp: 'Gdzie chcesz znaleźć pomoc domową?',
     whichAreYouWantToWork: 'W jakim rejonie chcesz pracować?',
+    unableOpenSettings: 'Nie można otworzyć ustawień',
+    locationDisabled: `Turn on Location Services to allow "${appConfig.displayName}" to determine your location. This is required to add your ad to listing`,
+    locationPermissionDenied: 'Location permission denied',
+    goToSettings: 'Go to Settings',
+    dontUseLocation: "Don't Use Location",
+    locationPermisssionRevoked: 'Location permission revoked by user',
   },
 };
 

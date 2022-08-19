@@ -6,7 +6,9 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 
-import { WelcomeScreen } from '../Welcome/WelcomeScreen';
+import { WelcomeScreen } from '@src/Welcome/WelcomeScreen';
+import { AssessmentScreen } from '@src/Assessment/AssessmentScreen';
+
 import {
   TCreateAdParams,
   TMainTabParams,
@@ -18,7 +20,7 @@ export type TRootNavigatorParams = {
   ContentCreate: undefined;
   MainTab: NavigatorScreenParams<TMainTabParams>;
   ResetPassword: undefined;
-  Location: undefined;
+  Assessment: undefined;
   Map: TMapScreenParams;
   CreateAd: TCreateAdParams;
   CreateAdMap: TMapScreenParams;
@@ -42,6 +44,7 @@ export const RootNavigator = () => {
     <NavigationContainer>
       <Root.Navigator screenOptions={{ headerShown: false }}>
         <Root.Screen name="Welcome" component={WelcomeScreen} />
+        <Root.Screen name="Assessment" component={AssessmentScreen} />
       </Root.Navigator>
     </NavigationContainer>
   );

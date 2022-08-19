@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import { Middleware } from 'redux';
 
-import location from './Location/locationStore';
+import assessment from '@src/Assessment/assessmentStore';
 
 let flipperMiddleware: Middleware;
 if (__DEV__) {
@@ -14,7 +14,7 @@ if (__DEV__) {
 const makeStore = () => {
   return configureStore({
     reducer: {
-      location,
+      assessment,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().concat(flipperMiddleware || []),

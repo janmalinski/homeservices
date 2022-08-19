@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getRoles, getTypesOfEmployment } from './locationApi';
+import { getRoles, getTypesOfEmployment } from './assessmentApi';
 // import { setAlert } from 'app/components/Alert/alertStore';
 // import { signOutThunk } from '../Auth/authStore';
 
@@ -72,8 +72,8 @@ export const fetchTypesOfEmploymentThunk = createAsyncThunk(
   },
 );
 
-const locationStore = createSlice({
-  name: 'location',
+const assessmentStore = createSlice({
+  name: 'assessment',
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -113,4 +113,4 @@ const locationStore = createSlice({
   },
 });
 
-export default locationStore.reducer;
+export default assessmentStore.reducer;

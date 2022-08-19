@@ -24,7 +24,7 @@ export const WelcomeScreen = () => {
   }, [navigation]);
 
   const navigateToLocationScreen = useCallback(() => {
-    navigation.navigate('Location');
+    navigation.navigate('Assessment');
   }, [navigation]);
 
   const Header = (

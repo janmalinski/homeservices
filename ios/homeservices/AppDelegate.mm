@@ -1,4 +1,5 @@
 #import <GoogleMaps/GoogleMaps.h>
+#import "ReactNativeConfig.h"
 
 #import "AppDelegate.h"
 #import "RNBootSplash.h"
@@ -34,8 +35,8 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
- NSString *gPlacesApiKey = [ReactNativeConfig envFor:@"GOOGLE_PLACES_API_KEY"];
-[GMSServices provideAPIKey:gPlacesApiKey];
+
+[GMSServices provideAPIKey:[ReactNativeConfig envFor:@"GOOGLE_PLACES_API_KEY"]];
 
   RCTAppSetupPrepareApp(application);
 

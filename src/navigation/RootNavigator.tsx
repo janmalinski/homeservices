@@ -15,6 +15,8 @@ import {
   TMapScreenParams,
   TSignUpScreenParams,
 } from './BottomTabs/BottomTabsNavigator';
+import { InternetConnectionHandler } from '@src/Toast/InternetConnectionHandler';
+import { GlobalToast } from '@src/Toast/GlobalToast';
 
 export type TRootNavigatorParams = {
   ContentCreate: undefined;
@@ -46,6 +48,8 @@ export const RootNavigator = () => {
         <Root.Screen name="Welcome" component={WelcomeScreen} />
         <Root.Screen name="Assessment" component={AssessmentScreen} />
       </Root.Navigator>
+      <GlobalToast />
+      <InternetConnectionHandler />
     </NavigationContainer>
   );
 };

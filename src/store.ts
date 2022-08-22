@@ -4,6 +4,7 @@ import { TypedUseSelectorHook } from 'react-redux';
 import { Middleware } from 'redux';
 
 import assessment from '@src/Assessment/assessmentStore';
+import toast from '@src/Toast/toastStore';
 
 let flipperMiddleware: Middleware;
 if (__DEV__) {
@@ -15,6 +16,7 @@ const makeStore = () => {
   return configureStore({
     reducer: {
       assessment,
+      toast,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().concat(flipperMiddleware || []),

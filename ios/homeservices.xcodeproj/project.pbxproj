@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* homeservicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* homeservicesTests.m */; };
-		0A0ACC96B6F21B90C3F9121F /* libPods-homeservices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 820D1A2DC5FC13AC24E7690C /* libPods-homeservices.a */; };
 		0A29F7ACF1CA47DDB76CDAED /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 513044D9818641879719B2E0 /* Inter-SemiBold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		341089C428B3873D001CA9B7 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C42F52C236F14E5DA3A34263 /* Inter-Medium.ttf */; };
 		34D0A61C28A5143A0091A1EB /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D0A61B28A5143A0091A1EB /* BootSplash.storyboard */; };
-		3FAB416114BA43FD956CFABD /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C42F52C236F14E5DA3A34263 /* Inter-Medium.ttf */; };
 		49EAD50E44654689A8DF10B3 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6E78733F8C4396B86EB4F2 /* Montserrat-Bold.ttf */; };
+		5465FE5C25852A8C0B7B1D10 /* libPods-homeservices-homeservicesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 131B89AD4F90267F61EB220F /* libPods-homeservices-homeservicesTests.a */; };
 		6A250063FDFF4ECB89E03664 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA0017629D6E4FA5AAA0F011 /* Inter-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		AE81BB64FE2764E3FD99E22E /* libPods-homeservices-homeservicesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 754006ABE709C14B06A27C7B /* libPods-homeservices-homeservicesTests.a */; };
 		C09C75FD74A14A9F91982795 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4B90A6F4064693B7E9ED0B /* Montserrat-SemiBold.ttf */; };
+		C97CD3F808022CB3A3638EBD /* libPods-homeservices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA69125EDF97ED95CF45CC7D /* libPods-homeservices.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,25 +36,30 @@
 		00E356EE1AD99517003FC87E /* homeservicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homeservicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* homeservicesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = homeservicesTests.m; sourceTree = "<group>"; };
+		131B89AD4F90267F61EB220F /* libPods-homeservices-homeservicesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-homeservices-homeservicesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* homeservices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homeservices.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = homeservices/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = homeservices/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = homeservices/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = homeservices/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = homeservices/main.m; sourceTree = "<group>"; };
-		217BA22DD84DC14C3C0A6F93 /* Pods-homeservices-homeservicesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices-homeservicesTests.debug.xcconfig"; path = "Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		22E40A346CC7CFDB83BD0C17 /* Pods-homeservices-homeservicesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices-homeservicesTests.release.xcconfig"; path = "Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests.release.xcconfig"; sourceTree = "<group>"; };
-		2C0AA62B52B3724FDC6532A1 /* Pods-homeservices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices.debug.xcconfig"; path = "Target Support Files/Pods-homeservices/Pods-homeservices.debug.xcconfig"; sourceTree = "<group>"; };
+		3463D14B28AFC23E00F7D3F6 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		3463D14C28AFC23E00F7D3F6 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		3463D14D28AFC23E00F7D3F6 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		3463D15728AFC23E00F7D3F6 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		3463D15A28AFC23F00F7D3F6 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		34D0A61B28A5143A0091A1EB /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = homeservices/BootSplash.storyboard; sourceTree = "<group>"; };
 		513044D9818641879719B2E0 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
-		754006ABE709C14B06A27C7B /* libPods-homeservices-homeservicesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-homeservices-homeservicesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57BAE4775F3FD4C000FA62B5 /* Pods-homeservices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices.release.xcconfig"; path = "Target Support Files/Pods-homeservices/Pods-homeservices.release.xcconfig"; sourceTree = "<group>"; };
+		78DCB26BE1C4469A6DF43512 /* Pods-homeservices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices.debug.xcconfig"; path = "Target Support Files/Pods-homeservices/Pods-homeservices.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = homeservices/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		820D1A2DC5FC13AC24E7690C /* libPods-homeservices.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-homeservices.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93FC871ED4EE5151BC090658 /* Pods-homeservices-homeservicesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices-homeservicesTests.debug.xcconfig"; path = "Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B14406DF5BEA2C4F06BA022C /* Pods-homeservices-homeservicesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices-homeservicesTests.release.xcconfig"; path = "Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests.release.xcconfig"; sourceTree = "<group>"; };
 		C42F52C236F14E5DA3A34263 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		CE4B90A6F4064693B7E9ED0B /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		EA0017629D6E4FA5AAA0F011 /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
-		EA540FF4CA4861748974495B /* Pods-homeservices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homeservices.release.xcconfig"; path = "Target Support Files/Pods-homeservices/Pods-homeservices.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FA69125EDF97ED95CF45CC7D /* libPods-homeservices.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-homeservices.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E78733F8C4396B86EB4F2 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE81BB64FE2764E3FD99E22E /* libPods-homeservices-homeservicesTests.a in Frameworks */,
+				5465FE5C25852A8C0B7B1D10 /* libPods-homeservices-homeservicesTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A0ACC96B6F21B90C3F9121F /* libPods-homeservices.a in Frameworks */,
+				C97CD3F808022CB3A3638EBD /* libPods-homeservices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +115,7 @@
 		13B07FAE1A68108700A75B9A /* homeservices */ = {
 			isa = PBXGroup;
 			children = (
+				3463D14A28AFC1AA00F7D3F6 /* Fonts */,
 				34D0A61B28A5143A0091A1EB /* BootSplash.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -125,10 +131,22 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				820D1A2DC5FC13AC24E7690C /* libPods-homeservices.a */,
-				754006ABE709C14B06A27C7B /* libPods-homeservices-homeservicesTests.a */,
+				FA69125EDF97ED95CF45CC7D /* libPods-homeservices.a */,
+				131B89AD4F90267F61EB220F /* libPods-homeservices-homeservicesTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3463D14A28AFC1AA00F7D3F6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3463D14B28AFC23E00F7D3F6 /* FontAwesome5_Brands.ttf */,
+				3463D14C28AFC23E00F7D3F6 /* FontAwesome5_Regular.ttf */,
+				3463D15A28AFC23F00F7D3F6 /* FontAwesome5_Solid.ttf */,
+				3463D15728AFC23E00F7D3F6 /* Ionicons.ttf */,
+				3463D14D28AFC23E00F7D3F6 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -166,10 +184,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2C0AA62B52B3724FDC6532A1 /* Pods-homeservices.debug.xcconfig */,
-				EA540FF4CA4861748974495B /* Pods-homeservices.release.xcconfig */,
-				217BA22DD84DC14C3C0A6F93 /* Pods-homeservices-homeservicesTests.debug.xcconfig */,
-				22E40A346CC7CFDB83BD0C17 /* Pods-homeservices-homeservicesTests.release.xcconfig */,
+				78DCB26BE1C4469A6DF43512 /* Pods-homeservices.debug.xcconfig */,
+				57BAE4775F3FD4C000FA62B5 /* Pods-homeservices.release.xcconfig */,
+				93FC871ED4EE5151BC090658 /* Pods-homeservices-homeservicesTests.debug.xcconfig */,
+				B14406DF5BEA2C4F06BA022C /* Pods-homeservices-homeservicesTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -181,12 +199,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "homeservicesTests" */;
 			buildPhases = (
-				7E7725F6B825A97ED979E104 /* [CP] Check Pods Manifest.lock */,
+				651834C1F51CC609EE1A3400 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				3B71F822270999AD787AE2B1 /* [CP] Embed Pods Frameworks */,
-				64ECB80A32CFC1E19D06546D /* [CP] Copy Pods Resources */,
+				B9FD394C37636F5290385A88 /* [CP] Embed Pods Frameworks */,
+				52576E2C85D65BD003A1CDC9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,14 +220,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "homeservices" */;
 			buildPhases = (
-				1D68EF5810A86F74C7165F9A /* [CP] Check Pods Manifest.lock */,
+				3ACE01F2FE65D46EA6DB1614 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				47C1DAA749C74C0368C45577 /* [CP] Embed Pods Frameworks */,
-				40593578E2CE535D3B6BBD67 /* [CP] Copy Pods Resources */,
+				BB4CB473B5A38E97206E2345 /* [CP] Embed Pods Frameworks */,
+				3F561C7E4B25E7FEA9980A34 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,10 +286,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				341089C428B3873D001CA9B7 /* Inter-Medium.ttf in Resources */,
 				34D0A61C28A5143A0091A1EB /* BootSplash.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				3FAB416114BA43FD956CFABD /* Inter-Medium.ttf in Resources */,
 				6A250063FDFF4ECB89E03664 /* Inter-Regular.ttf in Resources */,
 				0A29F7ACF1CA47DDB76CDAED /* Inter-SemiBold.ttf in Resources */,
 				49EAD50E44654689A8DF10B3 /* Montserrat-Bold.ttf in Resources */,
@@ -298,7 +316,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		1D68EF5810A86F74C7165F9A /* [CP] Check Pods Manifest.lock */ = {
+		3ACE01F2FE65D46EA6DB1614 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,24 +338,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3B71F822270999AD787AE2B1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		40593578E2CE535D3B6BBD67 /* [CP] Copy Pods Resources */ = {
+		3F561C7E4B25E7FEA9980A34 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -354,24 +355,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeservices/Pods-homeservices-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		47C1DAA749C74C0368C45577 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeservices/Pods-homeservices-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeservices/Pods-homeservices-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeservices/Pods-homeservices-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		64ECB80A32CFC1E19D06546D /* [CP] Copy Pods Resources */ = {
+		52576E2C85D65BD003A1CDC9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -388,7 +372,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7E7725F6B825A97ED979E104 /* [CP] Check Pods Manifest.lock */ = {
+		651834C1F51CC609EE1A3400 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -408,6 +392,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9FD394C37636F5290385A88 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeservices-homeservicesTests/Pods-homeservices-homeservicesTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB4CB473B5A38E97206E2345 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-homeservices/Pods-homeservices-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-homeservices/Pods-homeservices-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeservices/Pods-homeservices-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -462,7 +480,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 217BA22DD84DC14C3C0A6F93 /* Pods-homeservices-homeservicesTests.debug.xcconfig */;
+			baseConfigurationReference = 93FC871ED4EE5151BC090658 /* Pods-homeservices-homeservicesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -489,7 +507,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22E40A346CC7CFDB83BD0C17 /* Pods-homeservices-homeservicesTests.release.xcconfig */;
+			baseConfigurationReference = B14406DF5BEA2C4F06BA022C /* Pods-homeservices-homeservicesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -513,7 +531,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C0AA62B52B3724FDC6532A1 /* Pods-homeservices.debug.xcconfig */;
+			baseConfigurationReference = 78DCB26BE1C4469A6DF43512 /* Pods-homeservices.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -541,7 +559,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA540FF4CA4861748974495B /* Pods-homeservices.release.xcconfig */;
+			baseConfigurationReference = 57BAE4775F3FD4C000FA62B5 /* Pods-homeservices.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

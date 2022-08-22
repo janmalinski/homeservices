@@ -16,6 +16,7 @@ const translations = {
     no: 'No',
     save: 'Save',
     logIn: 'Log In',
+    noInternetConnection: 'No internet connection',
   },
   welcome: {
     hireHomeHelp: 'Hire Home Help',

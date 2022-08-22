@@ -4,6 +4,7 @@ const translations = {
   common: {
     cancel: 'Anuluj',
     logIn: 'Zaloguj się',
+    noInternetConnection: 'Brak internetu',
   },
   welcome: {
     hireHomeHelp: 'Wyszukaj pomoc domową',

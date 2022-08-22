@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Text, FullScreenTemplate } from '@src/components';
-import { colors, spacing, typography } from '@src/components';
+import { colors, spacing } from '@src/components';
 import { useAppSelector, useAppDispatch } from '@src/store';
 import {
   fetchRolesThunk,
@@ -16,7 +16,6 @@ import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 
 export const AssessmentScreen = () => {
   const [mapButtonPressed, setMapButtonPressed] = useState(false);
-
   const [userType, setUserType] = useState({ id: '', name: '' });
   const [typeOfEmployment, setTypeOfEmployment] = useState<string>('');
 
@@ -54,7 +53,9 @@ export const AssessmentScreen = () => {
   return (
     <FullScreenTemplate safeArea padded>
       {roles?.length > 0 && (
-        <Text style={styles.firstHeaader}>{t('location.clientOrWorker')}</Text>
+        <Text typography="title3" style={styles.firstHeader}>
+          {t('location.clientOrWorker')}
+        </Text>
       )}
       <View style={styles.row}>
         {roles?.map(
@@ -74,8 +75,8 @@ export const AssessmentScreen = () => {
         )}
       </View>
       {userType?.id !== '' && (
-        <View>
-          <Text style={styles.header}>
+        <>
+          <Text typography="title3" style={styles.header}>
             {userType.name === 'Client'
               ? t('location.clientEmploymentType')
               : t('location.workerEmploymentType')}
@@ -85,10 +86,7 @@ export const AssessmentScreen = () => {
               (typeemployment: { id: string; name: string }) => (
                 <Button
                   key={typeemployment.id}
-                  buttonStyle={[
-                    styles.typeemploymentButton,
-                    { flex: 1 / typesOfEmployment.length - 0.04 },
-                  ]}
+                  buttonStyle={{ flex: 1 / typesOfEmployment.length - 0.04 }}
                   variant={
                     typeOfEmployment === typeemployment.id
                       ? 'SECONDARY'
@@ -103,11 +101,13 @@ export const AssessmentScreen = () => {
               ),
             )}
           </View>
-        </View>
+        </>
       )}
       {typeOfEmployment.length > 0 && (
         <View>
-          <Text style={styles.header}>{t('location.yourLocation')}</Text>
+          <Text typography="title3" style={styles.header}>
+            {t('location.yourLocation')}
+          </Text>
           <Button
             buttonStyle={styles.button}
             variant={mapButtonPressed ? 'SECONDARY' : 'PRIMARY'}
@@ -122,21 +122,18 @@ export const AssessmentScreen = () => {
 };
 
 interface IStyles {
-  firstHeaader: TextStyle;
+  firstHeader: TextStyle;
   header: TextStyle;
   row: ViewStyle;
   button: ViewStyle;
   buttonTitle: TextStyle;
-  typeemploymentButton: ViewStyle;
 }
 
 const stylesDef: IStyles = {
-  firstHeaader: {
-    ...typography.subtitle1,
+  firstHeader: {
     marginBottom: spacing.tiny,
   },
   header: {
-    ...typography.subtitle1,
     marginTop: spacing.xxxLarge,
     marginBottom: spacing.tiny,
   },
@@ -151,9 +148,6 @@ const stylesDef: IStyles = {
   },
   buttonTitle: {
     color: colors.black,
-  },
-  typeemploymentButton: {
-    marginBottom: 10,
   },
 };
 

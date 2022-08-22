@@ -13,7 +13,7 @@ import { Spinner } from '../Spinner';
 
 import { colors } from './colors';
 import { spacing } from './spacing';
-import { Text } from './Text';
+import { Text } from './Text/Text';
 
 interface IButton extends Omit<TouchableOpacityProps, 'style'> {
   title: string;
@@ -80,7 +80,20 @@ export const Button = ({
           </View>
         )}
 
-        {!isLoading && <Text style={[styles.title, titleStyle]}>{title}</Text>}
+        {!isLoading && (
+          <Text
+            color={
+              variant === 'PRIMARY'
+                ? 'white'
+                : variant === 'SECONDARY'
+                ? 'primary'
+                : 'tertiaryButtonText'
+            }
+            typography="subhead"
+            fontWeight="semiBold">
+            {title}
+          </Text>
+        )}
       </>
     </TouchableOpacity>
   );

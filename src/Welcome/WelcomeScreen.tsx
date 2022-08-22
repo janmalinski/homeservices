@@ -34,7 +34,12 @@ export const WelcomeScreen = () => {
           source={require('../assets/bootsplash_logo.png')}
           style={styles.brand as StyleProp<ImageStyle>}
         />
-        <Text style={styles.headerText}>{t('welcome.hireHomeHelp')}</Text>
+        <Text
+          typography="largeTitle"
+          fontWeight="extraBold"
+          style={styles.headerText}>
+          {t('welcome.hireHomeHelp')}
+        </Text>
       </SafeAreaView>
     </View>
   );
@@ -48,7 +53,9 @@ export const WelcomeScreen = () => {
       style={styles.imageBackground}>
       <View style={styles.container}>
         {Header}
-        <Text style={styles.title}>{t('welcome.findHomeHelp')}</Text>
+        <Text typography="title2" fontWeight="bold" style={styles.title}>
+          {t('welcome.findHomeHelp')}
+        </Text>
         <View style={styles.subContainer}>
           <Button
             buttonStyle={styles.button}
@@ -56,11 +63,19 @@ export const WelcomeScreen = () => {
             onPress={navigateToLocationScreen}
           />
           <TouchableOpacity style={styles.row} onPress={navigateSignInScreen}>
-            <Text style={styles.paragraph}>
+            <Text
+              typography="body"
+              fontWeight="medium"
+              style={styles.paragraph}>
               {t('welcome.alreadyHaveAccount')}
             </Text>
             <View style={styles.linkContainer}>
-              <Text style={styles.paragraph}>{t('common.logIn')}</Text>
+              <Text
+                typography="body"
+                fontWeight="medium"
+                style={styles.paragraph}>
+                {t('common.logIn')}
+              </Text>
             </View>
           </TouchableOpacity>
         </View>

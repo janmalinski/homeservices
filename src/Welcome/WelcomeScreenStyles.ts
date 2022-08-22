@@ -1,6 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle, ImageStyle } from 'react-native';
 
-import { colors, spacing, typography } from '@src/components';
+import { colors, spacing } from '@src/components';
 
 interface IStyles {
   imageBackground: ViewStyle;
@@ -23,7 +23,6 @@ const stylesDef: IStyles = {
     flex: 1,
   },
   headerText: {
-    ...typography.header1,
     color: colors.white,
     textAlign: 'center',
   },
@@ -38,12 +37,10 @@ const stylesDef: IStyles = {
     marginBottom: spacing.large,
   },
   title: {
-    ...typography.header2,
     color: colors.white,
     textAlign: 'center',
   },
   paragraph: {
-    ...typography.subtitle1,
     lineHeight: spacing.large,
     color: colors.white,
   },

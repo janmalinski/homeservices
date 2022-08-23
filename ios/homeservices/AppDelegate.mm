@@ -36,7 +36,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-[GMSServices provideAPIKey:[ReactNativeConfig envFor:@"GOOGLE_PLACES_API_KEY"]];
+[GMSServices provideAPIKey:[ReactNativeConfig envFor:@"GOOGLE_API_KEY"]];
 
   RCTAppSetupPrepareApp(application);
 

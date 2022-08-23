@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import i18n from 'i18next';
 
 import { getRoles, getTypesOfEmployment } from './assessmentApi';
-// import { setAlert } from 'app/components/Alert/alertStore';
+import { showErrorToastAction } from '@src/Toast/toastStore';
+
 // import { signOutThunk } from '../Auth/authStore';
 
 export interface Payload {
@@ -37,15 +39,20 @@ export const fetchRolesThunk = createAsyncThunk(
       const response = await getRoles();
       const roles = response.data.roles;
       if (roles.length === 0) {
-        // thunkApi.dispatch(
-        // setAlert({ message: 'Something went wrong', status: 'error' }),
-        // );
+        thunkApi.dispatch(
+          showErrorToastAction({
+            message: i18n.t('common.somethingWentWrong'),
+          }),
+        );
         return thunkApi.rejectWithValue('Something went wrong');
       }
+
       return roles;
     } catch (error) {
+      thunkApi.dispatch(
+        showErrorToastAction({ message: i18n.t('common.somethingWentWrong') }),
+      );
       const message = error.response.data.message;
-      // thunkApi.dispatch(setAlert({ message, status: 'error' }));
       return thunkApi.rejectWithValue(message);
     }
   },
@@ -58,15 +65,19 @@ export const fetchTypesOfEmploymentThunk = createAsyncThunk(
       const response = await getTypesOfEmployment();
       const typesOfEmployment = response.data.typeemployments;
       if (typesOfEmployment.length === 0) {
-        // thunkApi.dispatch(
-        // setAlert({ message: 'Something went wrong', status: 'error' }),
-        // );
+        thunkApi.dispatch(
+          showErrorToastAction({
+            message: i18n.t('common.somethingWentWrong'),
+          }),
+        );
         return thunkApi.rejectWithValue('Something went wrong');
       }
       return typesOfEmployment;
     } catch (error) {
       const message = error.response.data.message;
-      // thunkApi.dispatch(setAlert({ message, status: 'error' }));
+      thunkApi.dispatch(
+        showErrorToastAction({ message: i18n.t('common.somethingWentWrong') }),
+      );
       return thunkApi.rejectWithValue(message);
     }
   },

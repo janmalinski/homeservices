@@ -5,6 +5,7 @@ const translations = {
     cancel: 'Anuluj',
     logIn: 'Zaloguj się',
     noInternetConnection: 'Brak internetu',
+    somethingWentWrong: 'Coś poszło nie tak',
   },
   welcome: {
     hireHomeHelp: 'Wyszukaj pomoc domową',

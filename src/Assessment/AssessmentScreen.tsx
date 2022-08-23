@@ -52,76 +52,81 @@ export const AssessmentScreen = () => {
 
   return (
     <FullScreenTemplate safeArea padded>
-      {roles?.length > 0 && (
-        <Text typography="title3" style={styles.firstHeader}>
-          {t('location.clientOrWorker')}
-        </Text>
-      )}
-      <View style={styles.row}>
-        {roles?.map(
-          (item: Payload) =>
-            item.name !== 'Admin' && (
-              <Button
-                key={item.id}
-                buttonStyle={styles.button}
-                variant={userType.id === item.id ? 'SECONDARY' : 'PRIMARY'}
-                titleStyle={styles.buttonTitle}
-                title={t(
-                  item.name === 'Help' ? 'location.worker' : 'location.client',
-                )}
-                onPress={() => setUserType({ id: item.id, name: item.name })}
-              />
-            ),
-        )}
-      </View>
-      {userType?.id !== '' && (
-        <>
-          <Text typography="title3" style={styles.header}>
-            {userType.name === 'Client'
-              ? t('location.clientEmploymentType')
-              : t('location.workerEmploymentType')}
+      <View style={styles.container}>
+        {roles?.length > 0 && (
+          <Text typography="title3" style={styles.firstHeader}>
+            {t('location.clientOrWorker')}
           </Text>
-          <View style={styles.row}>
-            {typesOfEmployment?.map(
-              (typeemployment: { id: string; name: string }) => (
+        )}
+        <View style={styles.row}>
+          {roles?.map(
+            (item: Payload) =>
+              item.name !== 'Admin' && (
                 <Button
-                  key={typeemployment.id}
-                  buttonStyle={{ flex: 1 / typesOfEmployment.length - 0.04 }}
-                  variant={
-                    typeOfEmployment === typeemployment.id
-                      ? 'SECONDARY'
-                      : 'PRIMARY'
-                  }
+                  key={item.id}
+                  buttonStyle={styles.button}
+                  variant={userType.id === item.id ? 'SECONDARY' : 'PRIMARY'}
                   titleStyle={styles.buttonTitle}
-                  title={typeemployment.name}
-                  onPress={() =>
-                    handlePresstypeOfEmploymentButton(typeemployment.id)
-                  }
+                  title={t(
+                    item.name === 'Help'
+                      ? 'location.worker'
+                      : 'location.client',
+                  )}
+                  onPress={() => setUserType({ id: item.id, name: item.name })}
                 />
               ),
-            )}
-          </View>
-        </>
-      )}
-      {typeOfEmployment.length > 0 && (
-        <View>
-          <Text typography="title3" style={styles.header}>
-            {t('location.yourLocation')}
-          </Text>
-          <Button
-            buttonStyle={styles.button}
-            variant={mapButtonPressed ? 'SECONDARY' : 'PRIMARY'}
-            titleStyle={styles.buttonTitle}
-            title={t('location.detectLocation')}
-            onPress={navigateToMap}
-          />
+          )}
         </View>
-      )}
+        {userType?.id !== '' && (
+          <>
+            <Text typography="title3" style={styles.header}>
+              {userType.name === 'Client'
+                ? t('location.clientEmploymentType')
+                : t('location.workerEmploymentType')}
+            </Text>
+            <View style={styles.row}>
+              {typesOfEmployment?.map(
+                (typeemployment: { id: string; name: string }) => (
+                  <Button
+                    key={typeemployment.id}
+                    buttonStyle={{ flex: 1 / typesOfEmployment.length - 0.04 }}
+                    variant={
+                      typeOfEmployment === typeemployment.id
+                        ? 'SECONDARY'
+                        : 'PRIMARY'
+                    }
+                    titleStyle={styles.buttonTitle}
+                    title={typeemployment.name}
+                    onPress={() =>
+                      handlePresstypeOfEmploymentButton(typeemployment.id)
+                    }
+                  />
+                ),
+              )}
+            </View>
+          </>
+        )}
+        {typeOfEmployment.length > 0 && (
+          <View>
+            <Text typography="title3" style={styles.header}>
+              {t('location.yourLocation')}
+            </Text>
+            <Button
+              buttonStyle={styles.button}
+              variant={mapButtonPressed ? 'SECONDARY' : 'PRIMARY'}
+              titleStyle={styles.buttonTitle}
+              title={t('location.detectLocation')}
+              onPress={navigateToMap}
+            />
+          </View>
+        )}
+      </View>
     </FullScreenTemplate>
   );
 };
 
 interface IStyles {
+  container: ViewStyle;
   firstHeader: TextStyle;
   header: TextStyle;
   row: ViewStyle;
@@ -130,6 +135,10 @@ interface IStyles {
 }
 
 const stylesDef: IStyles = {
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
   firstHeader: {
     marginBottom: spacing.tiny,
   },

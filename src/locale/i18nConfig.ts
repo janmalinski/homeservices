@@ -27,3 +27,5 @@ i18n.use(initReactI18next).init({
     escapeValue: false,
   },
 });
+
+export const language = i18n.language;

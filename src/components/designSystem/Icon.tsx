@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import IonIcons from 'react-native-vector-icons/Ionicons';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import { colors } from './colors';
-
 interface IIconProps {
   name: string;
   color?: string;
@@ -19,7 +18,7 @@ export const Icon = ({
   style,
   onPress,
 }: IIconProps) => (
-  <IonIcons
+  <IonIcon
     name={name}
     color={color}
     size={size}

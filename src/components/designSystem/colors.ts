@@ -51,4 +51,68 @@ export const colors = {
   orange500: '#FD6500',
   orange900: '#923C27',
   blue400: '#3DB6FB',
-} as const;
+};
+
+const grayscale = {
+  grayscale00: 'rgba(255, 255, 255, 1)', // #FFFFFF
+  grayscale01: 'rgba(247, 249, 251, 1)', // #F7F9FB
+  grayscale02: 'rgba(236, 241, 245, 1)', // #ECF1F5
+  grayscale03: 'rgba(215, 225, 235, 1)', // #D7E1EB
+  grayscale04: 'rgba(194, 204, 215, 1)', // #C2CCD7
+  grayscale05: 'rgba(163, 174, 186, 1)', // #A3AEBA
+  grayscale06: 'rgba(119, 131, 144, 1)', // #778390
+  grayscale07: 'rgba(86, 97, 108, 1)', // #56616C
+  grayscale08: 'rgba(52, 61, 71, 1)', // #343D47
+  grayscale09: 'rgba(25, 30, 35, 1)', // #191E23
+};
+
+const primary = {
+  primaryLight: 'rgba(105, 192, 255, 1)', // #69C0FF
+  primaryDefault: 'rgba(222, 245, 241, 1)', // #def5f1
+  primaryRaised: 'rgba(9, 109, 217, 1)', // #096DD9
+  primaryDark: 'rgba(0, 80, 179, 1)', // #0050B3
+  primaryDisabled: 'rgba(213, 228, 242, 1)', // #D5E4F2
+};
+
+export const CheckboxColors = {
+  unselected: {
+    default: {
+      border: grayscale.grayscale04,
+      background: grayscale.grayscale00,
+      icon: grayscale.grayscale00,
+      label: grayscale.grayscale09,
+    },
+    raised: {
+      border: grayscale.grayscale04,
+      background: grayscale.grayscale00,
+      icon: grayscale.grayscale00,
+      label: grayscale.grayscale09,
+    },
+    disabled: {
+      border: grayscale.grayscale03,
+      background: grayscale.grayscale01,
+      icon: grayscale.grayscale00,
+      label: grayscale.grayscale05,
+    },
+  },
+  selected: {
+    default: {
+      border: primary.primaryDefault,
+      background: primary.primaryDefault,
+      icon: grayscale.grayscale09,
+      label: grayscale.grayscale09,
+    },
+    raised: {
+      border: primary.primaryRaised,
+      background: primary.primaryRaised,
+      icon: grayscale.grayscale00,
+      label: grayscale.grayscale09,
+    },
+    disabled: {
+      border: primary.primaryDisabled,
+      background: primary.primaryDisabled,
+      icon: grayscale.grayscale00,
+      label: grayscale.grayscale09,
+    },
+  },
+};

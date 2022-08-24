@@ -45,7 +45,7 @@ export const AssessmentScreen = () => {
   const navigateToMap = useCallback(() => {
     setMapButtonPressed(true);
     navigation.navigate('Map', {
-      redirectAfterSubmit: 'SignUp',
+      redirectAfterSubmit: 'Register',
       userType,
     });
   }, [setMapButtonPressed, navigation, userType]);

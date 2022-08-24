@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
 import Config from 'react-native-config';
 import {
   GooglePlacesAutocomplete,
@@ -59,7 +59,12 @@ export const MapInput = ({ onAddressChange }: Props) => {
     />
   );
 };
-const styles = StyleSheet.create({
+
+interface IStyles {
+  searchIconContainer: ViewStyle;
+}
+
+const stylesDef: IStyles = {
   searchIconContainer: {
     height: 42,
     justifyContent: 'center',
@@ -67,4 +72,6 @@ const styles = StyleSheet.create({
     paddingRight: spacing.small,
     backgroundColor: colors.white,
   },
-});
+};
+
+const styles = StyleSheet.create(stylesDef);

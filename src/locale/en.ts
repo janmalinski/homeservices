@@ -81,6 +81,7 @@ const translations = {
     unableOpenSettings: 'Unable to open settings',
     locationPermissionDenied: 'Location permission denied',
     locationPermisssionRevoked: 'Location permission revoked by user',
+    confirmLocation: 'Confirm location',
   },
   logIn: {
     logInButton: 'Log In',

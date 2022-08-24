@@ -49,6 +49,7 @@ const translations = {
     goToSettings: 'Go to Settings',
     dontUseLocation: "Don't Use Location",
     locationPermisssionRevoked: 'Location permission revoked by user',
+    confirmLocation: 'Zatwierdź lokalizację',
   },
 };
 

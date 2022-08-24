@@ -8,6 +8,7 @@ import RNBootSplash from 'react-native-bootsplash';
 
 import { WelcomeScreen } from '@src/Welcome/WelcomeScreen';
 import { AssessmentScreen } from '@src/Assessment/AssessmentScreen';
+import { MapScreen } from '@src/Map/MapScreen/MapScreen';
 
 import {
   TCreateAdParams,
@@ -47,6 +48,7 @@ export const RootNavigator = () => {
       <Root.Navigator screenOptions={{ headerShown: false }}>
         <Root.Screen name="Welcome" component={WelcomeScreen} />
         <Root.Screen name="Assessment" component={AssessmentScreen} />
+        <Root.Screen name="Map" component={MapScreen} />
       </Root.Navigator>
       <GlobalToast />
       <InternetConnectionHandler />

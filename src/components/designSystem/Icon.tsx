@@ -3,7 +3,7 @@ import { StyleProp, ViewStyle } from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import { colors } from './colors';
-interface IIconProps {
+export interface IIconProps {
   name: string;
   color?: string;
   size?: number;

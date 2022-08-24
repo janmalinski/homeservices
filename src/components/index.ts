@@ -1,26 +1,12 @@
-import { colors, CheckboxColors } from './designSystem/colors';
-import { spacing } from './designSystem/spacing';
-import { fonts } from './designSystem/fonts';
-import * as textStyles from './designSystem/Text/styles';
-import * as helpers from './designSystem/helpers';
-import { Text } from './designSystem/Text/Text';
-import { Button } from './designSystem/Button';
-import { Spinner } from './Spinner';
-import { FullScreenTemplate } from './FullScreenTemplate';
-import { KeyboardAvoidingComponent } from './KeyboardAvoidingComponent';
-import { Checkbox } from './designSystem/Checkbox';
-
-export {
-  colors,
-  CheckboxColors,
-  spacing,
-  fonts,
-  helpers,
-  textStyles,
-  Text,
-  Button,
-  Spinner,
-  Checkbox,
-  FullScreenTemplate,
-  KeyboardAvoidingComponent,
-};
+export { colors, CheckboxColors } from './designSystem/colors';
+export { spacing } from './designSystem/spacing';
+export { fonts } from './designSystem/fonts';
+export * as textStyles from './designSystem/Text/styles';
+export * as helpers from './designSystem/helpers';
+export { Text } from './designSystem/Text/Text';
+export { Button } from './designSystem/Button';
+export { Spinner } from './Spinner';
+export { FullScreenTemplate } from './FullScreenTemplate';
+export { KeyboardAvoidingComponent } from './KeyboardAvoidingComponent';
+export { Checkbox } from './designSystem/Checkbox';
+export { Icon, type IIconProps } from './designSystem/Icon';

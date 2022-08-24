@@ -1,4 +1,4 @@
-import { NavigatorScreenParams,} from '@react-navigation/native';
+import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type TBottomTabsNavigatorParams = {
   ContentCreate: undefined;
@@ -9,7 +9,7 @@ export type TBottomTabsNavigatorParams = {
   CreateAd: TCreateAdParams;
   CreateAdMap: TMapScreenParams;
   SignIn: undefined;
-  SignUp: TSignUpScreenParams;
+  SignUp: TRegisterScreenParams;
   RegistrationCodeSignUp: undefined;
   SingOutDialog: undefined;
   Storybook: undefined;
@@ -24,7 +24,7 @@ export type TMainTabParams = {
 };
 
 export type TMapScreenParams = {
-  redirectAfterSubmit: string;
+  redirectAfterSubmit: 'Register' | 'AdCreate';
   userType: {
     id: string;
     name: string;
@@ -44,6 +44,6 @@ export type TCoordinates = {
   longitudeDelta: number;
 };
 
-export interface TSignUpScreenParams
+export interface TRegisterScreenParams
   extends Pick<TMapScreenParams, 'userType'>,
     Pick<TCoordinates, 'latitude' | 'longitude'> {}

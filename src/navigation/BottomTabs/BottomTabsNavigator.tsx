@@ -9,7 +9,7 @@ export type TBottomTabsNavigatorParams = {
   CreateAd: TCreateAdParams;
   CreateAdMap: TMapScreenParams;
   SignIn: undefined;
-  SignUp: TRegisterScreenParams;
+  Register: TRegisterScreenParams;
   RegistrationCodeSignUp: undefined;
   SingOutDialog: undefined;
   Storybook: undefined;

@@ -9,12 +9,13 @@ import RNBootSplash from 'react-native-bootsplash';
 import { WelcomeScreen } from '@src/Welcome/WelcomeScreen';
 import { AssessmentScreen } from '@src/Assessment/AssessmentScreen';
 import { MapScreen } from '@src/Map/MapScreen/MapScreen';
+import { RegisterScreen } from '@src/Auth/Register/RegisterScreen';
 
 import {
   TCreateAdParams,
   TMainTabParams,
   TMapScreenParams,
-  TSignUpScreenParams,
+  TRegisterScreenParams,
 } from './BottomTabs/BottomTabsNavigator';
 import { InternetConnectionHandler } from '@src/Toast/InternetConnectionHandler';
 import { GlobalToast } from '@src/Toast/GlobalToast';
@@ -28,7 +29,7 @@ export type TRootNavigatorParams = {
   CreateAd: TCreateAdParams;
   CreateAdMap: TMapScreenParams;
   SignIn: undefined;
-  SignUp: TSignUpScreenParams;
+  Register: TRegisterScreenParams;
   RegistrationCodeSignUp: undefined;
   SingOutDialog: undefined;
   Storybook: undefined;
@@ -49,6 +50,7 @@ export const RootNavigator = () => {
         <Root.Screen name="Welcome" component={WelcomeScreen} />
         <Root.Screen name="Assessment" component={AssessmentScreen} />
         <Root.Screen name="Map" component={MapScreen} />
+        <Root.Screen name="Register" component={RegisterScreen} />
       </Root.Navigator>
       <GlobalToast />
       <InternetConnectionHandler />

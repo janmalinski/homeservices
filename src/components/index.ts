@@ -10,3 +10,4 @@ export { FullScreenTemplate } from './FullScreenTemplate';
 export { KeyboardAvoidingComponent } from './KeyboardAvoidingComponent';
 export { Checkbox } from './designSystem/Checkbox';
 export { Icon, type IIconProps } from './designSystem/Icon';
+export { TextInput, type ITextInputProps } from './designSystem/TextInput';

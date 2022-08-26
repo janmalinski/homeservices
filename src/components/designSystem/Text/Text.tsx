@@ -2,7 +2,7 @@ import React from 'react';
 import {
   LayoutChangeEvent,
   StyleProp,
-  Text as RNText,
+  Text as TextRN,
   TextStyle,
 } from 'react-native';
 
@@ -23,6 +23,7 @@ interface ITextProps {
   numberOfLines?: number;
   children?: React.ReactNode;
   style?: StyleProp<TextStyle>;
+  onPress?: () => void;
   onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
 }
 
@@ -33,13 +34,15 @@ export const Text: React.FC<ITextProps> = ({
   textAlign = 'auto',
   color = 'textPrimary',
   textDecorationLine = 'none',
-  style,
-  onLayout,
   numberOfLines,
+  style,
+  onPress,
+  onLayout,
 }) => {
   return (
-    <RNText
+    <TextRN
       numberOfLines={numberOfLines}
+      onPress={onPress}
       onLayout={onLayout}
       maxFontSizeMultiplier={1.5}
       style={[
@@ -51,6 +54,6 @@ export const Text: React.FC<ITextProps> = ({
         style,
       ]}>
       {children}
-    </RNText>
+    </TextRN>
   );
 };

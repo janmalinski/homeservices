@@ -88,9 +88,8 @@ const translations = {
     signUpTip: "don't have an account?",
     forgotPassword: 'Forgot password?',
   },
-  signUp: {
-    signUp: 'Sign Up',
-    signUpButton: 'Sign Up',
+  register: {
+    register: 'Register',
     accept: 'I accept ',
     termsOfUse: 'Terms of Use',
   },

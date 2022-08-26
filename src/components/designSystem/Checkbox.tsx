@@ -48,9 +48,9 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
           <View style={[styles.container, containerStyle]}>
             <Icon
               onPress={!disabled ? handlePress : undefined}
-              name="checkmark-outline"
+              name="checkmark-sharp"
               color={CheckboxColors[select][state].icon}
-              size={spacing.regular}
+              size={spacing.large}
               style={[
                 styles.iconContainer,
                 size === 'small' ? styles.iconSmall : styles.iconMedium,
@@ -91,8 +91,6 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
   },
   iconContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
     borderWidth: 1.6,
     borderRadius: 3,
     marginRight: 11,

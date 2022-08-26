@@ -3,7 +3,7 @@ export const colors = {
   black: 'black',
   shadowColor: '#000000',
   lightContrast: '#FAFAFA',
-  primary: '#84E0C3',
+  primary: '#def5f1',
   secondary: '#458caf',
   disabled: '#878787',
   disabledLight: '#F2F2F2',
@@ -25,7 +25,7 @@ export const colors = {
   textAccent: '#000000',
 
   dirtyBlue: '#222D40',
-
+  gray: '##C2CCD7',
   gray90: '#E5E5E5',
   navyBlue50: '#ECEFF5',
   navyBlue100: '#D1D7E1',

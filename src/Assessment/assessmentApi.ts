@@ -1,7 +1,7 @@
 import { publicApi } from '@src/Api/publicApi';
 
 export const getRoles = async () => {
-  const data = publicApi.get('/role');
+  const data = await publicApi.get('/role');
   return data;
 };
 

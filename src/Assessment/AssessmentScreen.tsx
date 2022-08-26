@@ -11,7 +11,7 @@ import {
   fetchRolesThunk,
   fetchTypesOfEmploymentThunk,
 } from './assessmentStore';
-import { Payload } from './assessmentStore';
+import { IPayload } from './assessmentStore';
 import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 
 export const AssessmentScreen = () => {
@@ -21,8 +21,8 @@ export const AssessmentScreen = () => {
 
   const dispatch = useAppDispatch();
 
-  const roles: Payload[] = useAppSelector(state => state.assessment.roles);
-  const typesOfEmployment: Payload[] = useAppSelector(
+  const roles: IPayload[] = useAppSelector(state => state.assessment.roles);
+  const typesOfEmployment: IPayload[] = useAppSelector(
     state => state.assessment.typesOfEmployment,
   );
 
@@ -60,7 +60,7 @@ export const AssessmentScreen = () => {
         )}
         <View style={styles.row}>
           {roles?.map(
-            (item: Payload) =>
+            (item: IPayload) =>
               item.name !== 'Admin' && (
                 <Button
                   key={item.id}

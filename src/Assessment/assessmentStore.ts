@@ -6,24 +6,24 @@ import { showErrorToastAction } from '@src/Toast/toastStore';
 
 // import { signOutThunk } from '../Auth/authStore';
 
-export interface Payload {
+export interface IPayload {
   id: string;
   name: string;
 }
 
-export interface RoleState {
-  roles: Payload[];
+export interface IRoleState {
+  roles: IPayload[];
   rolesPending: boolean;
   rolesError: string;
 }
 
-export interface typesOfEmploymentState {
-  typesOfEmployment: Payload[];
+export interface ITypesOfEmploymentState {
+  typesOfEmployment: IPayload[];
   typesOfEmploymentPending: boolean;
   typesOfEmploymentError: string;
 }
 
-const initialState: RoleState & typesOfEmploymentState = {
+const initialState: IRoleState & ITypesOfEmploymentState = {
   roles: [],
   rolesPending: false,
   rolesError: '',

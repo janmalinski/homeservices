@@ -20,6 +20,7 @@ import { Map } from './Map';
 import { MapInput } from './MapInput';
 import { MapScreenStyles as styles } from './MapScreenStyles';
 import { GooglePlaceDetail } from 'react-native-google-places-autocomplete';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export interface ICoordinates {
   latitude: number;
@@ -44,7 +45,10 @@ export const MapScreen = () => {
   const [address, setAddress] = useState<string>('');
   const [addressChangedByInput, setAddressChangeByInput] = useState(false);
 
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<
+      StackNavigationProp<TRootNavigatorParams, 'Assessment', 'AdCreate'>
+    >();
 
   const route = useRoute<RouteProp<TRootNavigatorParams, 'Map'>>();
 
@@ -178,7 +182,22 @@ export const MapScreen = () => {
   const handleConfirmLocation = async () => {
     const { latitude, longitude } = coordinates;
     const { userType, redirectAfterSubmit } = route.params;
-    // IT WIL BE FINISHED
+
+    if (redirectAfterSubmit === 'Register') {
+      navigation.navigate('Register', {
+        latitude,
+        longitude,
+        userType,
+      });
+    }
+    // NEEDS TO BE FINISHED
+    // else if (redirectAfterSubmit === 'AdCreate') {
+    //   navigation.navigate('AdCreate', {
+    //     latitude,
+    //     longitude,
+    //     address,
+    //   });
+    // }
   };
 
   const userType = route.params.userType;
@@ -210,7 +229,10 @@ export const MapScreen = () => {
             <Text typography="title3" style={styles.addressText}>
               {address}
             </Text>
-            <Button title="Confirm Location" onPress={handleConfirmLocation} />
+            <Button
+              title={t('map.confirmLocation')}
+              onPress={handleConfirmLocation}
+            />
           </View>
         </View>
       )}

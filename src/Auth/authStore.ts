@@ -8,14 +8,14 @@ import {
 
 export interface IAuthState {
   accessToken: string | null;
-  registered: boolean;
+  verfifiacationEmailSent: boolean;
   error: string | null;
   pending: boolean;
 }
 
 const initialState: IAuthState = {
   accessToken: null,
-  registered: false,
+  verfifiacationEmailSent: false,
   error: null,
   pending: false,
 };
@@ -51,7 +51,7 @@ const authStore = createSlice({
     builder.addCase(registerThunk.fulfilled, state => {
       state.pending = false;
       state.error = null;
-      state.registered = true;
+      state.verfifiacationEmailSent = true;
     });
   },
 });

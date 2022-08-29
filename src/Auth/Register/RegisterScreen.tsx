@@ -1,5 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import {
+  useRoute,
+  RouteProp,
+  useNavigation,
+  NavigationProp,
+} from '@react-navigation/native';
 
 import { FullScreenTemplate } from '@src/components';
 import { RegisterForm, IRegisterFormData } from './RegisterForm';
@@ -21,12 +26,18 @@ const initialValues: IRegisterFormData = {
 export const RegisterScreen = () => {
   const dispatch = useAppDispatch();
   const route = useRoute<RouteProp<TRootNavigatorParams, 'Register'>>();
+  const navigation =
+    useNavigation<NavigationProp<TRootNavigatorParams, 'Register'>>();
   const isLoading = useAppSelector(state => state.auth.pending);
-  const isRegistered = useAppSelector(state => state.auth.registered);
+  const isVerificationEmailSent = useAppSelector(
+    state => state.auth.verfifiacationEmailSent,
+  );
 
   useEffect(() => {
-    // NEEDS TO BE FINISHED
-  }, [isLoading, isRegistered]);
+    if (!isLoading && isVerificationEmailSent) {
+      navigation.navigate('VerifyRegistrationCode');
+    }
+  }, [isLoading, isVerificationEmailSent, navigation]);
 
   const registerHandler = useCallback(
     (values: IRegisterFormData) => {
@@ -49,11 +60,11 @@ export const RegisterScreen = () => {
   );
 
   return (
-    <FullScreenTemplate safeArea padded isLoading={isLoading}>
+    <FullScreenTemplate safeArea padded>
       <RegisterForm
         initialValues={initialValues}
         onSubmit={registerHandler}
-        loading={false}
+        loading={isLoading}
       />
     </FullScreenTemplate>
   );

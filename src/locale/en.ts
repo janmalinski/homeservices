@@ -93,6 +93,13 @@ const translations = {
     accept: 'I accept ',
     termsOfUse: 'Terms of Use',
   },
+  verifyRegistrationCode: {
+    checkEmail:
+      'Check your email inbox. And submit form with provided verification code',
+    registrationCodeVerification: 'Registration code verification',
+    registrationCode: 'Registration code',
+    registrationCodeButton: 'Submit registration code',
+  },
   registrationCodeSignUp: {
     registrationCodeVerification: 'Registration code verification',
     registrationCode: 'Registration code',

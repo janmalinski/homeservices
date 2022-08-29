@@ -51,6 +51,23 @@ const translations = {
     locationPermisssionRevoked: 'Location permission revoked by user',
     confirmLocation: 'Zatwierdź lokalizację',
   },
+  logIn: {
+    logInButton: 'Zaloguj się',
+    signUpTip: 'Nie masz konta?',
+    forgotPassword: 'Zapomniałeś hasła?',
+  },
+  register: {
+    register: 'Zarejestruj się',
+    accept: 'Akceptuje ',
+    termsOfUse: 'Warunki korzystania',
+  },
+  verifyRegistrationCode: {
+    checkEmail:
+      'Sprawdź skrzynkę emailową. Prześlij w formularzy kod weryfikacyjny zą emaila',
+    registrationCodeVerification: 'Weryfikacja kodu autoryzacyjnego',
+    registrationCode: 'Kod autoryzacyjny',
+    registrationCodeButton: 'Zatwierdź kod autoryzacyjny',
+  },
 };
 
 export default translations;

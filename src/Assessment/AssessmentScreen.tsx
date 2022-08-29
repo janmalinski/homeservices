@@ -25,6 +25,11 @@ export const AssessmentScreen = () => {
   const typesOfEmployment: IPayload[] = useAppSelector(
     state => state.assessment.typesOfEmployment,
   );
+  const isLoading = useAppSelector(
+    state =>
+      state.assessment.rolesPending ||
+      state.assessment.typesOfEmploymentPending,
+  );
 
   const navigation =
     useNavigation<StackNavigationProp<TRootNavigatorParams, 'Assessment'>>();
@@ -51,7 +56,7 @@ export const AssessmentScreen = () => {
   }, [setMapButtonPressed, navigation, userType]);
 
   return (
-    <FullScreenTemplate safeArea padded>
+    <FullScreenTemplate safeArea padded isLoading={isLoading}>
       <View style={styles.container}>
         {roles?.length > 0 && (
           <Text typography="title3" style={styles.firstHeader}>

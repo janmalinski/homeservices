@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   TextInput as TextInputRN,
   TextInputProps,
@@ -28,6 +28,7 @@ export interface ITextInputProps extends TextInputProps {
 
 export const SMALL_INPUT_HEIGHT = 48;
 export const MEDIUM_INPUT_HEIGHT = 60;
+const SECURE_ICON_CONTAINER_TOP_MARGIN = 41;
 
 export const TextInput: React.FC<ITextInputProps> = ({
   withBorder,
@@ -50,6 +51,18 @@ export const TextInput: React.FC<ITextInputProps> = ({
   const [isSecureTextVisible, setIsSecureTextVisible] = useState(
     !secureTextEntry,
   );
+
+  const SECURE_ICON_TOP_MARGIN_STYLE = useMemo(() => {
+    return {
+      top:
+        size === 'small'
+          ? SECURE_ICON_CONTAINER_TOP_MARGIN
+          : size === 'medium'
+          ? SECURE_ICON_CONTAINER_TOP_MARGIN +
+            (MEDIUM_INPUT_HEIGHT - SMALL_INPUT_HEIGHT) / 2
+          : undefined,
+    };
+  }, [size]);
 
   const handleBlur = useCallback(
     (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
@@ -79,7 +92,7 @@ export const TextInput: React.FC<ITextInputProps> = ({
       color={
         disabled ? colors.disabled : value ? colors.primary : colors.secondary
       }
-      style={styles.iconContainer}
+      style={[styles.iconContainer, SECURE_ICON_TOP_MARGIN_STYLE]}
     />
   );
 
@@ -122,8 +135,8 @@ export const TextInput: React.FC<ITextInputProps> = ({
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      {secureTextEntry && SecureTextIcon}
       <Text style={styles.errorMessage}>{errorMessage}</Text>
+      {secureTextEntry && SecureTextIcon}
     </View>
   );
 };
@@ -191,8 +204,7 @@ const styles = StyleSheet.create({
     color: colors.error,
   },
   iconContainer: {
-    alignSelf: 'flex-end',
     right: spacing.small,
-    marginTop: -34,
+    position: 'absolute',
   },
 });

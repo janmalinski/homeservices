@@ -15,7 +15,6 @@ export interface IFullScreenTemplateProps {
   noScroll?: boolean;
   isLoading?: boolean;
   contentContainerStyle?: ViewStyle;
-  header?: React.ReactNode;
   keyboardShouldPersistTaps?: boolean | 'always' | 'never' | 'handled';
 }
 
@@ -27,7 +26,6 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
   noScroll,
   isLoading,
   contentContainerStyle,
-  header,
   keyboardShouldPersistTaps,
 }) => {
   const RootView = safeArea ? SafeAreaView : View;
@@ -35,26 +33,30 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
 
   return (
     <RootView style={styles.mainContainer} edges={['top']}>
-      {header}
-      <Container
-        bounces={false}
-        extraScrollHeight={Platform.select({ ios: 32, android: 0 })}
-        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-        contentContainerStyle={[
-          padded && styles.padded,
-          bottomNavigationPad && styles.bottomNavigationPad,
-          contentContainerStyle,
-        ]}
-        style={[
-          styles.container,
-          noScroll && styles.containerNoScroll,
-          noScroll && padded && styles.padded,
-          noScroll && bottomNavigationPad && styles.bottomNavigationPad,
-          noScroll && contentContainerStyle,
-        ]}>
-        {isLoading && <Spinner />}
-        {!isLoading && children}
-      </Container>
+      {isLoading ? (
+        <View style={styles.centeredContainer}>
+          <Spinner />
+        </View>
+      ) : (
+        <Container
+          bounces={false}
+          extraScrollHeight={Platform.select({ ios: 32, android: 0 })}
+          keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+          contentContainerStyle={[
+            padded && styles.padded,
+            bottomNavigationPad && styles.bottomNavigationPad,
+            contentContainerStyle,
+          ]}
+          style={[
+            styles.container,
+            noScroll && styles.containerNoScroll,
+            noScroll && padded && styles.padded,
+            noScroll && bottomNavigationPad && styles.bottomNavigationPad,
+            noScroll && contentContainerStyle,
+          ]}>
+          {children}
+        </Container>
+      )}
     </RootView>
   );
 };
@@ -62,6 +64,7 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
 interface IStyles {
   mainContainer: ViewStyle;
   container: ViewStyle;
+  centeredContainer: ViewStyle;
   containerNoScroll: ViewStyle;
   padded: ViewStyle;
   bottomNavigationPad: ViewStyle;
@@ -75,6 +78,12 @@ const stylesDef: IStyles = {
   },
   container: {
     backgroundColor: colors.white,
+  },
+  centeredContainer: {
+    flex: 1,
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   containerNoScroll: {
     flex: 1,

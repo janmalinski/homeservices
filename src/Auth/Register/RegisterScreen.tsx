@@ -50,7 +50,7 @@ export const RegisterScreen = () => {
         ...values,
         latitude,
         longitude,
-        userType: id,
+        userTypeId: id,
         language,
       };
 

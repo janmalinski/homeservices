@@ -7,7 +7,7 @@ type TRegister = (args: {
   termsAccepted: boolean;
   latitude: number;
   longitude: number;
-  userType: string;
+  userTypeId: string;
   language: string;
 }) => Promise<AuthDto.registerDetails>;
 
@@ -17,7 +17,7 @@ export const register: TRegister = async ({
   termsAccepted,
   latitude,
   longitude,
-  userType,
+  userTypeId,
   language,
 }) => {
   const response = await publicApi.post('/auth/signUp', {
@@ -26,7 +26,7 @@ export const register: TRegister = async ({
     termsAccepted,
     latitude,
     longitude,
-    userType,
+    userTypeId,
     language,
   });
   return response.data.message;

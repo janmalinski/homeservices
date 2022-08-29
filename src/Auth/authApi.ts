@@ -11,6 +11,10 @@ type TRegister = (args: {
   language: string;
 }) => Promise<AuthDto.registerDetails>;
 
+type TVerifyRegistrationCode = (
+  code: string,
+) => Promise<AuthDto.verifyRegistrationCodeDetails>;
+
 export const register: TRegister = async ({
   email,
   password,
@@ -28,6 +32,13 @@ export const register: TRegister = async ({
     longitude,
     userTypeId,
     language,
+  });
+  return response.data.message;
+};
+
+export const verifyRegistrationCode = async (code: TVerifyRegistrationCode) => {
+  const response = await publicApi.post('/auth/verify', {
+    code,
   });
   return response.data.message;
 };

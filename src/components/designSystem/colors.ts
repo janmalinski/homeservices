@@ -3,8 +3,8 @@ export const colors = {
   black: 'black',
   shadowColor: '#000000',
   lightContrast: '#FAFAFA',
-  primary: '#def5f1',
-  secondary: '#458caf',
+  primary: '#e4f6f4',
+  secondary: '#8184a1',
   disabled: '#878787',
   disabledLight: '#F2F2F2',
 
@@ -17,8 +17,8 @@ export const colors = {
   warning: '#f0ad4e',
 
   textTitle: '#1A2333',
-  textPrimary: '#5D6D8B',
-  textSecondary: '#818EA3',
+  textPrimary: '#6c6d7c',
+  textSecondary: '#fff',
   textPlaceholder: '#B4BDCB',
   tertiaryButtonBackground: '#FFD1B2',
   tertiaryButtonText: '#BA4A00',

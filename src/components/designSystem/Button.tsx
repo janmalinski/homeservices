@@ -75,7 +75,7 @@ export const Button = ({
         {isLoading && (
           <View style={styles.loader}>
             <Spinner
-              color={variant === 'PRIMARY' ? colors.primary : colors.white}
+              color={variant === 'PRIMARY' ? colors.secondary : colors.primary}
             />
           </View>
         )}
@@ -84,9 +84,9 @@ export const Button = ({
           <Text
             color={
               variant === 'PRIMARY'
-                ? 'white'
+                ? 'textPrimary'
                 : variant === 'SECONDARY'
-                ? 'primary'
+                ? 'textSecondary'
                 : 'tertiaryButtonText'
             }
             typography="subhead"
@@ -129,8 +129,8 @@ const stylesDef: Tstyles = {
     borderColor: colors.primary,
   },
   btn_secondary: {
-    backgroundColor: colors.white,
-    borderColor: colors.primary,
+    backgroundColor: colors.secondary,
+    borderColor: colors.secondary,
   },
   btn_tertiary: {
     backgroundColor: colors.tertiaryButtonBackground,

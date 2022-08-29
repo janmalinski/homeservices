@@ -5,6 +5,7 @@ import { Middleware } from 'redux';
 
 import assessment from '@src/Assessment/assessmentStore';
 import toast from '@src/Toast/toastStore';
+import auth from '@src/Auth/authStore';
 
 let flipperMiddleware: Middleware;
 if (__DEV__) {
@@ -17,6 +18,7 @@ const makeStore = () => {
     reducer: {
       assessment,
       toast,
+      auth,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().concat(flipperMiddleware || []),

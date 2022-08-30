@@ -19,7 +19,7 @@ const initialValues: IRegisterFormData = {
   termsAccepted: false,
   latitude: 0,
   longitude: 0,
-  userType: '',
+  userRole: '',
   language: '',
 };
 
@@ -28,29 +28,28 @@ export const RegisterScreen = () => {
   const route = useRoute<RouteProp<TRootNavigatorParams, 'Register'>>();
   const navigation =
     useNavigation<NavigationProp<TRootNavigatorParams, 'Register'>>();
-  const isLoading = useAppSelector(state => state.auth.pending);
   const isVerificationEmailSent = useAppSelector(
-    state => state.auth.verfifiacationEmailSent,
+    state => state.auth.verificationEmailSent,
   );
 
   useEffect(() => {
-    if (!isLoading && isVerificationEmailSent) {
+    if (isVerificationEmailSent) {
       navigation.navigate('VerifyRegistrationCode');
     }
-  }, [isLoading, isVerificationEmailSent, navigation]);
+  }, [isVerificationEmailSent, navigation]);
 
   const registerHandler = useCallback(
     (values: IRegisterFormData) => {
       const {
         latitude,
         longitude,
-        userType: { id },
+        userRole: { id },
       } = route.params;
       const data = {
         ...values,
         latitude,
         longitude,
-        userTypeId: id,
+        userRoleId: id,
         language,
       };
 
@@ -61,11 +60,7 @@ export const RegisterScreen = () => {
 
   return (
     <FullScreenTemplate safeArea padded>
-      <RegisterForm
-        initialValues={initialValues}
-        onSubmit={registerHandler}
-        loading={isLoading}
-      />
+      <RegisterForm initialValues={initialValues} onSubmit={registerHandler} />
     </FullScreenTemplate>
   );
 };

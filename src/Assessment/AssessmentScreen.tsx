@@ -16,7 +16,7 @@ import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 
 export const AssessmentScreen = () => {
   const [mapButtonPressed, setMapButtonPressed] = useState(false);
-  const [userType, setUserType] = useState({ id: '', name: '' });
+  const [userRole, setUserRole] = useState({ id: '', name: '' });
   const [typeOfEmployment, setTypeOfEmployment] = useState<string>('');
 
   const dispatch = useAppDispatch();
@@ -51,9 +51,9 @@ export const AssessmentScreen = () => {
     setMapButtonPressed(true);
     navigation.navigate('Map', {
       redirectAfterSubmit: 'Register',
-      userType,
+      userRole,
     });
-  }, [setMapButtonPressed, navigation, userType]);
+  }, [setMapButtonPressed, navigation, userRole]);
 
   return (
     <FullScreenTemplate safeArea padded isLoading={isLoading}>
@@ -70,22 +70,22 @@ export const AssessmentScreen = () => {
                 <Button
                   key={item.id}
                   buttonStyle={styles.button}
-                  variant={userType.id === item.id ? 'SECONDARY' : 'PRIMARY'}
+                  variant={userRole.id === item.id ? 'SECONDARY' : 'PRIMARY'}
                   titleStyle={styles.buttonTitle}
                   title={t(
                     item.name === 'Help'
                       ? 'location.worker'
                       : 'location.client',
                   )}
-                  onPress={() => setUserType({ id: item.id, name: item.name })}
+                  onPress={() => setUserRole({ id: item.id, name: item.name })}
                 />
               ),
           )}
         </View>
-        {userType?.id !== '' && (
+        {userRole?.id !== '' && (
           <>
             <Text typography="title3" style={styles.header}>
-              {userType.name === 'Client'
+              {userRole.name === 'Client'
                 ? t('location.clientEmploymentType')
                 : t('location.workerEmploymentType')}
             </Text>

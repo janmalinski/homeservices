@@ -181,13 +181,13 @@ export const MapScreen = () => {
 
   const handleConfirmLocation = async () => {
     const { latitude, longitude } = coordinates;
-    const { userType, redirectAfterSubmit } = route.params;
+    const { userRole, redirectAfterSubmit } = route.params;
 
     if (redirectAfterSubmit === 'Register') {
       navigation.navigate('Register', {
         latitude,
         longitude,
-        userType,
+        userRole,
       });
     }
     // NEEDS TO BE FINISHED
@@ -200,7 +200,7 @@ export const MapScreen = () => {
     // }
   };
 
-  const userType = route.params.userType;
+  const userRole = route.params.userRole;
   return (
     <FullScreenTemplate noScroll>
       {coordinates.latitude === 0 && coordinates.longitude === 0 ? (
@@ -212,7 +212,7 @@ export const MapScreen = () => {
           <View style={styles.searchInputContainer}>
             <View style={[styles.container, styles.questionContainer]}>
               <Text typography="title3" style={styles.questionText}>
-                {userType.name === 'Client'
+                {userRole.name === 'Client'
                   ? t('map.whereAreYouLookingForHelp')
                   : t('map.whichAreYouWantToWork')}
               </Text>

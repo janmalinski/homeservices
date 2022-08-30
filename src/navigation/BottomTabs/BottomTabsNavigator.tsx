@@ -8,7 +8,7 @@ export type TBottomTabsNavigatorParams = {
   Map: TMapScreenParams;
   CreateAd: TCreateAdParams;
   CreateAdMap: TMapScreenParams;
-  SignIn: undefined;
+  Login: undefined;
   Register: TRegisterScreenParams;
   RegistrationCodeSignUp: undefined;
   SingOutDialog: undefined;
@@ -25,7 +25,7 @@ export type TMainTabParams = {
 
 export type TMapScreenParams = {
   redirectAfterSubmit: 'Register' | 'AdCreate';
-  userType: {
+  userRole: {
     id: string;
     name: string;
   };
@@ -45,5 +45,5 @@ export type TCoordinates = {
 };
 
 export interface TRegisterScreenParams
-  extends Pick<TMapScreenParams, 'userType'>,
+  extends Pick<TMapScreenParams, 'userRole'>,
     Pick<TCoordinates, 'latitude' | 'longitude'> {}

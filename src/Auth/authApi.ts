@@ -7,7 +7,7 @@ type TRegister = (args: {
   termsAccepted: boolean;
   latitude: number;
   longitude: number;
-  userTypeId: string;
+  userRoleId: string;
   language: string;
 }) => Promise<AuthDto.registerDetails>;
 
@@ -21,7 +21,7 @@ export const register: TRegister = async ({
   termsAccepted,
   latitude,
   longitude,
-  userTypeId,
+  userRoleId,
   language,
 }) => {
   const response = await publicApi.post('/auth/signUp', {
@@ -30,13 +30,13 @@ export const register: TRegister = async ({
     termsAccepted,
     latitude,
     longitude,
-    userTypeId,
+    userRoleId,
     language,
   });
   return response.data.message;
 };
 
-export const verifyRegistrationCode = async (code: TVerifyRegistrationCode) => {
+export const verifyRegistrationCode: TVerifyRegistrationCode = async code => {
   const response = await publicApi.post('/auth/verify', {
     code,
   });

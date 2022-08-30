@@ -89,9 +89,7 @@ export const TextInput: React.FC<ITextInputProps> = ({
       name={isSecureTextVisible ? 'eye-off-outline' : 'eye-outline'}
       size={20}
       onPress={secureTextHandler}
-      color={
-        disabled ? colors.disabled : value ? colors.primary : colors.secondary
-      }
+      color={disabled ? colors.disabled : colors.secondary}
       style={[styles.iconContainer, SECURE_ICON_TOP_MARGIN_STYLE]}
     />
   );

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { register, verifyRegistrationCode } from './authApi';
+import { register, verifyRegistrationCode, login } from './authApi';
 import {
   showErrorToastAction,
   showSuccessToastAction,
@@ -13,6 +13,8 @@ export interface IAuthState {
   verifyRegistrationCodeError: string | null;
   verifyRegistrationCodePending: boolean;
   registered: boolean;
+  loginError: string | null;
+  loginPending: boolean;
   accessToken: string | null;
 }
 
@@ -23,6 +25,8 @@ const initialState: IAuthState = {
   verifyRegistrationCodeError: null,
   verifyRegistrationCodePending: false,
   registered: false,
+  loginError: null,
+  loginPending: false,
   accessToken: null,
 };
 
@@ -68,6 +72,22 @@ export const verifyRegistrationCodeThunk = createAsyncThunk(
   },
 );
 
+export const loginThunk = createAsyncThunk(
+  'auth/login',
+  async (args: Parameters<typeof login>[0], thunkApi) => {
+    try {
+      const token = await login(args);
+      return token;
+    } catch (e) {
+      const error = e as IErrorStatus;
+      const message = error?.response?.data?.message;
+      //ADD SOME TRANSLATIONS LATER
+      thunkApi.dispatch(showErrorToastAction({ message }));
+      return thunkApi.rejectWithValue(message);
+    }
+  },
+);
+
 const authStore = createSlice({
   name: 'auth',
   initialState,
@@ -100,6 +120,19 @@ const authStore = createSlice({
       state.verifyRegistrationCodePending = false;
       state.verifyRegistrationCodeError = null;
       state.registered = true;
+    });
+
+    builder.addCase(loginThunk.pending, state => {
+      state.loginPending = true;
+    });
+    builder.addCase(loginThunk.rejected, (state, { payload }) => {
+      state.loginPending = false;
+      state.loginError = payload as string;
+    });
+    builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
+      state.loginPending = false;
+      state.loginError = null;
+      state.accessToken = payload;
     });
   },
 });

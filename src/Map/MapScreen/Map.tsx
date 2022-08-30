@@ -4,7 +4,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import { ICoordinates } from './MapScreen';
 
-interface IMap {
+interface IMapProps {
   addressChangedByInput: boolean;
   coordinates: ICoordinates;
   onRegionChange: (reg: ICoordinates) => void;
@@ -16,7 +16,7 @@ export const Map = ({
   coordinates,
   onRegionChange,
   resetAddressChangedByInput,
-}: IMap) => {
+}: IMapProps) => {
   const [panDrag, setPanDrag] = useState(false);
   const mapRef = useRef(null);
 

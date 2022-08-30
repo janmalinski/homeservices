@@ -10,10 +10,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { colors, spacing } from '@src/components';
 
-interface Props {
+interface IMapInputProps {
   onAddressChange: (details: GooglePlaceDetail) => void;
 }
-export const MapInput = ({ onAddressChange }: Props) => {
+export const MapInput = ({ onAddressChange }: IMapInputProps) => {
   const ref = useRef<any>(null);
 
   const [t] = useTranslation();

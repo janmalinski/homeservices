@@ -19,8 +19,8 @@ export const WelcomeScreen = () => {
   const navigation = useNavigation<StackNavigationProp<TRootNavigatorParams>>();
   const [t] = useTranslation();
 
-  const navigateSignInScreen = useCallback(() => {
-    navigation.navigate('SignIn');
+  const navigateLoginScreen = useCallback(() => {
+    navigation.navigate('Login');
   }, [navigation]);
 
   const navigateToLocationScreen = useCallback(() => {
@@ -62,7 +62,7 @@ export const WelcomeScreen = () => {
             title={t('welcome.start')}
             onPress={navigateToLocationScreen}
           />
-          <TouchableOpacity style={styles.row} onPress={navigateSignInScreen}>
+          <TouchableOpacity style={styles.row} onPress={navigateLoginScreen}>
             <Text
               typography="body"
               fontWeight="medium"
@@ -74,7 +74,7 @@ export const WelcomeScreen = () => {
                 typography="body"
                 fontWeight="medium"
                 style={styles.paragraph}>
-                {t('common.logIn')}
+                {t('common.login')}
               </Text>
             </View>
           </TouchableOpacity>

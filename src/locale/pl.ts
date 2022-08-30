@@ -3,7 +3,7 @@ import appConfig from '../../app.json';
 const translations = {
   common: {
     cancel: 'Anuluj',
-    logIn: 'Zaloguj się',
+    login: 'Zaloguj się',
     noInternetConnection: 'Brak internetu',
     somethingWentWrong: 'Coś poszło nie tak',
   },
@@ -51,7 +51,7 @@ const translations = {
     locationPermisssionRevoked: 'Location permission revoked by user',
     confirmLocation: 'Zatwierdź lokalizację',
   },
-  logIn: {
+  login: {
     logInButton: 'Zaloguj się',
     signUpTip: 'Nie masz konta?',
     forgotPassword: 'Zapomniałeś hasła?',

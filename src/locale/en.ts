@@ -15,7 +15,7 @@ const translations = {
     yes: 'Yes',
     no: 'No',
     save: 'Save',
-    logIn: 'Log In',
+    login: 'Log In',
     noInternetConnection: 'No internet connection',
     somethingWentWrong: 'Something went wrong',
   },
@@ -83,7 +83,7 @@ const translations = {
     locationPermisssionRevoked: 'Location permission revoked by user',
     confirmLocation: 'Confirm location',
   },
-  logIn: {
+  login: {
     logInButton: 'Log In',
     signUpTip: "don't have an account?",
     forgotPassword: 'Forgot password?',

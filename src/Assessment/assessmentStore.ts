@@ -32,6 +32,14 @@ const initialState: IRoleState & ITypesOfEmploymentState = {
   typesOfEmploymentError: '',
 };
 
+interface IErrorStatus extends Error {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
+
 export const fetchRolesThunk = createAsyncThunk(
   'roles/fetch',
   async (_, thunkApi) => {
@@ -48,11 +56,12 @@ export const fetchRolesThunk = createAsyncThunk(
       }
 
       return roles;
-    } catch (error) {
+    } catch (e) {
+      const error = e as IErrorStatus;
       thunkApi.dispatch(
         showErrorToastAction({ message: i18n.t('common.somethingWentWrong') }),
       );
-      const message = error.response.data.message;
+      const message = error?.response?.data?.message;
       return thunkApi.rejectWithValue(message);
     }
   },
@@ -73,8 +82,9 @@ export const fetchTypesOfEmploymentThunk = createAsyncThunk(
         return thunkApi.rejectWithValue('Something went wrong');
       }
       return typesOfEmployment;
-    } catch (error) {
-      const message = error.response.data.message;
+    } catch (e) {
+      const error = e as IErrorStatus;
+      const message = error?.response?.data?.message;
       thunkApi.dispatch(
         showErrorToastAction({ message: i18n.t('common.somethingWentWrong') }),
       );

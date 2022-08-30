@@ -10,23 +10,21 @@ export interface IVerifyRegistrationCodeFormData {
   code: string;
 }
 
-export interface Props {
+export interface IVerifyRegistrationCodeFormProps {
   initialValues: IVerifyRegistrationCodeFormData;
-  loading?: boolean;
   onSubmit: (values: IVerifyRegistrationCodeFormData) => void;
 }
 
 const validationSchema = Yup.object().shape({
   code: Yup.string()
-    .min(4, i18n.t('validation:registrationCodeLength'))
-    .required(i18n.t('validation:required')),
+    .min(4, i18n.t('validation.registrationCodeLength'))
+    .required(i18n.t('validation.required')),
 });
 
 export const VerifyRegistrationCodeForm = ({
   initialValues,
-  loading,
   onSubmit,
-}: Props) => {
+}: IVerifyRegistrationCodeFormProps) => {
   const renderForm = useCallback(
     (props: FormikProps<IVerifyRegistrationCodeFormData>) => {
       const {
@@ -36,13 +34,15 @@ export const VerifyRegistrationCodeForm = ({
         handleSubmit,
         errors,
         touched,
+        isValid,
+        isSubmitting,
       } = props;
 
       return (
         <View>
           <TextInput
             withBorder
-            label={i18n.t('registrationCodeSignUp:registrationCode')}
+            label={i18n.t('registrationCodeSignUp.registrationCode')}
             errorMessage={errors.code && touched.code ? errors.code : ''}
             size="small"
             secureTextEntry={false}
@@ -56,14 +56,20 @@ export const VerifyRegistrationCodeForm = ({
           />
           <Button
             onPress={handleSubmit}
-            title={i18n.t('registrationCodeSignUp:registrationCodeButton')}
+            title={i18n.t('registrationCodeSignUp.registrationCodeButton')}
             buttonStyle={styles.button}
-            isLoading={loading}
+            isLoading={isSubmitting}
+            disabled={
+              !isValid ||
+              isSubmitting ||
+              (Object.keys(touched).length === 0 &&
+                touched.constructor === Object)
+            }
           />
         </View>
       );
     },
-    [loading],
+    [],
   );
 
   return (

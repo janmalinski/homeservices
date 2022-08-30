@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +10,8 @@ import {
 import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 import { showSuccessToastAction } from '@src/Toast/toastStore';
 import { useAppSelector, useAppDispatch } from '@src/store';
+import { verifyRegistrationCodeThunk } from '../authStore';
+import { FullScreenTemplate } from '@src/components';
 
 const initialValues: IVerifyRegistrationCodeFormData = {
   code: '',
@@ -17,17 +19,25 @@ const initialValues: IVerifyRegistrationCodeFormData = {
 
 export const VerifyRegistrationCodeScreen = () => {
   const dispatch = useAppDispatch();
+
   const [t] = useTranslation();
 
   const isVerificationEmailSent = useAppSelector(
-    state => state.auth.verfifiacationEmailSent,
+    state => state.auth.verificationEmailSent,
   );
+
+  const isRegistered = useAppSelector(state => state.auth.registered);
+
   const navigation =
     useNavigation<
       NavigationProp<TRootNavigatorParams, 'VerifyRegistrationCode'>
     >();
 
   useEffect(() => {
+    if (isRegistered) {
+      navigation.navigate('Login');
+    }
+
     navigation.addListener('beforeRemove', e => {
       if (isVerificationEmailSent === false) {
         return;
@@ -39,23 +49,23 @@ export const VerifyRegistrationCodeScreen = () => {
         }),
       );
     });
-  }, [navigation, isVerificationEmailSent, dispatch, t]);
+  }, [navigation, isVerificationEmailSent, dispatch, t, isRegistered]);
 
   const registerCodeSignUpHandler = useCallback(
     (values: IVerifyRegistrationCodeFormData) => {
-      //  NEEDS T BE FINISHED
+      const { code } = values;
+      dispatch(verifyRegistrationCodeThunk(code));
     },
-    [],
+    [dispatch],
   );
 
   return (
-    <View>
+    <FullScreenTemplate safeArea padded>
       <VerifyRegistrationCodeForm
         initialValues={initialValues}
         onSubmit={registerCodeSignUpHandler}
-        loading={false}
       />
-    </View>
+    </FullScreenTemplate>
   );
 };
 

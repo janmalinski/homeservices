@@ -11,6 +11,7 @@ import { AssessmentScreen } from '@src/Assessment/AssessmentScreen';
 import { MapScreen } from '@src/Map/MapScreen/MapScreen';
 import { RegisterScreen } from '@src/Auth/Register/RegisterScreen';
 import { VerifyRegistrationCodeScreen } from '@src/Auth/VerifyRegistrationCode/VerifyRegistrationCodeScreen';
+import { LoginScreen } from '@src/Auth/Login/LoginScreen';
 
 import {
   TCreateAdParams,
@@ -29,7 +30,7 @@ export type TRootNavigatorParams = {
   Map: TMapScreenParams;
   CreateAd: TCreateAdParams;
   CreateAdMap: TMapScreenParams;
-  SignIn: undefined;
+  Login: undefined;
   Register: TRegisterScreenParams;
   VerifyRegistrationCode: undefined;
   SingOutDialog: undefined;
@@ -56,6 +57,7 @@ export const RootNavigator = () => {
           name="VerifyRegistrationCode"
           component={VerifyRegistrationCodeScreen}
         />
+        <Root.Screen name="Login" component={LoginScreen} />
       </Root.Navigator>
       <GlobalToast />
       <InternetConnectionHandler />

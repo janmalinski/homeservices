@@ -19,13 +19,12 @@ export interface IRegisterFormData {
   termsAccepted: boolean;
   latitude: number;
   longitude: number;
-  userType: string;
+  userRole: string;
   language: string;
 }
 
-export interface Props {
+export interface IRegisterFormProps {
   initialValues: IRegisterFormData;
-  loading?: boolean;
   onSubmit: (values: IRegisterFormData) => void;
 }
 
@@ -42,11 +41,10 @@ const validationSchema = Yup.object().shape({
   ),
 });
 
-export const RegisterForm: React.FC<Props> = ({
+export const RegisterForm = ({
   initialValues,
-  loading,
   onSubmit,
-}) => {
+}: IRegisterFormProps) => {
   const navigateToTermsOfUse = useCallback(() => {
     // navigate to terms of use
   }, []);
@@ -61,6 +59,8 @@ export const RegisterForm: React.FC<Props> = ({
         errors,
         setFieldValue,
         touched,
+        isSubmitting,
+        isValid,
       } = props;
 
       return (
@@ -126,15 +126,21 @@ export const RegisterForm: React.FC<Props> = ({
             }
           />
           <Button
+            disabled={
+              !isValid ||
+              isSubmitting ||
+              (Object.keys(touched).length === 0 &&
+                touched.constructor === Object)
+            }
             onPress={handleSubmit}
             title={i18n.t('register.register')}
             buttonStyle={styles.button}
-            isLoading={loading}
+            isLoading={isSubmitting}
           />
         </>
       );
     },
-    [loading, navigateToTermsOfUse],
+    [navigateToTermsOfUse],
   );
 
   return (

@@ -1,5 +1,5 @@
 import { Formik, FormikProps } from 'formik';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import * as Yup from 'yup';
 import i18n from 'i18next';
@@ -25,48 +25,53 @@ export const ResetPasswordForm = ({
   initialValues,
   onSubmit,
 }: IResetPAsswordFormProps) => {
+  const renderForm = useCallback(
+    (props: FormikProps<IResetPasswordFormData>) => {
+      const {
+        handleChange,
+        handleBlur,
+        values,
+        handleSubmit,
+        errors,
+        touched,
+        isValid,
+        isSubmitting,
+      } = props;
+      return (
+        <View style={styles.container}>
+          <TextInput
+            withBorder
+            label={i18n.t('common.email')}
+            errorMessage={errors.email && touched.email ? errors.email : ''}
+            size="small"
+            value={values.email}
+            onChangeText={handleChange('email')}
+            onBlur={handleBlur('email')}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            blurOnSubmit
+            autoCompleteType="off"
+          />
+          <Button
+            onPress={handleSubmit}
+            title={i18n.t('resetPassword.resetPasswordButtonLabel')}
+            buttonStyle={styles.button}
+            isLoading={isSubmitting}
+            disabled={!isValid || isSubmitting || !touched}
+          />
+        </View>
+      );
+    },
+    [],
+  );
+
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}>
-      {(props: FormikProps<IResetPasswordFormData>) => {
-        const {
-          handleChange,
-          handleBlur,
-          values,
-          handleSubmit,
-          errors,
-          touched,
-          isValid,
-          isSubmitting,
-        } = props;
-        return (
-          <View style={styles.container}>
-            <TextInput
-              withBorder
-              label={i18n.t('common.email')}
-              errorMessage={errors.email && touched.email ? errors.email : ''}
-              size="small"
-              value={values.email}
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              blurOnSubmit
-              autoCompleteType="off"
-            />
-            <Button
-              onPress={handleSubmit}
-              title={i18n.t('resetPassword.resetPasswordButtonLabel')}
-              buttonStyle={styles.button}
-              isLoading={isSubmitting}
-              disabled={!isValid || isSubmitting}
-            />
-          </View>
-        );
-      }}
+      {renderForm}
     </Formik>
   );
 };

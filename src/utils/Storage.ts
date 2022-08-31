@@ -73,4 +73,5 @@ export const buildSecureStorage = (key: string) => ({
   write: (value: string) => writeSecure(key, value),
   read: () => readSecure(key),
   clear: () => clearSecure(key),
+  clearAll: () => clearKeychain(),
 });

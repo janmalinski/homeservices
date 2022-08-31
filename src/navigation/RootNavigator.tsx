@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   NavigationContainer,
   NavigatorScreenParams,
@@ -13,9 +13,10 @@ import { RegisterScreen } from '@src/Auth/Register/RegisterScreen';
 import { VerifyRegistrationCodeScreen } from '@src/Auth/VerifyRegistrationCode/VerifyRegistrationCodeScreen';
 import { LoginScreen } from '@src/Auth/Login/LoginScreen';
 import { ResetPasswordScreen } from '@src/Auth/ResetPassword/ResetPasswordScreen';
-import { FullScreenTemplate } from '@src/components';
 
 import {
+  BottomTabsNavigator,
+  TBottomTabsNavigatorParams,
   TCreateAdParams,
   TMainTabParams,
   TMapScreenParams,
@@ -24,8 +25,10 @@ import {
 import { InternetConnectionHandler } from '@src/Toast/InternetConnectionHandler';
 import { GlobalToast } from '@src/Toast/GlobalToast';
 import { useAppSelector } from '@src/store';
+import { SecureStorage } from '@src/utils';
 
 export type TRootNavigatorParams = {
+  Tabs: NavigatorScreenParams<TBottomTabsNavigatorParams>;
   ContentCreate: undefined;
   MainTab: NavigatorScreenParams<TMainTabParams>;
   ResetPassword: undefined;
@@ -45,15 +48,30 @@ export type TRootNavigatorParams = {
 const Root = createStackNavigator<TRootNavigatorParams>();
 
 export const RootNavigator = () => {
-  const token = useAppSelector(state => state.auth.accessToken);
-  const isTokenLoading = useAppSelector(state => state.auth.accessTokenPending);
+  const isLoginSuccess = useAppSelector(state => state.auth.loginSuccess);
+
+  const [token, setToken] = useState<string>('');
+
+  const getToken = useCallback(async () => {
+    const accessToken = await SecureStorage.read('ACCESS_TOKEN');
+    if (isLoginSuccess && accessToken && accessToken.length > 0) {
+      setToken(accessToken);
+    } else {
+      setToken('');
+    }
+  }, [isLoginSuccess]);
 
   useEffect(() => {
     RNBootSplash.hide();
-  }, []);
+    getToken();
+  }, [getToken]);
+
+  useEffect(() => {
+    getToken();
+  }, [isLoginSuccess, getToken]);
 
   const welcomeScreens = (
-    <Root.Navigator screenOptions={{ headerShown: false }}>
+    <>
       <Root.Screen name="Welcome" component={WelcomeScreen} />
       <Root.Screen name="Assessment" component={AssessmentScreen} />
       <Root.Screen name="Map" component={MapScreen} />
@@ -64,20 +82,22 @@ export const RootNavigator = () => {
       />
       <Root.Screen name="Login" component={LoginScreen} />
       <Root.Screen name="ResetPassword" component={ResetPasswordScreen} />
-    </Root.Navigator>
+    </>
   );
 
-  const authorizedScreens = {};
+  const authorizedScreens = (
+    <Root.Screen name="Tabs" component={BottomTabsNavigator} />
+  );
 
   return (
-    <NavigationContainer>
-      {isTokenLoading ? (
-        <FullScreenTemplate isLoading={isTokenLoading} />
-      ) : (
-        welcomeScreens
-      )}
-      <GlobalToast />
-      <InternetConnectionHandler />
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Root.Navigator screenOptions={{ headerShown: false }}>
+          {token && token.length > 0 ? authorizedScreens : welcomeScreens}
+        </Root.Navigator>
+        <GlobalToast />
+        <InternetConnectionHandler />
+      </NavigationContainer>
+    </>
   );
 };

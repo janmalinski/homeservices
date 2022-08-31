@@ -6,6 +6,7 @@ import {
   showSuccessToastAction,
 } from '@src/Toast/toastStore';
 import { accessTokenStorage } from './authStorage';
+import { t } from 'i18next';
 
 export interface IAuthState {
   registerError: string | null;
@@ -16,9 +17,9 @@ export interface IAuthState {
   registered: boolean;
   loginError: string | null;
   loginPending: boolean;
-  accessTokenPending: boolean;
-  accessTokenError: string | null;
-  accessToken: string | null;
+  loginSuccess: boolean;
+  logoutError: string | null;
+  logoutPending: boolean;
 }
 
 const initialState: IAuthState = {
@@ -30,9 +31,9 @@ const initialState: IAuthState = {
   registered: false,
   loginError: null,
   loginPending: false,
-  accessTokenPending: false,
-  accessTokenError: null,
-  accessToken: null,
+  loginSuccess: false,
+  logoutError: null,
+  logoutPending: false,
 };
 
 interface IErrorStatus extends Error {
@@ -82,14 +83,28 @@ export const loginThunk = createAsyncThunk(
   async (args: Parameters<typeof login>[0], thunkApi) => {
     try {
       const token = await login(args);
-      accessTokenStorage.write(token);
-      return token;
+      await accessTokenStorage.write(token);
     } catch (e) {
       const error = e as IErrorStatus;
       const message = error?.response?.data?.message;
       //ADD SOME TRANSLATIONS LATER
       thunkApi.dispatch(showErrorToastAction({ message }));
       return thunkApi.rejectWithValue(message);
+    }
+  },
+);
+
+export const logoutThunk = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkApi) => {
+    try {
+      await accessTokenStorage.clearAll();
+    } catch (error) {
+      //ADD SOME TRANSLATIONS  LATER
+      thunkApi.dispatch(
+        showErrorToastAction({ message: t('common.somethingWentWrong') }),
+      );
+      return thunkApi.rejectWithValue('Logout error');
     }
   },
 );
@@ -135,10 +150,23 @@ const authStore = createSlice({
       state.loginPending = false;
       state.loginError = payload as string;
     });
-    builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(loginThunk.fulfilled, state => {
       state.loginPending = false;
       state.loginError = null;
-      state.accessToken = payload;
+      state.loginSuccess = true;
+    });
+
+    builder.addCase(logoutThunk.pending, state => {
+      state.logoutPending = true;
+    });
+    builder.addCase(logoutThunk.rejected, (state, { payload }) => {
+      state.logoutPending = false;
+      state.logoutError = payload as string;
+    });
+    builder.addCase(logoutThunk.fulfilled, state => {
+      state.logoutPending = false;
+      state.logoutError = null;
+      state.loginSuccess = false;
     });
   },
 });

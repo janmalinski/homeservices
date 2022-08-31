@@ -59,12 +59,7 @@ export const VerifyRegistrationCodeForm = ({
             title={i18n.t('registrationCodeSignUp.registrationCodeButton')}
             buttonStyle={styles.button}
             isLoading={isSubmitting}
-            disabled={
-              !isValid ||
-              isSubmitting ||
-              (Object.keys(touched).length === 0 &&
-                touched.constructor === Object)
-            }
+            disabled={!isValid || isSubmitting}
           />
         </View>
       );

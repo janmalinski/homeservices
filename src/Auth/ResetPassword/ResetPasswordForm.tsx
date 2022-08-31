@@ -62,12 +62,7 @@ export const ResetPasswordForm = ({
               title={i18n.t('resetPassword.resetPasswordButtonLabel')}
               buttonStyle={styles.button}
               isLoading={isSubmitting}
-              disabled={
-                !isValid ||
-                isSubmitting ||
-                (Object.keys(touched).length === 0 &&
-                  touched.constructor === Object)
-              }
+              disabled={!isValid || isSubmitting}
             />
           </View>
         );

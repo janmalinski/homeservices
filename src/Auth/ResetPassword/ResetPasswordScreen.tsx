@@ -28,7 +28,6 @@ export const ResetPasswordScreen = () => {
       <ResetPasswordForm
         initialValues={initialValues}
         onSubmit={resetPassword}
-        loading={false}
       />
     </FullScreenTemplate>
   );

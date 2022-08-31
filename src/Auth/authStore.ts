@@ -94,18 +94,6 @@ export const loginThunk = createAsyncThunk(
   },
 );
 
-export const authorizeFromSavedTokenThunk = createAsyncThunk(
-  'auth/authorizeFromSavedToken',
-  (_, thunkApi) => {
-    try {
-      const accessToken = accessTokenStorage.read();
-      return accessToken;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error);
-    }
-  },
-);
-
 const authStore = createSlice({
   name: 'auth',
   initialState,
@@ -152,25 +140,6 @@ const authStore = createSlice({
       state.loginError = null;
       state.accessToken = payload;
     });
-
-    builder.addCase(authorizeFromSavedTokenThunk.pending, state => {
-      state.accessTokenPending = true;
-    });
-    builder.addCase(
-      authorizeFromSavedTokenThunk.rejected,
-      (state, { payload }) => {
-        state.accessTokenPending = false;
-        state.accessTokenError = payload as string;
-      },
-    );
-    builder.addCase(
-      authorizeFromSavedTokenThunk.fulfilled,
-      (state, { payload }) => {
-        state.accessTokenPending = false;
-        state.accessTokenError = null;
-        state.accessToken = payload as string;
-      },
-    );
   },
 });
 

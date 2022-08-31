@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { RootNavigator } from './navigation/RootNavigator';
 import { store } from './store';
 import './locale/i18nConfig';
-import { AuthHandler } from './Auth/AuthHandler';
 
 const App = () => {
   return (
@@ -18,7 +17,6 @@ const App = () => {
           barStyle="dark-content"
         />
         <RootNavigator />
-        <AuthHandler />
       </SafeAreaProvider>
     </Provider>
   );

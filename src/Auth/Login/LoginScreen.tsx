@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { Button, FullScreenTemplate } from '@src/components';
 import { LoginForm, ILoginFormData } from './LoginForm';
 import { useAppDispatch } from '@src/store';
 import { loginThunk } from '../authStore';
+import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 
 const initialValues: ILoginFormData = {
   email: '',
@@ -14,8 +15,11 @@ const initialValues: ILoginFormData = {
 };
 
 export const LoginScreen = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NavigationProp<TRootNavigatorParams, 'Login'>>();
+
   const dispatch = useAppDispatch();
+
   const [t] = useTranslation();
 
   const loginHandler = useCallback(
@@ -26,9 +30,8 @@ export const LoginScreen = () => {
   );
 
   const navigateToResetPassword = useCallback(() => {
-    // NEEDS TO BE FINSIHED
-    // navigation.navigate(Types.Route.ResetPassword);
-  }, []);
+    navigation.navigate('ResetPassword');
+  }, [navigation]);
 
   return (
     <FullScreenTemplate safeArea padded>

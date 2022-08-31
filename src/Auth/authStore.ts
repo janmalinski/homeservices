@@ -5,6 +5,7 @@ import {
   showErrorToastAction,
   showSuccessToastAction,
 } from '@src/Toast/toastStore';
+import { accessTokenStorage } from './authStorage';
 
 export interface IAuthState {
   registerError: string | null;
@@ -15,6 +16,8 @@ export interface IAuthState {
   registered: boolean;
   loginError: string | null;
   loginPending: boolean;
+  accessTokenPending: boolean;
+  accessTokenError: string | null;
   accessToken: string | null;
 }
 
@@ -27,6 +30,8 @@ const initialState: IAuthState = {
   registered: false,
   loginError: null,
   loginPending: false,
+  accessTokenPending: false,
+  accessTokenError: null,
   accessToken: null,
 };
 
@@ -77,6 +82,7 @@ export const loginThunk = createAsyncThunk(
   async (args: Parameters<typeof login>[0], thunkApi) => {
     try {
       const token = await login(args);
+      accessTokenStorage.write(token);
       return token;
     } catch (e) {
       const error = e as IErrorStatus;
@@ -84,6 +90,18 @@ export const loginThunk = createAsyncThunk(
       //ADD SOME TRANSLATIONS LATER
       thunkApi.dispatch(showErrorToastAction({ message }));
       return thunkApi.rejectWithValue(message);
+    }
+  },
+);
+
+export const authorizeFromSavedTokenThunk = createAsyncThunk(
+  'auth/authorizeFromSavedToken',
+  (_, thunkApi) => {
+    try {
+      const accessToken = accessTokenStorage.read();
+      return accessToken;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
     }
   },
 );
@@ -134,6 +152,25 @@ const authStore = createSlice({
       state.loginError = null;
       state.accessToken = payload;
     });
+
+    builder.addCase(authorizeFromSavedTokenThunk.pending, state => {
+      state.accessTokenPending = true;
+    });
+    builder.addCase(
+      authorizeFromSavedTokenThunk.rejected,
+      (state, { payload }) => {
+        state.accessTokenPending = false;
+        state.accessTokenError = payload as string;
+      },
+    );
+    builder.addCase(
+      authorizeFromSavedTokenThunk.fulfilled,
+      (state, { payload }) => {
+        state.accessTokenPending = false;
+        state.accessTokenError = null;
+        state.accessToken = payload as string;
+      },
+    );
   },
 });
 

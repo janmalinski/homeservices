@@ -15,6 +15,7 @@ export interface ILoginFormData {
 export interface ILoginFormProps {
   initialValues: ILoginFormData;
   onSubmit: (values: ILoginFormData) => void;
+  isPending: boolean;
 }
 
 const validationSchema = Yup.object().shape({
@@ -26,66 +27,72 @@ const validationSchema = Yup.object().shape({
     .required(i18n.t('validation.required')),
 });
 
-export const LoginForm = ({ initialValues, onSubmit }: ILoginFormProps) => {
-  const renderForm = useCallback((formProps: FormikProps<ILoginFormData>) => {
-    const {
-      handleChange,
-      handleBlur,
-      values,
-      handleSubmit,
-      errors,
-      touched,
-      isValid,
-      isSubmitting,
-    } = formProps;
-    return (
-      <View>
-        <TextInput
-          withBorder
-          label={i18n.t('common.email')}
-          errorMessage={errors.email && touched.email ? errors.email : ''}
-          size="small"
-          secureTextEntry={false}
-          value={values.email}
-          onChangeText={handleChange('email')}
-          onBlur={handleBlur('email')}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          blurOnSubmit
-          autoCompleteType="off"
-        />
-        <TextInput
-          withBorder
-          label={i18n.t('common.password')}
-          errorMessage={
-            errors.password && touched.password ? errors.password : ''
-          }
-          size="small"
-          secureTextEntry
-          value={values.password}
-          onChangeText={handleChange('password')}
-          onBlur={handleBlur('password')}
-          autoCapitalize="none"
-          textContentType="password"
-          blurOnSubmit
-          autoCompleteType="off"
-        />
-        <Button
-          onPress={handleSubmit}
-          title={i18n.t('common.login')}
-          buttonStyle={styles.button}
-          isLoading={isSubmitting}
-          disabled={
-            !isValid ||
-            isSubmitting ||
-            (Object.keys(touched).length === 0 &&
-              touched.constructor === Object)
-          }
-        />
-      </View>
-    );
-  }, []);
+export const LoginForm = ({
+  initialValues,
+  onSubmit,
+  isPending,
+}: ILoginFormProps) => {
+  const renderForm = useCallback(
+    (formProps: FormikProps<ILoginFormData>) => {
+      const {
+        handleChange,
+        handleBlur,
+        values,
+        handleSubmit,
+        errors,
+        touched,
+        isValid,
+      } = formProps;
+      return (
+        <View>
+          <TextInput
+            withBorder
+            label={i18n.t('common.email')}
+            errorMessage={errors.email && touched.email ? errors.email : ''}
+            size="small"
+            secureTextEntry={false}
+            value={values.email}
+            onChangeText={handleChange('email')}
+            onBlur={handleBlur('email')}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            blurOnSubmit
+            autoCompleteType="off"
+          />
+          <TextInput
+            withBorder
+            label={i18n.t('common.password')}
+            errorMessage={
+              errors.password && touched.password ? errors.password : ''
+            }
+            size="small"
+            secureTextEntry
+            value={values.password}
+            onChangeText={handleChange('password')}
+            onBlur={handleBlur('password')}
+            autoCapitalize="none"
+            textContentType="password"
+            blurOnSubmit
+            autoCompleteType="off"
+          />
+          <Button
+            onPress={handleSubmit}
+            title={i18n.t('common.login')}
+            buttonStyle={styles.button}
+            isLoading={isPending}
+            disabled={
+              !isValid ||
+              isPending ||
+              (Object.keys(touched).length === 0 &&
+                touched.constructor === Object)
+            }
+          />
+        </View>
+      );
+    },
+    [isPending],
+  );
 
   return (
     <Formik

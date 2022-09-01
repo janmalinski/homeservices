@@ -26,6 +26,7 @@ export interface IRegisterFormData {
 export interface IRegisterFormProps {
   initialValues: IRegisterFormData;
   onSubmit: (values: IRegisterFormData) => void;
+  isPending: boolean;
 }
 
 const validationSchema = Yup.object().shape({
@@ -44,6 +45,7 @@ const validationSchema = Yup.object().shape({
 export const RegisterForm = ({
   initialValues,
   onSubmit,
+  isPending,
 }: IRegisterFormProps) => {
   const navigateToTermsOfUse = useCallback(() => {
     // navigate to terms of use
@@ -59,7 +61,6 @@ export const RegisterForm = ({
         errors,
         setFieldValue,
         touched,
-        isSubmitting,
         isValid,
       } = props;
 
@@ -128,19 +129,19 @@ export const RegisterForm = ({
           <Button
             disabled={
               !isValid ||
-              isSubmitting ||
+              isPending ||
               (Object.keys(touched).length === 0 &&
                 touched.constructor === Object)
             }
             onPress={handleSubmit}
             title={i18n.t('register.register')}
             buttonStyle={styles.button}
-            isLoading={isSubmitting}
+            isLoading={isPending}
           />
         </>
       );
     },
-    [navigateToTermsOfUse],
+    [navigateToTermsOfUse, isPending],
   );
 
   return (

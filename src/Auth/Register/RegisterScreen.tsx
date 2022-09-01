@@ -25,12 +25,16 @@ const initialValues: IRegisterFormData = {
 
 export const RegisterScreen = () => {
   const dispatch = useAppDispatch();
+
   const route = useRoute<RouteProp<TRootNavigatorParams, 'Register'>>();
+
   const navigation =
     useNavigation<NavigationProp<TRootNavigatorParams, 'Register'>>();
   const isVerificationEmailSent = useAppSelector(
     state => state.auth.verificationEmailSent,
   );
+
+  const isPending = useAppSelector(state => state.auth.registerPending);
 
   useEffect(() => {
     if (isVerificationEmailSent) {
@@ -60,7 +64,11 @@ export const RegisterScreen = () => {
 
   return (
     <FullScreenTemplate safeArea padded>
-      <RegisterForm initialValues={initialValues} onSubmit={registerHandler} />
+      <RegisterForm
+        initialValues={initialValues}
+        onSubmit={registerHandler}
+        isPending={isPending}
+      />
     </FullScreenTemplate>
   );
 };

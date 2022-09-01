@@ -5,7 +5,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { Button, FullScreenTemplate } from '@src/components';
 import { LoginForm, ILoginFormData } from './LoginForm';
-import { useAppDispatch } from '@src/store';
+import { useAppDispatch, useAppSelector } from '@src/store';
 import { loginThunk } from '../authStore';
 import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 
@@ -22,6 +22,8 @@ export const LoginScreen = () => {
 
   const [t] = useTranslation();
 
+  const isPending = useAppSelector(state => state.auth.loginPending);
+
   const loginHandler = useCallback(
     (values: ILoginFormData) => {
       dispatch(loginThunk(values));
@@ -35,7 +37,11 @@ export const LoginScreen = () => {
 
   return (
     <FullScreenTemplate safeArea padded>
-      <LoginForm initialValues={initialValues} onSubmit={loginHandler} />
+      <LoginForm
+        initialValues={initialValues}
+        onSubmit={loginHandler}
+        isPending={isPending}
+      />
       <View style={styles.row}>
         <Button
           variant="PRIMARY"

@@ -22,6 +22,10 @@ export const VerifyRegistrationCodeScreen = () => {
 
   const [t] = useTranslation();
 
+  const isPending = useAppSelector(
+    state => state.auth.verifyRegistrationCodePending,
+  );
+
   const isVerificationEmailSent = useAppSelector(
     state => state.auth.verificationEmailSent,
   );
@@ -64,9 +68,8 @@ export const VerifyRegistrationCodeScreen = () => {
       <VerifyRegistrationCodeForm
         initialValues={initialValues}
         onSubmit={registerCodeSignUpHandler}
+        isPending={isPending}
       />
     </FullScreenTemplate>
   );
 };
-
-const styles = StyleSheet.create({});

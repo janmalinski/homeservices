@@ -13,8 +13,11 @@ const initialValues = {
 export const ResetPasswordScreen = () => {
   const [t] = useTranslation();
 
+  //   NEEDS TO BE FINISHED WHEN BACKEND READY
+  const isPending = false;
+
   const resetPassword = useCallback((values: IResetPasswordFormData) => {
-    //   NEEDS TO BE FINISHED
+    //   NEEDS TO BE FINISHED WHEN BACKEND READY
   }, []);
 
   return (
@@ -28,6 +31,7 @@ export const ResetPasswordScreen = () => {
       <ResetPasswordForm
         initialValues={initialValues}
         onSubmit={resetPassword}
+        isPending={isPending}
       />
     </FullScreenTemplate>
   );

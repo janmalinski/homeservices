@@ -13,6 +13,7 @@ export interface IVerifyRegistrationCodeFormData {
 export interface IVerifyRegistrationCodeFormProps {
   initialValues: IVerifyRegistrationCodeFormData;
   onSubmit: (values: IVerifyRegistrationCodeFormData) => void;
+  isPending: boolean;
 }
 
 const validationSchema = Yup.object().shape({
@@ -24,6 +25,7 @@ const validationSchema = Yup.object().shape({
 export const VerifyRegistrationCodeForm = ({
   initialValues,
   onSubmit,
+  isPending,
 }: IVerifyRegistrationCodeFormProps) => {
   const renderForm = useCallback(
     (props: FormikProps<IVerifyRegistrationCodeFormData>) => {
@@ -35,7 +37,6 @@ export const VerifyRegistrationCodeForm = ({
         errors,
         touched,
         isValid,
-        isSubmitting,
       } = props;
 
       return (
@@ -58,13 +59,13 @@ export const VerifyRegistrationCodeForm = ({
             onPress={handleSubmit}
             title={i18n.t('registrationCodeSignUp.registrationCodeButton')}
             buttonStyle={styles.button}
-            isLoading={isSubmitting}
-            disabled={!isValid || isSubmitting || !touched}
+            isLoading={isPending}
+            disabled={!isValid || isPending || !touched}
           />
         </View>
       );
     },
-    [],
+    [isPending],
   );
 
   return (

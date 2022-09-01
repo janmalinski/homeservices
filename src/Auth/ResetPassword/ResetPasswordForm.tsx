@@ -10,9 +10,10 @@ export interface IResetPasswordFormData {
   email: string;
 }
 
-export interface IResetPAsswordFormProps {
+export interface IResetPasswordFormProps {
   initialValues: IResetPasswordFormData;
   onSubmit: (values: IResetPasswordFormData) => void;
+  isPending: boolean;
 }
 
 const validationSchema = Yup.object().shape({
@@ -24,7 +25,8 @@ const validationSchema = Yup.object().shape({
 export const ResetPasswordForm = ({
   initialValues,
   onSubmit,
-}: IResetPAsswordFormProps) => {
+  isPending,
+}: IResetPasswordFormProps) => {
   const renderForm = useCallback(
     (props: FormikProps<IResetPasswordFormData>) => {
       const {
@@ -35,7 +37,6 @@ export const ResetPasswordForm = ({
         errors,
         touched,
         isValid,
-        isSubmitting,
       } = props;
       return (
         <View style={styles.container}>
@@ -57,13 +58,13 @@ export const ResetPasswordForm = ({
             onPress={handleSubmit}
             title={i18n.t('resetPassword.resetPasswordButtonLabel')}
             buttonStyle={styles.button}
-            isLoading={isSubmitting}
-            disabled={!isValid || isSubmitting || !touched}
+            isLoading={isPending}
+            disabled={!isValid || isPending || !touched}
           />
         </View>
       );
     },
-    [],
+    [isPending],
   );
 
   return (

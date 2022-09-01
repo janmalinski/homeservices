@@ -26,7 +26,7 @@ const translations = {
     alreadyHaveAccount: 'Already have an account?',
   },
   adCreate: {
-    createAd: 'Create Ad',
+    screenTitle: 'Create Ad',
     employmentType: 'Employment type',
     availableFrom: 'Availiable from',
     availableTo: 'Availiable to',
@@ -118,7 +118,7 @@ const translations = {
       'Email with password reset link has been sent. After setting up new password, sign in with newly set password at the login screen.',
   },
   adList: {
-    list: 'Ads',
+    screenTitle: 'Ads',
     image: 'Image',
     addAd: 'Add Ad',
     contentList: 'Content List',

@@ -3,35 +3,15 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { NavigatorScreenParams } from '@react-navigation/native';
 
 import { AdListScreen } from '@src/Ad/AdList/AdListScreen';
-
-// export type TBottomTabsNavigatorParams = {
-//   ContentCreate: undefined;
-//   MainTab: NavigatorScreenParams<TMainTabParams>;
-//   ResetPassword: undefined;
-//   Location: undefined;
-//   Map: TMapScreenParams;
-//   CreateAd: TCreateAdParams;
-//   CreateAdMap: TMapScreenParams;
-//   Login: undefined;
-//   Register: TRegisterScreenParams;
-//   RegistrationCodeSignUp: undefined;
-//   SingOutDialog: undefined;
-//   Storybook: undefined;
-//   Welcome: undefined;
-//   Account: undefined;
-// };
+import { AdCreateScreen } from '@src/Ad/AdCreate/AdCreateScreen';
+import { useBottomNavDef } from './useBottomNavDef';
+import { CustomTabBar } from './CustomTabBar';
 
 export type TBottomTabsNavigatorParams = {
   AdList: undefined;
-};
-
-export type TMainTabParams = {
-  AdList: undefined;
-  CreateAd: TCreateAdParams;
-  Settings: undefined;
+  AdCreate: undefined;
 };
 
 export type TCreateAdParams = {
@@ -61,9 +41,32 @@ export type TCoordinates = {
 const BottomTabs = createBottomTabNavigator<TBottomTabsNavigatorParams>();
 
 export const BottomTabsNavigator = () => {
+  const bottomNavDef = useBottomNavDef();
+
+  const renderTabBar = useCallback(
+    ({ state }: BottomTabBarProps) => {
+      const tabs = bottomNavDef.map(r => ({
+        routeName: r.routeName,
+        isFocused: r.routeName === state.routes[state.index].name,
+        label: r.label,
+      }));
+      return <CustomTabBar tabs={tabs} />;
+    },
+    [bottomNavDef],
+  );
+
   return (
-    <BottomTabs.Navigator screenOptions={{ headerShown: false }}>
-      <BottomTabs.Screen name="AdList" component={AdListScreen} />
+    <BottomTabs.Navigator
+      tabBar={renderTabBar}
+      screenOptions={{ headerShown: false }}>
+      <BottomTabs.Screen
+        name={bottomNavDef[0].routeName}
+        component={AdListScreen}
+      />
+      <BottomTabs.Screen
+        name={bottomNavDef[1].routeName}
+        component={AdCreateScreen}
+      />
     </BottomTabs.Navigator>
   );
 };

@@ -18,7 +18,6 @@ import {
   BottomTabsNavigator,
   TBottomTabsNavigatorParams,
   TCreateAdParams,
-  TMainTabParams,
   TMapScreenParams,
   TRegisterScreenParams,
 } from './BottomTabs/BottomTabsNavigator';
@@ -30,7 +29,7 @@ import { SecureStorage } from '@src/utils';
 export type TRootNavigatorParams = {
   Tabs: NavigatorScreenParams<TBottomTabsNavigatorParams>;
   ContentCreate: undefined;
-  MainTab: NavigatorScreenParams<TMainTabParams>;
+  MainTab: NavigatorScreenParams<TBottomTabsNavigatorParams>;
   ResetPassword: undefined;
   Assessment: undefined;
   Map: TMapScreenParams;

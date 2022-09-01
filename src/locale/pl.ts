@@ -13,9 +13,6 @@ const translations = {
     findHomeHelp: 'Znajdź pomoc domową w 10 minut',
     alreadyHaveAccount: 'Masz już konto?',
   },
-  adList: {
-    contentList: 'Treści',
-  },
   settings: {
     settings: 'Ustawienia',
     account: 'Konto',
@@ -67,6 +64,52 @@ const translations = {
     registrationCodeVerification: 'Weryfikacja kodu autoryzacyjnego',
     registrationCode: 'Kod autoryzacyjny',
     registrationCodeButton: 'Zatwierdź kod autoryzacyjny',
+  },
+  resetPassword: {
+    resetPassword: 'Reset password',
+    guide1:
+      'Provide you email in the field below. We will send you link to reset your password.',
+    guide2:
+      'After setting up new password, sign in with newly set password at the login screen.',
+    resetPasswordButtonLabel: 'Reset Password',
+    userNotFound:
+      'No user found for provided email. Make sure to provide email you registered.',
+    resetPasswordSuccess:
+      'Email with password reset link has been sent. After setting up new password, sign in with newly set password at the login screen.',
+  },
+  adList: {
+    screenTitle: 'Ogłoszenia',
+    image: 'Image',
+    addAd: 'Add Ad',
+    contentList: 'Treści',
+    contentImage: 'Content Image',
+    contentCreate: 'Content Create',
+    addContent: 'Add new content',
+  },
+  adCreate: {
+    screenTitle: 'Create Ad',
+    employmentType: 'Employment type',
+    availableFrom: 'Availiable from',
+    availableTo: 'Availiable to',
+    services: 'Services',
+    description: 'Description',
+    fixedTerm: 'Fixed-term',
+    setHoursWorkingTime: 'Time of day',
+    workingTimeNegotiable: 'Negotiable',
+    setHoursWorkingTimeSetHours: 'Set hours',
+    days: {
+      monday: 'Mo',
+      tuesday: 'Tu',
+      wednesday: 'We',
+      thursday: 'Th',
+      friday: 'Fr',
+      saturday: 'Sa',
+      sunday: 'Su',
+    },
+    overnight: 'Night',
+    location: 'Location',
+    detectLocation: 'Detect my location',
+    setLocationManually: '',
   },
 };
 

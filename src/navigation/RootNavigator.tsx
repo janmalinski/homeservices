@@ -62,8 +62,7 @@ export const RootNavigator = () => {
 
   useEffect(() => {
     RNBootSplash.hide();
-    getToken();
-  }, [getToken]);
+  }, []);
 
   useEffect(() => {
     getToken();

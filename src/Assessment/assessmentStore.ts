@@ -14,13 +14,13 @@ export interface IPayload {
 export interface IRoleState {
   roles: IPayload[];
   rolesPending: boolean;
-  rolesError: string;
+  rolesError: string | null;
 }
 
 export interface ITypesOfEmploymentState {
   typesOfEmployment: IPayload[];
   typesOfEmploymentPending: boolean;
-  typesOfEmploymentError: string;
+  typesOfEmploymentError: string | null;
 }
 
 const initialState: IRoleState & ITypesOfEmploymentState = {
@@ -100,7 +100,7 @@ const assessmentStore = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchRolesThunk.pending, state => {
       state.rolesPending = true;
-      state.rolesError = '';
+      state.rolesError = null;
     });
     builder.addCase(fetchRolesThunk.rejected, (state, { payload }) => {
       state.rolesPending = false;
@@ -108,12 +108,12 @@ const assessmentStore = createSlice({
     });
     builder.addCase(fetchRolesThunk.fulfilled, (state, { payload }) => {
       state.rolesPending = false;
-      state.rolesError = '';
+      state.rolesError = null;
       state.roles = payload;
     });
     builder.addCase(fetchTypesOfEmploymentThunk.pending, state => {
       state.typesOfEmploymentPending = true;
-      state.typesOfEmploymentError = '';
+      state.typesOfEmploymentError = null;
     });
     builder.addCase(
       fetchTypesOfEmploymentThunk.rejected,
@@ -126,7 +126,7 @@ const assessmentStore = createSlice({
       fetchTypesOfEmploymentThunk.fulfilled,
       (state, { payload }) => {
         state.typesOfEmploymentPending = false;
-        state.typesOfEmploymentError = '';
+        state.typesOfEmploymentError = null;
         state.typesOfEmployment = payload;
       },
     );

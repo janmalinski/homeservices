@@ -17,7 +17,6 @@ import { ResetPasswordScreen } from '@src/Auth/ResetPassword/ResetPasswordScreen
 import {
   BottomTabsNavigator,
   TBottomTabsNavigatorParams,
-  TCreateAdParams,
   TMapScreenParams,
   TRegisterScreenParams,
 } from './BottomTabs/BottomTabsNavigator';
@@ -28,20 +27,13 @@ import { SecureStorage } from '@src/utils';
 
 export type TRootNavigatorParams = {
   Tabs: NavigatorScreenParams<TBottomTabsNavigatorParams>;
-  ContentCreate: undefined;
-  MainTab: NavigatorScreenParams<TBottomTabsNavigatorParams>;
   ResetPassword: undefined;
   Assessment: undefined;
   Map: TMapScreenParams;
-  CreateAd: TCreateAdParams;
-  CreateAdMap: TMapScreenParams;
   Login: undefined;
   Register: TRegisterScreenParams;
   VerifyRegistrationCode: undefined;
-  SingOutDialog: undefined;
-  Storybook: undefined;
   Welcome: undefined;
-  Account: undefined;
 };
 
 const Root = createStackNavigator<TRootNavigatorParams>();

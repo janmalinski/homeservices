@@ -7,6 +7,7 @@ import assessment from '@src/Assessment/assessmentStore';
 import toast from '@src/Toast/toastStore';
 import auth from '@src/Auth/authStore';
 import user from '@src/User/userStore';
+import ad from '@src/Ad/adStore';
 
 let flipperMiddleware: Middleware;
 if (__DEV__) {
@@ -21,6 +22,7 @@ const makeStore = () => {
       toast,
       auth,
       user,
+      ad,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().concat(flipperMiddleware || []),

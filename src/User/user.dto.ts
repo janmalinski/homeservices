@@ -4,7 +4,7 @@ export namespace UserDto {
     name: string;
   };
 
-  type AvailabilityTimeItem = {
+  export type AvailabilityTime = {
     '06-09': boolean;
     '09-12': boolean;
     '12-15': boolean;
@@ -14,7 +14,7 @@ export namespace UserDto {
     night: boolean;
   };
 
-  type UserAdItem = {
+  type UserAd = {
     id: string;
     description: string;
     availableFrom: Date;
@@ -24,7 +24,7 @@ export namespace UserDto {
     address: string;
     availability: {
       negotiable: boolean;
-      time: AvailabilityTimeItem[];
+      time: AvailabilityTime[];
     };
   };
 
@@ -34,7 +34,7 @@ export namespace UserDto {
     phoneNumber: number | null;
     phoneNumberConsent: boolean | null;
     avatarUrl: string | null;
-    ads: UserAdItem[];
+    ads: UserAd[];
     roles: UserRoleItem[];
   };
 }

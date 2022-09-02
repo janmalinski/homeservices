@@ -24,7 +24,7 @@ interface IErrorStatus extends Error {
   };
 }
 
-export const getUserThunk = createAsyncThunk(
+export const fetchUserThunk = createAsyncThunk(
   'user/fetch',
   async (_, thunkApi) => {
     try {
@@ -41,18 +41,18 @@ export const getUserThunk = createAsyncThunk(
 );
 
 const userStore = createSlice({
-  name: 'auth',
+  name: 'user',
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(getUserThunk.pending, state => {
+    builder.addCase(fetchUserThunk.pending, state => {
       state.pending = true;
     });
-    builder.addCase(getUserThunk.rejected, (state, { payload }) => {
+    builder.addCase(fetchUserThunk.rejected, (state, { payload }) => {
       state.pending = false;
       state.error = payload as string;
     });
-    builder.addCase(getUserThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchUserThunk.fulfilled, (state, { payload }) => {
       state.pending = false;
       state.error = null;
       state.user = payload;

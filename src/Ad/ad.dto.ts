@@ -6,7 +6,7 @@ export namespace AdDto {
     name: string;
   };
 
-  type TypeOfEmployment = {
+  export type TypeOfEmployment = {
     id: string;
     name: string;
   };

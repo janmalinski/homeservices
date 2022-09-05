@@ -10,6 +10,7 @@ import {
   TextInputFocusEventData,
   View,
   Text,
+  TextStyle,
 } from 'react-native';
 
 import { colors, spacing, textStyles, Icon } from '@src/components';
@@ -28,6 +29,7 @@ export interface ITextInputProps extends TextInputProps {
 
 export const SMALL_INPUT_HEIGHT = 48;
 export const MEDIUM_INPUT_HEIGHT = 60;
+export const TEXTAREA_INPUTP_HEIGHT = 80;
 const SECURE_ICON_CONTAINER_TOP_MARGIN = 41;
 
 export const TextInput: React.FC<ITextInputProps> = ({
@@ -104,11 +106,26 @@ export const TextInput: React.FC<ITextInputProps> = ({
         {...props}
         style={
           disabled
-            ? styles.disabledText
-            : [
+            ? [
+                styles.disabledText,
+                styles.disabledContainer,
+                size === 'small'
+                  ? styles.smallInput
+                  : size === 'medium'
+                  ? styles.mediumInput
+                  : null,
+                size === 'textArea' && styles.textArea,
                 size === 'textArea' &&
                   Platform.OS === 'android' &&
-                  styles.textArea,
+                  styles.textAreaAndroid,
+                withBorder ? styles.withBorder : styles.lineInput,
+                !!value && styles.filledBorder,
+              ]
+            : [
+                size === 'textArea' && styles.textArea,
+                size === 'textArea' &&
+                  Platform.OS === 'android' &&
+                  styles.textAreaAndroid,
                 styles.text,
                 styles.inputContainer,
                 size === 'small'
@@ -118,7 +135,6 @@ export const TextInput: React.FC<ITextInputProps> = ({
                   : null,
                 withBorder ? styles.withBorder : styles.lineInput,
                 !!value && styles.filledBorder,
-                disabled && styles.disabledContainer,
                 !!errorMessage && styles.errorBorder,
                 active && styles.activeBorder,
               ]
@@ -128,7 +144,7 @@ export const TextInput: React.FC<ITextInputProps> = ({
         placeholder={placeholder}
         placeholderTextColor={colors.disabled}
         secureTextEntry={secureTextEntry && !isSecureTextVisible}
-        multiline={size === 'textArea'}
+        multiline={props.multiline}
         numberOfLines={numberOfLines}
         onBlur={handleBlur}
         onFocus={handleFocus}
@@ -139,7 +155,28 @@ export const TextInput: React.FC<ITextInputProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+interface IStyles {
+  container: ViewStyle;
+  inputcontainer: ViewStyle;
+  smallInput: ViewStyle;
+  mediumInput: ViewStyle;
+  lineInput: ViewStyle;
+  withBorder: ViewStyle;
+  activeBorder: ViewStyle;
+  filledBorder: ViewStyle;
+  errorBorder: ViewStyle;
+  disabledContainer: ViewStyle;
+  disabledText: TextStyle;
+  text: TextStyle;
+  textArea: ViewStyle;
+  textAreaAndroid: TextStyle;
+  errorMessage: TextStyle;
+  label: TextStyle;
+  labelError: TextStyle;
+  iconContainer: ViewStyle;
+}
+
+const stylesDef = {
   container: {
     paddingLeft: 0,
     paddingRight: 0,
@@ -185,7 +222,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.small,
   },
   textArea: {
-    textAlignVertical: 'top',
+    height: TEXTAREA_INPUTP_HEIGHT,
+  },
+  textAreaAndroid: {
+    textAlignVertical: 'top' as 'top',
   },
   errorMessage: {
     ...textStyles.typographies.caption2,
@@ -203,6 +243,8 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     right: spacing.small,
-    position: 'absolute',
+    position: 'absolute' as 'absolute',
   },
-});
+};
+
+const styles = StyleSheet.create(stylesDef);

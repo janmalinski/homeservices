@@ -17,13 +17,29 @@ import { ResetPasswordScreen } from '@src/Auth/ResetPassword/ResetPasswordScreen
 import {
   BottomTabsNavigator,
   TBottomTabsNavigatorParams,
-  TMapScreenParams,
-  TRegisterScreenParams,
 } from './BottomTabs/BottomTabsNavigator';
 import { InternetConnectionHandler } from '@src/Toast/InternetConnectionHandler';
 import { GlobalToast } from '@src/Toast/GlobalToast';
 import { useAppSelector } from '@src/store';
 import { SecureStorage } from '@src/utils';
+
+export type TMapScreenParams = {
+  redirectAfterSubmit: 'Register' | 'AdCreate';
+  userRole: {
+    id: string;
+    name: string;
+  };
+};
+export interface TRegisterScreenParams
+  extends Pick<TMapScreenParams, 'userRole'>,
+    Pick<TCoordinates, 'latitude' | 'longitude'> {}
+
+export type TCoordinates = {
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
+};
 
 export type TRootNavigatorParams = {
   Tabs: NavigatorScreenParams<TBottomTabsNavigatorParams>;
@@ -34,7 +50,10 @@ export type TRootNavigatorParams = {
   Register: TRegisterScreenParams;
   VerifyRegistrationCode: undefined;
   Welcome: undefined;
+  AdCreateMap: TMapScreenParams;
 };
+
+export type TNavParams = TRootNavigatorParams & TBottomTabsNavigatorParams;
 
 const Root = createStackNavigator<TRootNavigatorParams>();
 
@@ -76,7 +95,10 @@ export const RootNavigator = () => {
   );
 
   const authorizedScreens = (
-    <Root.Screen name="Tabs" component={BottomTabsNavigator} />
+    <>
+      <Root.Screen name="Tabs" component={BottomTabsNavigator} />
+      <Root.Screen name="AdCreateMap" component={MapScreen} />
+    </>
   );
 
   return (

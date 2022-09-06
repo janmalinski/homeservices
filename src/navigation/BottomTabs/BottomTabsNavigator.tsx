@@ -11,31 +11,13 @@ import { CustomTabBar } from './CustomTabBar';
 
 export type TBottomTabsNavigatorParams = {
   AdList: undefined;
-  AdCreate: undefined;
+  AdCreate: TAdCreateParams;
 };
 
-export type TCreateAdParams = {
-  latitude?: number;
-  longitude?: number;
-  address?: string;
-};
-
-export type TMapScreenParams = {
-  redirectAfterSubmit: 'Register' | 'AdCreate';
-  userRole: {
-    id: string;
-    name: string;
-  };
-};
-export interface TRegisterScreenParams
-  extends Pick<TMapScreenParams, 'userRole'>,
-    Pick<TCoordinates, 'latitude' | 'longitude'> {}
-
-export type TCoordinates = {
-  latitude: number;
-  longitude: number;
-  latitudeDelta: number;
-  longitudeDelta: number;
+export type TAdCreateParams = {
+  latitude: number | undefined;
+  longitude: number | undefined;
+  address: string | undefined;
 };
 
 const BottomTabs = createBottomTabNavigator<TBottomTabsNavigatorParams>();

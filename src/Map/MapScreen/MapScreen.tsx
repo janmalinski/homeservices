@@ -11,16 +11,23 @@ import {
 import Config from 'react-native-config';
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  RouteProp,
+  NavigationProp,
+} from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
-import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
+import {
+  TNavParams,
+  TRootNavigatorParams,
+} from '@src/navigation/RootNavigator';
 import { Button, FullScreenTemplate, Spinner, Text } from '@src/components';
 import { Map } from './Map';
 import { MapInput } from './MapInput';
 import { MapScreenStyles as styles } from './MapScreenStyles';
 import { GooglePlaceDetail } from 'react-native-google-places-autocomplete';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 export interface ICoordinates {
   latitude: number;
@@ -46,9 +53,7 @@ export const MapScreen = () => {
   const [addressChangedByInput, setAddressChangeByInput] = useState(false);
 
   const navigation =
-    useNavigation<
-      StackNavigationProp<TRootNavigatorParams, 'Assessment', 'AdCreate'>
-    >();
+    useNavigation<NavigationProp<TNavParams, 'Assessment', 'AdCreate'>>();
 
   const route = useRoute<RouteProp<TRootNavigatorParams, 'Map'>>();
 
@@ -189,15 +194,13 @@ export const MapScreen = () => {
         longitude,
         userRole,
       });
+    } else if (redirectAfterSubmit === 'AdCreate') {
+      navigation.navigate('AdCreate', {
+        latitude,
+        longitude,
+        address,
+      });
     }
-    // NEEDS TO BE FINISHED
-    // else if (redirectAfterSubmit === 'AdCreate') {
-    //   navigation.navigate('AdCreate', {
-    //     latitude,
-    //     longitude,
-    //     address,
-    //   });
-    // }
   };
 
   const userRole = route.params.userRole;

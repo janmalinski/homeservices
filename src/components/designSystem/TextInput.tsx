@@ -119,7 +119,6 @@ export const TextInput: React.FC<ITextInputProps> = ({
                   Platform.OS === 'android' &&
                   styles.textAreaAndroid,
                 styles.text,
-                styles.inputContainer,
                 withBorder ? styles.withBorder : styles.lineInput,
                 !!value && styles.filledBorder,
               ]

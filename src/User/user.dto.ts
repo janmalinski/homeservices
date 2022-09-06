@@ -1,5 +1,5 @@
 export namespace UserDto {
-  type UserRoleItem = {
+  export type UserRoleItem = {
     id: string;
     name: string;
   };
@@ -11,7 +11,8 @@ export namespace UserDto {
     '15-18': boolean;
     '18-21': boolean;
     '21-24': boolean;
-    night: boolean;
+    '24-03': boolean;
+    '03-06': boolean;
   };
 
   type UserAd = {

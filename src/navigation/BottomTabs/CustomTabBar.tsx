@@ -57,14 +57,14 @@ export const CustomTabBar = ({ tabs }: TCustomTabBar) => {
               onPress={onPress}>
               <Icon
                 name={iconName}
-                size={15}
+                size={18}
                 color={isFocused ? colors.textTitle : colors.textPlaceholder}
               />
               <View style={styles.tabBarLabelContainer}>
                 <Text
                   color={isFocused ? 'textTitle' : 'textPlaceholder'}
                   textAlign="center"
-                  typography="caption3"
+                  typography="caption1"
                   fontWeight="medium">
                   {label}
                 </Text>
@@ -92,7 +92,7 @@ const stylesDef: IStyles = {
     left: 0,
     right: 0,
     zIndex: 0,
-    backgroundColor: colors.white,
+    backgroundColor: colors.disabledLight,
     overflow: 'hidden',
     elevation: 12,
     shadowRadius: 12,

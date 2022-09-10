@@ -20,7 +20,7 @@ export interface ITextInputProps extends TextInputProps {
   size: 'small' | 'medium' | 'textArea';
   label?: string;
   disabled?: boolean;
-  errorMessage: string;
+  errorMessage?: string;
   autoCompleteType?: string;
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
@@ -99,7 +99,12 @@ export const TextInput: React.FC<ITextInputProps> = ({
   return (
     <View style={[styles.container, containerStyle]}>
       <Text
-        style={[styles.label, errorMessage.length > 0 && styles.labelError]}>
+        style={[
+          styles.label,
+          errorMessage !== undefined &&
+            errorMessage.length > 0 &&
+            styles.labelError,
+        ]}>
         {label}
       </Text>
       <TextInputRN

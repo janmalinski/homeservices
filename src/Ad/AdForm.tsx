@@ -39,12 +39,14 @@ export interface IAdFormData {
 }
 
 export interface IAddFormProps {
-  enableReinitialize: boolean;
   initialValues: IAdFormData;
   isPending: boolean;
   services: AdDto.ServiceDetails[];
   typeemployments: AdDto.TypeOfEmployment[];
-  onSubmit: (values: IAdFormData) => void;
+  onSubmit: (
+    values: IAdFormData,
+    { resetForm }: { resetForm: () => void },
+  ) => void;
   navigation: NavigationProp<TNavParams, 'AdCreate'>;
   roles: UserDto.UserRoleItem[];
   latitude?: number;
@@ -67,7 +69,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export const AdForm = ({
-  enableReinitialize,
   initialValues,
   isPending,
   services,
@@ -365,17 +366,13 @@ export const AdForm = ({
               size="textArea"
               numberOfLines={2}
               multiline
+              disabled
               label={i18n.t('adCreate.location')}
               containerStyle={styles.negativeMarginBottomRegular}
-              disabled
               withBorder
-              errorMessage={
-                errors.address && touched.address ? errors.address : ''
-              }
               secureTextEntry={false}
               value={address}
               autoCapitalize="none"
-              onBlur={handleBlur('address')}
               blurOnSubmit
               autoCompleteType="off"
             />
@@ -402,7 +399,6 @@ export const AdForm = ({
               secureTextEntry={false}
               value={values.description}
               onChangeText={handleChange('description')}
-              onBlur={handleBlur('description')}
               autoCapitalize="none"
               blurOnSubmit
               style={styles.textArea}
@@ -414,12 +410,7 @@ export const AdForm = ({
             onPress={handleSubmit}
             title={i18n.t('common.save')}
             buttonStyle={styles.button}
-            disabled={
-              !isValid ||
-              isPending ||
-              (Object.keys(touched).length === 0 &&
-                touched.constructor === Object)
-            }
+            disabled={!isValid || isPending}
             isLoading={isPending}
           />
         </View>
@@ -443,7 +434,6 @@ export const AdForm = ({
     <Formik
       innerRef={formRef}
       initialValues={initialValues}
-      enableReinitialize={enableReinitialize}
       onSubmit={onSubmit}
       validationSchema={validationSchema}>
       {renderForm}

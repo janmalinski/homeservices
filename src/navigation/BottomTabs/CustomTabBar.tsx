@@ -13,6 +13,8 @@ const getTabBarIconName = (routeName: keyof TBottomTabsNavigatorParams) => {
       return 'list-outline';
     case 'AdCreate':
       return 'create-outline';
+    case 'Settings':
+      return 'settings-outline';
     default:
       throw new Error(`cannot find TabBarIcon of ${routeName}`);
   }

@@ -38,4 +38,9 @@ export namespace UserDto {
     ads: UserAd[];
     roles: UserRoleItem[];
   };
+
+  export type userAvatarDetails = {
+    avatarURL: string;
+    message: string;
+  };
 }

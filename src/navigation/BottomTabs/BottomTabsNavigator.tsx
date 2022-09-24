@@ -6,12 +6,14 @@ import {
 
 import { AdListScreen } from '@src/Ad/AdList/AdListScreen';
 import { AdCreateScreen } from '@src/Ad/AdCreate/AdCreateScreen';
+import { SettingsScreen } from '@src/Settings/SettingsScreen/SettingsScreen';
 import { useBottomNavDef } from './useBottomNavDef';
 import { CustomTabBar } from './CustomTabBar';
 
 export type TBottomTabsNavigatorParams = {
   AdList: undefined;
   AdCreate: TAdCreateParams;
+  Settings: undefined;
 };
 
 export type TAdCreateParams = {
@@ -48,6 +50,10 @@ export const BottomTabsNavigator = () => {
       <BottomTabs.Screen
         name={bottomNavDef[1].routeName}
         component={AdCreateScreen}
+      />
+      <BottomTabs.Screen
+        name={bottomNavDef[2].routeName}
+        component={SettingsScreen}
       />
     </BottomTabs.Navigator>
   );

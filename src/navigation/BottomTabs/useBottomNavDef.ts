@@ -17,6 +17,10 @@ export const useBottomNavDef = () => {
       routeName: 'AdCreate',
       label: t('adCreate.screenTitle'),
     },
+    {
+      routeName: 'Settings',
+      label: t('settings.screenTitle'),
+    },
   ];
 
   return bottomNavDef;

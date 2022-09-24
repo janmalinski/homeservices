@@ -3,7 +3,6 @@ import { Platform, StyleSheet, View, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colors, spacing } from './index';
-
 import { KeyboardAvoidingComponent } from './KeyboardAvoidingComponent';
 import { Spinner } from './Spinner';
 
@@ -15,6 +14,7 @@ export interface IFullScreenTemplateProps {
   noScroll?: boolean;
   isLoading?: boolean;
   contentContainerStyle?: ViewStyle;
+  header?: React.ReactNode;
   keyboardShouldPersistTaps?: boolean | 'always' | 'never' | 'handled';
 }
 
@@ -26,6 +26,7 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
   noScroll,
   isLoading,
   contentContainerStyle,
+  header,
   keyboardShouldPersistTaps,
 }) => {
   const RootView = safeArea ? SafeAreaView : View;
@@ -33,6 +34,7 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
 
   return (
     <RootView style={styles.mainContainer} edges={['top']}>
+      {header}
       {isLoading ? (
         <View style={styles.centeredContainer}>
           <Spinner />

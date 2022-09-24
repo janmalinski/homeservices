@@ -14,7 +14,7 @@ const translations = {
     alreadyHaveAccount: 'Masz już konto?',
   },
   settings: {
-    settings: 'Ustawienia',
+    screenTitle: 'Ustawienia',
     account: 'Konto',
     signOutTitle: 'Wyloguj się',
     signOutSubtitle: 'Po wylogowaniu się, musisz zalogować się ponownie',

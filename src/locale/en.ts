@@ -127,7 +127,7 @@ const translations = {
     addContent: 'Add new content',
   },
   settings: {
-    settings: 'Settings',
+    screenTitle: 'Settings',
     signOutTitle: 'Sign out',
     account: 'Account',
     signOutSubtitle: 'After you sign out, you will need to sign in again.',

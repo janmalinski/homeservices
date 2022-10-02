@@ -7,6 +7,7 @@ import {
 } from '@src/Toast/toastStore';
 import { accessTokenStorage } from './authStorage';
 import { t } from 'i18next';
+import { store } from '@src/store';
 
 export interface IAuthState {
   registerError: string | null;
@@ -17,9 +18,13 @@ export interface IAuthState {
   registered: boolean;
   loginError: string | null;
   loginPending: boolean;
-  loginSuccess: boolean;
+  loginStatusChanged: boolean;
   logoutError: string | null;
   logoutPending: boolean;
+  authTokenExpiriesIn: number | null;
+  authTokenExpiredError: string | null;
+  authTokenExpiredPending: boolean;
+  authTokenExpired: boolean;
 }
 
 const initialState: IAuthState = {
@@ -31,9 +36,13 @@ const initialState: IAuthState = {
   registered: false,
   loginError: null,
   loginPending: false,
-  loginSuccess: false,
+  loginStatusChanged: false,
   logoutError: null,
   logoutPending: false,
+  authTokenExpiriesIn: null,
+  authTokenExpiredError: null,
+  authTokenExpiredPending: false,
+  authTokenExpired: false,
 };
 
 interface IErrorStatus extends Error {
@@ -109,6 +118,34 @@ export const logoutThunk = createAsyncThunk(
   },
 );
 
+export const checkAuthTokenExpirationThunk = createAsyncThunk(
+  'auth/checkTokenExpiration',
+  async (_, thunkApi) => {
+    try {
+      const authTokenExpiriesIn = store.getState().auth.authTokenExpiriesIn;
+
+      if (
+        authTokenExpiriesIn !== null &&
+        authTokenExpiriesIn > Math.floor(Date.now() / 1000)
+      ) {
+        return false;
+      } else if (
+        authTokenExpiriesIn !== null &&
+        authTokenExpiriesIn < Math.floor(Date.now() / 1000)
+      ) {
+        thunkApi.dispatch(logoutThunk());
+        return true;
+      }
+    } catch (error) {
+      //ADD SOME TRANSLATIONS  LATER
+      thunkApi.dispatch(
+        showErrorToastAction({ message: t('common.somethingWentWrong') }),
+      );
+      return thunkApi.rejectWithValue('Check token expiration check error');
+    }
+  },
+);
+
 const authStore = createSlice({
   name: 'auth',
   initialState,
@@ -153,7 +190,8 @@ const authStore = createSlice({
     builder.addCase(loginThunk.fulfilled, state => {
       state.loginPending = false;
       state.loginError = null;
-      state.loginSuccess = true;
+      state.loginStatusChanged = !state.loginStatusChanged;
+      state.authTokenExpiriesIn = Math.floor(Date.now() / 1000) + 1440 * 60;
     });
 
     builder.addCase(logoutThunk.pending, state => {
@@ -166,8 +204,28 @@ const authStore = createSlice({
     builder.addCase(logoutThunk.fulfilled, state => {
       state.logoutPending = false;
       state.logoutError = null;
-      state.loginSuccess = false;
+      state.loginStatusChanged = !state.loginStatusChanged;
+      state.authTokenExpiriesIn = null;
     });
+
+    builder.addCase(checkAuthTokenExpirationThunk.pending, state => {
+      state.authTokenExpiredPending = true;
+    });
+    builder.addCase(
+      checkAuthTokenExpirationThunk.rejected,
+      (state, { payload }) => {
+        state.authTokenExpiredPending = false;
+        state.authTokenExpiredError = payload as string;
+      },
+    );
+    builder.addCase(
+      checkAuthTokenExpirationThunk.fulfilled,
+      (state, { payload }) => {
+        state.authTokenExpiredPending = false;
+        state.authTokenExpiredError = null;
+        state.authTokenExpired = payload;
+      },
+    );
   },
 });
 

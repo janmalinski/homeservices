@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   NavigationContainer,
   NavigatorScreenParams,
@@ -13,6 +13,7 @@ import { RegisterScreen } from '@src/Auth/Register/RegisterScreen';
 import { VerifyRegistrationCodeScreen } from '@src/Auth/VerifyRegistrationCode/VerifyRegistrationCodeScreen';
 import { LoginScreen } from '@src/Auth/Login/LoginScreen';
 import { ResetPasswordScreen } from '@src/Auth/ResetPassword/ResetPasswordScreen';
+import { AccountScreen } from '@src/Settings/AccountScreen/AccountScreen';
 
 import {
   BottomTabsNavigator,
@@ -20,8 +21,10 @@ import {
 } from './BottomTabs/BottomTabsNavigator';
 import { InternetConnectionHandler } from '@src/Toast/InternetConnectionHandler';
 import { GlobalToast } from '@src/Toast/GlobalToast';
-import { useAppSelector } from '@src/store';
-import { SecureStorage } from '@src/utils';
+import { useAppDispatch } from '@src/store';
+import { useGetToken } from '@src/utils/hooks/useGetToken';
+import { AppState } from 'react-native';
+import { checkAuthTokenExpirationThunk } from '@src/Auth/authStore';
 
 export type TMapScreenParams = {
   redirectAfterSubmit: 'Register' | 'AdCreate';
@@ -51,6 +54,7 @@ export type TRootNavigatorParams = {
   VerifyRegistrationCode: undefined;
   Welcome: undefined;
   AdCreateMap: TMapScreenParams;
+  Account: undefined;
 };
 
 export type TNavParams = TRootNavigatorParams & TBottomTabsNavigatorParams;
@@ -58,26 +62,29 @@ export type TNavParams = TRootNavigatorParams & TBottomTabsNavigatorParams;
 const Root = createStackNavigator<TRootNavigatorParams>();
 
 export const RootNavigator = () => {
-  const isLoginSuccess = useAppSelector(state => state.auth.loginSuccess);
+  const [appState, setAppState] = useState(AppState.currentState);
 
-  const [token, setToken] = useState<string>('');
+  const dispatch = useAppDispatch();
 
-  const getToken = useCallback(async () => {
-    const accessToken = await SecureStorage.read('ACCESS_TOKEN');
-    if (isLoginSuccess && accessToken && accessToken.length > 0) {
-      setToken(accessToken);
-    } else {
-      setToken('');
-    }
-  }, [isLoginSuccess]);
+  const token = useGetToken();
 
   useEffect(() => {
     RNBootSplash.hide();
-  }, []);
+    const appStateSubscription = AppState.addEventListener(
+      'change',
+      nextAppState => {
+        if (
+          appState.match(/inactive|background/) &&
+          nextAppState === 'active'
+        ) {
+          dispatch(checkAuthTokenExpirationThunk());
+        }
+        setAppState(nextAppState);
+      },
+    );
 
-  useEffect(() => {
-    getToken();
-  }, [isLoginSuccess, getToken]);
+    return () => appStateSubscription.remove();
+  }, [appState, dispatch]);
 
   const welcomeScreens = (
     <>
@@ -98,6 +105,7 @@ export const RootNavigator = () => {
     <>
       <Root.Screen name="Tabs" component={BottomTabsNavigator} />
       <Root.Screen name="AdCreateMap" component={MapScreen} />
+      <Root.Screen name="Account" component={AccountScreen} />
     </>
   );
 
@@ -105,7 +113,7 @@ export const RootNavigator = () => {
     <>
       <NavigationContainer>
         <Root.Navigator screenOptions={{ headerShown: false }}>
-          {token && token.length > 0 ? authorizedScreens : welcomeScreens}
+          {token?.length > 0 ? authorizedScreens : welcomeScreens}
         </Root.Navigator>
         <GlobalToast />
         <InternetConnectionHandler />

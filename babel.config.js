@@ -11,6 +11,7 @@ module.exports = {
           '@components': './src/components',
           '@designSystem': './src/components/designSystem',
           '@utils': './src/utils',
+          '@helpers': 'src/helpers'
         },
       },
     ],

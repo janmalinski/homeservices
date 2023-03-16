@@ -1,25 +1,27 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { showErrorToastAction } from '@src/Toast/toastStore';
-import { getUser, uploadUserAvatar } from './userApi';
+import { getUser, updateUser, uploadUserAvatar } from './userApi';
 import { UserDto } from './user.dto';
 
 export interface IUserState {
-  userPending: boolean;
-  errorUser: string | null;
+  userFetchPending: boolean;
+  errorFetchUser: string | null;
+  userUpdatePending: boolean;
+  errorUpdateUser: string | null;
   user: UserDto.userDetails | null;
   avatarPending: boolean;
   avatarError: string | null;
-  avatar: string | null;
 }
 
 const initialState: IUserState = {
-  userPending: false,
-  errorUser: null,
+  userFetchPending: false,
+  errorFetchUser: null,
+  userUpdatePending: false,
+  errorUpdateUser: null,
   user: null,
   avatarPending: false,
   avatarError: null,
-  avatar: null,
 };
 
 interface IErrorStatus extends Error {
@@ -62,21 +64,37 @@ export const uploadUserAvatarThunk = createAsyncThunk(
   },
 );
 
+export const updateUserThunk = createAsyncThunk(
+  'user/update',
+  async (args: Parameters<typeof updateUser>[0], thunkApi) => {
+    try {
+      const user = await updateUser(args);
+      return user;
+    } catch (e) {
+      const errorUpdateUser = e as IErrorStatus;
+      const message = errorUpdateUser?.response?.data?.message;
+      //ADD SOME TRANSLATIONS LATER
+      thunkApi.dispatch(showErrorToastAction({ message }));
+      return thunkApi.rejectWithValue(message);
+    }
+  },
+);
+
 const userStore = createSlice({
   name: 'user',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchUserThunk.pending, state => {
-      state.userPending = true;
+      state.userFetchPending = true;
     });
     builder.addCase(fetchUserThunk.rejected, (state, { payload }) => {
-      state.userPending = false;
-      state.errorUser = payload as string;
+      state.userFetchPending = false;
+      state.errorFetchUser = payload as string;
     });
     builder.addCase(fetchUserThunk.fulfilled, (state, { payload }) => {
-      state.userPending = false;
-      state.errorUser = null;
+      state.userFetchPending = false;
+      state.errorFetchUser = null;
       state.user = payload;
     });
 
@@ -90,7 +108,20 @@ const userStore = createSlice({
     builder.addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
       state.avatarPending = false;
       state.avatarError = null;
-      state.avatar = payload;
+      state.user!.avatarUrl = payload;
+    });
+
+    builder.addCase(updateUserThunk.pending, state => {
+      state.userUpdatePending = true;
+    });
+    builder.addCase(updateUserThunk.rejected, (state, { payload }) => {
+      state.userUpdatePending = false;
+      state.errorUpdateUser = payload as string;
+    });
+    builder.addCase(updateUserThunk.fulfilled, (state, { payload }) => {
+      state.userUpdatePending = false;
+      state.errorUpdateUser = null;
+      state.user = payload;
     });
   },
 });

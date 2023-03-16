@@ -1,3 +1,6 @@
+import { AdDto } from '@src/Ad/ad.dto';
+import { ChatDto } from '@src/Chat/chat.dto';
+
 export namespace UserDto {
   export type UserRoleItem = {
     id: string;
@@ -15,25 +18,35 @@ export namespace UserDto {
     '03-06': boolean;
   };
 
-  type UserAd = {
+  export type UserAd = {
     id: string;
+    userId: string;
+    createdAt: string;
     description: string;
-    availableFrom: Date;
-    availableTo: Date;
-    latitude: number;
-    longitude: number;
+    availableFrom: string;
+    availableTo: string;
     address: string;
+    services: AdDto.Service[];
+    typesOfEmployment: AdDto.TypeOfEmployment[];
     availability: {
       negotiable: boolean;
       time: AvailabilityTime[];
     };
+    workingTimeNegotiable?: boolean;
+    latitude: number;
+    longitude: number;
+    rooms: ChatDto.Room[];
   };
 
   export type userDetails = {
     id: string;
     email: string;
-    phoneNumber: number | null;
+    name: string;
+    phoneNumber: string | null;
     phoneNumberConsent: boolean | null;
+    latitude: number | null;
+    longitude: number | null;
+    address: string;
     avatarUrl: string | null;
     ads: UserAd[];
     roles: UserRoleItem[];

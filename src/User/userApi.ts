@@ -19,3 +19,34 @@ export const uploadUserAvatar: TUploadUserAvatar = async avatar => {
   const response = await protectedApi.post('/user/upload-avatar', formData);
   return response.data;
 };
+
+type TUpdateUser = (args: {
+  name: string;
+  phoneNumber: string;
+  phoneNumberConsent: boolean;
+  email: string;
+  latitude: number | null;
+  longitude: number | null;
+  address: string;
+}) => Promise<UserDto.userDetails>;
+
+export const updateUser: TUpdateUser = async ({
+  name,
+  phoneNumber,
+  phoneNumberConsent,
+  email,
+  address,
+  latitude,
+  longitude,
+}) => {
+  const response = await protectedApi.patch('/user/update', {
+    name,
+    phoneNumber,
+    phoneNumberConsent,
+    email,
+    address,
+    latitude,
+    longitude,
+  });
+  return response.data;
+};

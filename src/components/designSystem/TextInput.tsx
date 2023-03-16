@@ -224,7 +224,7 @@ const stylesDef = {
   },
   text: {
     ...textStyles.typographies.body,
-    color: colors.gray,
+    color: colors.black,
     paddingHorizontal: spacing.small,
   },
   textArea: {

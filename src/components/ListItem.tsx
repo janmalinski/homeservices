@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -10,6 +10,7 @@ import {
 import { colors, Text, textStyles, spacing, Avatar } from './index';
 
 import { Icon, IIconProps } from './designSystem/Icon';
+import { AdDto } from '@src/Ad/ad.dto';
 
 export interface ListItemProps {
   title?: string;
@@ -20,35 +21,48 @@ export interface ListItemProps {
   rightComponent?: 'chevron' | 'close';
   avatarUri?: string;
   icon?: IIconProps;
+  titleNumberOfLines?: number;
+  subtitleNumberOfLines?: number;
   style?: StyleProp<ViewStyle>;
-  onPress: () => void;
+  onPress: (item?: AdDto.AdDetails) => void;
 }
 
 export const ListItem: React.FC<ListItemProps> = ({
   title,
   subtitle,
   raised,
-  border,
   leftComponent,
   rightComponent,
   avatarUri,
   icon,
+  titleNumberOfLines,
+  subtitleNumberOfLines,
   style,
   onPress,
 }) => {
+
+  const pressItem = useCallback(
+    () => onPress(),
+    [onPress]
+  );
+
   return (
     <TouchableOpacity
       style={[styles.container, style, raised && styles.raised]}
-      onPress={onPress}>
+      onPress={pressItem}>
       {leftComponent === 'avatar' && avatarUri && <Avatar uri={avatarUri} />}
 
       {leftComponent === 'icon' && icon && (
         <Icon name={icon.name} color={colors.black} size={28} />
       )}
 
-      <View style={leftComponent && styles.textContainerLeftPadding}>
-        <Text typography="body">{title}</Text>
-        <Text typography="caption1">{subtitle}</Text>
+      <View
+        style={
+          (leftComponent && styles.textContainerLeftPadding,
+          styles.textContainerRightPadding)
+        }>
+        {title && <Text numberOfLines={titleNumberOfLines} typography="body">{title}</Text>}
+        {subtitle && <Text numberOfLines={subtitleNumberOfLines} typography="caption1">{subtitle}</Text>}
       </View>
 
       {rightComponent === 'chevron' && (
@@ -87,6 +101,9 @@ const styles = StyleSheet.create({
   },
   textContainerLeftPadding: {
     paddingLeft: spacing.regular,
+  },
+  textContainerRightPadding: {
+    paddingRight: spacing.large,
   },
   rightIcon: {
     position: 'absolute',

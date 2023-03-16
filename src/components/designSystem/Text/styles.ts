@@ -29,6 +29,7 @@ type TTextColors = Pick<
   | 'orange500'
   | 'orange400'
   | 'orange900'
+  | 'opacity'
 >;
 
 const colors: { [key in keyof TTextColors]: { color: string } } =
@@ -109,6 +110,9 @@ const colors: { [key in keyof TTextColors]: { color: string } } =
     red700: {
       color: ColorPallette.red700,
     },
+    opacity: {
+      color: ColorPallette.opacity
+    }
   });
 
 const typographies = StyleSheet.create({
@@ -209,4 +213,4 @@ const textDecorationLines = StyleSheet.create({
   },
 });
 
-export { typographies, textAligns, fontWeights, colors, textDecorationLines };
+export { typographies, textAligns, fontWeights, colors, textDecorationLines};

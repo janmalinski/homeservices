@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 
-import { Text, Icon, colors } from '@src/components';
+import { Text, Icon, colors, spacing } from '@src/components';
 import { TBottomTabsNavigatorParams } from './BottomTabsNavigator';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
@@ -60,11 +60,11 @@ export const CustomTabBar = ({ tabs }: TCustomTabBar) => {
               <Icon
                 name={iconName}
                 size={18}
-                color={isFocused ? colors.textTitle : colors.textPlaceholder}
+                color={isFocused ? colors.textTitle : colors.primary}
               />
               <View style={styles.tabBarLabelContainer}>
                 <Text
-                  color={isFocused ? 'textTitle' : 'textPlaceholder'}
+                  color={isFocused ? 'textTitle' : 'primary'}
                   textAlign="center"
                   typography="caption1"
                   fontWeight="medium">
@@ -94,7 +94,7 @@ const stylesDef: IStyles = {
     left: 0,
     right: 0,
     zIndex: 0,
-    backgroundColor: colors.disabledLight,
+    backgroundColor: colors.disabled,
     overflow: 'hidden',
     elevation: 12,
     shadowRadius: 12,
@@ -107,6 +107,7 @@ const stylesDef: IStyles = {
     height: TAB_BAR_HEIGHT,
   },
   tabBarItem: {
+    paddingVertical: spacing.small,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,4 +1,56 @@
-export const colors = {
+export interface Colors {
+  white: 'white',
+  black: 'black',
+  shadowColor: '#000000',
+  lightContrast: '#FAFAFA',
+  primary: '#e4f6f4',
+  secondary: '#8184a1',
+  disabled: '#878787',
+  disabledLight: '#F2F2F2',
+  pathColor: '#4169E1',
+  link: '#1E90FF',
+  overlay: 'rgba(0,0,0,0.8)',
+  error: '#B22222',
+  success: '#22bb33',
+  warning: '#f0ad4e',
+  textTitle: '#1A2333',
+  textPrimary: '#6c6d7c',
+  textSecondary: '#fff',
+  textPlaceholder: '#B4BDCB',
+  tertiaryButtonBackground: '#FFD1B2',
+  tertiaryButtonText: '#BA4A00',
+  textAccent: '#000000',
+  dirtyBlue: '#222D40',
+  gray: '#C2CCD7',
+  gray90: '#E5E5E5',
+  navyBlue50: '#ECEFF5',
+  navyBlue100: '#D1D7E1',
+  navyBlue200: '#B4BDCB',
+  navyBlue300: '#97A2B5',
+  navyBlue400: '#818EA3',
+  navyBlue500: '#5D6D8B',
+  navyBlue700: '#31415D',
+  navyBlue800: '#222D40',
+  navyBlue900: '#1A2333',
+  green50: '#AFF5B4',
+  green100: '#DCF9D2',
+  green200: '#56D364',
+  green500: '#228636',
+  green700: '#459473',
+  green900: '#235450',
+  red50: '#FFDAD5',
+  red700: '#8E1619',
+  red500: '#DA3633',
+  yellow100: '#FAF4B9',
+  orange300: '#FFD1B2',
+  orange400: '#FF9D5B',
+  orange500: '#FD6500',
+  orange900: '#923C27',
+  blue400: '#3DB6FB',
+  transparent: 'transparent',
+  opacity: '#191E23'
+}
+export const colors: Colors = {
   white: 'white',
   black: 'black',
   shadowColor: '#000000',
@@ -25,7 +77,7 @@ export const colors = {
   textAccent: '#000000',
 
   dirtyBlue: '#222D40',
-  gray: '##C2CCD7',
+  gray: '#C2CCD7',
   gray90: '#E5E5E5',
   navyBlue50: '#ECEFF5',
   navyBlue100: '#D1D7E1',
@@ -51,6 +103,8 @@ export const colors = {
   orange500: '#FD6500',
   orange900: '#923C27',
   blue400: '#3DB6FB',
+  transparent: 'transparent',
+  opacity: '#191E23'
 };
 
 const grayscale = {
@@ -109,10 +163,38 @@ export const CheckboxColors = {
       label: grayscale.grayscale09,
     },
     disabled: {
-      border: primary.primaryDisabled,
-      background: primary.primaryDisabled,
-      icon: grayscale.grayscale00,
+      border: primary.primaryDefault,
+      background: primary.primaryDefault,
+      icon: grayscale.grayscale09,
       label: grayscale.grayscale09,
     },
+  },
+};
+
+export const header = {
+  primary: {
+    background: colors.primary,
+    border: colors.primary,
+    title: colors.textTitle,
+  },
+  light: {
+    background: colors.white,
+    border: colors.primary,
+    title: colors.textTitle,
+  },
+}
+
+export const tabNavigator = {
+  default: {
+    active: primary.primaryDefault,
+    inactive: grayscale.grayscale03,
+  },
+  raised: {
+    active: primary.primaryDefault,
+    inactive: grayscale.grayscale03,
+  },
+  disabled: {
+    active: primary.primaryDefault,
+    inactive: grayscale.grayscale03,
   },
 };

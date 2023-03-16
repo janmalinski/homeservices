@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StyleSheet, View, ViewStyle } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colors, spacing } from './index';
@@ -8,32 +8,36 @@ import { Spinner } from './Spinner';
 
 export interface IFullScreenTemplateProps {
   children?: React.ReactNode;
-  padded?: boolean;
+  paddedHotizontaly?: boolean;
   safeArea?: boolean;
   bottomNavigationPad?: boolean;
   noScroll?: boolean;
   isLoading?: boolean;
   contentContainerStyle?: ViewStyle;
   header?: React.ReactNode;
+  footer?: React.ReactNode;
   keyboardShouldPersistTaps?: boolean | 'always' | 'never' | 'handled';
+  scrollRef?: React.RefObject<ScrollView>;
 }
 
 export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
   children,
-  padded,
+  paddedHotizontaly,
   safeArea,
   bottomNavigationPad,
   noScroll,
   isLoading,
   contentContainerStyle,
   header,
+  footer,
   keyboardShouldPersistTaps,
+  scrollRef,
 }) => {
   const RootView = safeArea ? SafeAreaView : View;
   const Container = noScroll ? View : KeyboardAvoidingComponent;
 
   return (
-    <RootView style={styles.mainContainer} edges={['top']}>
+    <RootView style={styles.mainContainer} edges={['top', 'bottom']}>
       {header}
       {isLoading ? (
         <View style={styles.centeredContainer}>
@@ -45,20 +49,24 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
           extraScrollHeight={Platform.select({ ios: 32, android: 0 })}
           keyboardShouldPersistTaps={keyboardShouldPersistTaps}
           contentContainerStyle={[
-            padded && styles.padded,
+            paddedHotizontaly && styles.paddedHotizontaly,
             bottomNavigationPad && styles.bottomNavigationPad,
             contentContainerStyle,
           ]}
+          scrollRef={scrollRef as React.RefObject<ScrollView>}
           style={[
             styles.container,
             noScroll && styles.containerNoScroll,
-            noScroll && padded && styles.padded,
+            noScroll && paddedHotizontaly && styles.paddedHotizontaly,
             noScroll && bottomNavigationPad && styles.bottomNavigationPad,
             noScroll && contentContainerStyle,
           ]}>
           {children}
         </Container>
       )}
+      <View style={styles.footerContainer}>
+        {footer}
+      </View>
     </RootView>
   );
 };
@@ -68,9 +76,10 @@ interface IStyles {
   container: ViewStyle;
   centeredContainer: ViewStyle;
   containerNoScroll: ViewStyle;
-  padded: ViewStyle;
+  paddedHotizontaly: ViewStyle;
   bottomNavigationPad: ViewStyle;
   loadingContainer: ViewStyle;
+  footerContainer: ViewStyle;
 }
 
 const stylesDef: IStyles = {
@@ -90,8 +99,8 @@ const stylesDef: IStyles = {
   containerNoScroll: {
     flex: 1,
   },
-  padded: {
-    padding: spacing.large,
+  paddedHotizontaly: {
+    paddingHorizontal: spacing.large,
   },
   bottomNavigationPad: {
     paddingBottom: 0,
@@ -101,6 +110,12 @@ const stylesDef: IStyles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  footerContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0
+  }
 };
 
 const styles = StyleSheet.create(stylesDef);

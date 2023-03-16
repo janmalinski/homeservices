@@ -63,15 +63,20 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
               ]}
             />
             <View style={styles.labelContainer}>
-              <Text
-                typography="caption1"
-                style={[
-                  size === 'small' ? styles.labelSmall : styles.labelMedium,
-                  { color: CheckboxColors[select][state].label },
-                  errorMessage ? { color: colors.error } : {},
-                ]}>
-                {label}
-              </Text>
+              {
+                typeof label === 'string' ? 
+                  <Text
+                  typography="caption1"
+                  style={[
+                    size === 'small' ? styles.labelSmall : styles.labelMedium,
+                    { color: CheckboxColors[select][state].label },
+                    errorMessage ? { color: colors.error } : {} ]}
+                  >
+                    {label}
+                  </Text>
+                :
+                  label
+              }
             </View>
           </View>
         </>

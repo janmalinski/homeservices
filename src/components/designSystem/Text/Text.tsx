@@ -21,6 +21,7 @@ interface ITextProps {
   color?: keyof typeof colors;
   textDecorationLine?: keyof typeof textDecorationLines;
   numberOfLines?: number;
+  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
   children?: React.ReactNode;
   style?: StyleProp<TextStyle>;
   onPress?: () => void;
@@ -35,6 +36,7 @@ export const Text: React.FC<ITextProps> = ({
   color = 'textPrimary',
   textDecorationLine = 'none',
   numberOfLines,
+  ellipsizeMode,
   style,
   onPress,
   onLayout,
@@ -42,6 +44,7 @@ export const Text: React.FC<ITextProps> = ({
   return (
     <TextRN
       numberOfLines={numberOfLines}
+      ellipsizeMode={ellipsizeMode}
       onPress={onPress}
       onLayout={onLayout}
       maxFontSizeMultiplier={1.5}

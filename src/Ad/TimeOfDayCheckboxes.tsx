@@ -7,10 +7,10 @@ import { Checkbox, spacing, Text } from '@src/components';
 import { IAdFormData } from './AdForm';
 import { UserDto } from '@src/User/user.dto';
 
-export interface Props {
+export interface IProps {
   workingTime: IAdFormData['workingTime'];
-  setFieldValue: any;
-  handleOnPress: (
+  setFieldValue?: any;
+  handleOnPress?: (
     value: boolean,
     index: number,
     setFieldValue: {
@@ -26,15 +26,17 @@ export interface Props {
   ) => void;
 }
 
-export const TimeOfDayCheckboxes = React.memo<Props>(
-  ({ workingTime, handleOnPress, setFieldValue }: Props) => {
+const TimeOfDayCheckboxes = React.memo<IProps>(
+  ({ workingTime, handleOnPress, setFieldValue }: IProps) => {
     const [t] = useTranslation();
 
     const handleOnPressCheckbox = (
       value: boolean,
       index: number,
       range: keyof UserDto.AvailabilityTime,
-    ) => handleOnPress(value, index, setFieldValue, workingTime, range);
+    ) =>
+      handleOnPress &&
+      handleOnPress(value, index, setFieldValue, workingTime, range);
 
     const handleRenderRow = (
       item: UserDto.AvailabilityTime,
@@ -52,6 +54,7 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
               onPress={value => handleOnPressCheckbox(value, index, range)}
               checked={workingTime[index][range]}
               containerStyle={styles.checkboxContainer}
+              disabled={!handleOnPress}
             />
           </View>
         )}
@@ -64,6 +67,7 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
               onPress={value => handleOnPressCheckbox(value, index, range)}
               checked={workingTime[index][range]}
               containerStyle={styles.checkboxContainer}
+              disabled={!handleOnPress}
             />
           </View>
         )}
@@ -76,6 +80,7 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
               onPress={value => handleOnPressCheckbox(value, index, range)}
               checked={workingTime[index][range]}
               containerStyle={styles.checkboxContainer}
+              disabled={!handleOnPress}
             />
           </View>
         )}
@@ -88,6 +93,7 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
               onPress={value => handleOnPressCheckbox(value, index, range)}
               checked={workingTime[index][range]}
               containerStyle={styles.checkboxContainer}
+              disabled={!handleOnPress}
             />
           </View>
         )}
@@ -100,6 +106,7 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
               onPress={value => handleOnPressCheckbox(value, index, range)}
               checked={workingTime[index][range]}
               containerStyle={styles.checkboxContainer}
+              disabled={!handleOnPress}
             />
           </View>
         )}
@@ -112,6 +119,7 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
               onPress={value => handleOnPressCheckbox(value, index, range)}
               checked={workingTime[index][range]}
               containerStyle={styles.checkboxContainer}
+              disabled={!handleOnPress}
             />
           </View>
         )}
@@ -124,6 +132,7 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
               onPress={value => handleOnPressCheckbox(value, index, range)}
               checked={workingTime[index][range]}
               containerStyle={styles.checkboxContainer}
+              disabled={!handleOnPress}
             />
           </View>
         )}
@@ -200,6 +209,8 @@ export const TimeOfDayCheckboxes = React.memo<Props>(
     );
   },
 );
+
+export default TimeOfDayCheckboxes;
 
 interface IStyles {
   checkboxContainer: ViewStyle;

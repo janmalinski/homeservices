@@ -15,17 +15,19 @@ export interface IKeyboardAvoidingComponentProps {
   contentContainerStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   keyboardShouldPersistTaps?: boolean | 'always' | 'never' | 'handled';
+  scrollRef: React.RefObject<ScrollView>;
 }
 
 export const KeyboardAvoidingComponent: React.FC<
   IKeyboardAvoidingComponentProps
-> = ({ children, extraScrollHeight, ...props }) => {
+> = ({ children, extraScrollHeight, scrollRef, ...props }) => {
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
       keyboardVerticalOffset={extraScrollHeight}>
-      <ScrollView {...props}>{children}</ScrollView>
+      <ScrollView ref={scrollRef} {...props}>{children}</ScrollView>
     </KeyboardAvoidingView>
   );
 };

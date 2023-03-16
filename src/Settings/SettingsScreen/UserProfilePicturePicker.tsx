@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
-import Config from 'react-native-config';
 import ImagePicker, { Options } from 'react-native-image-crop-picker';
 
 import { Icon } from '@src/components';
@@ -9,6 +8,7 @@ import { colors, spacing } from '@src/components';
 import { Avatar } from '@src/components';
 import { useAppDispatch, useAppSelector } from '@src/store';
 import { uploadUserAvatarThunk } from '@src/User/userStore';
+import URL from '@src/helpers/domainUrlWithoutLastSlash';
 
 const imageOptions: Options = {
   width: 512,
@@ -20,7 +20,7 @@ const imageOptions: Options = {
 };
 
 interface IUserProfilePicturePickerProps {
-  initialImageURL: string;
+  initialImageURL?: string;
 }
 
 export const UserProfilePicturePicker = ({
@@ -32,7 +32,9 @@ export const UserProfilePicturePicker = ({
   const user = useAppSelector(state => state.user.user);
 
   useEffect(() => {
-    setImageURL(Config.DOMAIN_URL + user?.avatarUrl);
+    if(user?.avatarUrl !== null){
+      setImageURL(URL + user?.avatarUrl);
+    }
   }, [user]);
 
   const openPicker = useCallback(async () => {
@@ -53,7 +55,7 @@ export const UserProfilePicturePicker = ({
 
   return (
     <View style={styles.container}>
-      <Avatar uri={imageURL} loading={loading} />
+      <Avatar uri={imageURL} loading={loading} editable />
       <Icon
         size={28}
         name="pencil"

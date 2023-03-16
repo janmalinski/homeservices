@@ -1,10 +1,5 @@
 import React, { useCallback } from 'react';
-import {
-  View,
-  ImageBackground,
-  TouchableOpacity,
-  StyleProp,
-} from 'react-native';
+import { View, ImageBackground, StyleProp } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,7 +7,7 @@ import Image, { ImageStyle } from 'react-native-fast-image';
 import { useTranslation } from 'react-i18next';
 
 import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
-import { Button, Text } from '@src/components';
+import { Button, colors, Text, Link } from '@src/components';
 import { WelcomeScreenStyles as styles } from './WelcomeScreenStyles';
 
 export const WelcomeScreen = () => {
@@ -62,22 +57,19 @@ export const WelcomeScreen = () => {
             title={t('welcome.start')}
             onPress={navigateToLocationScreen}
           />
-          <TouchableOpacity style={styles.row} onPress={navigateLoginScreen}>
+          <View style={styles.row}>
             <Text
               typography="body"
               fontWeight="medium"
               style={styles.paragraph}>
               {t('welcome.alreadyHaveAccount')}
             </Text>
-            <View style={styles.linkContainer}>
-              <Text
-                typography="body"
-                fontWeight="medium"
-                style={styles.paragraph}>
-                {t('common.login')}
-              </Text>
-            </View>
-          </TouchableOpacity>
+            <Link
+              text={t('common.login')}
+              color={colors.white}
+              onPress={navigateLoginScreen}
+            />
+          </View>
         </View>
       </View>
     </ImageBackground>

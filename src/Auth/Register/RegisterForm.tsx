@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { View, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { Formik, FormikProps } from 'formik';
 import i18n from 'i18next';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import {
   Button,
@@ -11,6 +12,7 @@ import {
   Text,
   colors,
   spacing,
+  Link,
 } from '@src/components';
 
 export interface IRegisterFormData {
@@ -19,7 +21,10 @@ export interface IRegisterFormData {
   termsAccepted: boolean;
   latitude: number;
   longitude: number;
-  userRole: string;
+  userRole: {
+    name: string;
+    id: string;
+  }
   language: string;
 }
 
@@ -47,6 +52,9 @@ export const RegisterForm = ({
   onSubmit,
   isPending,
 }: IRegisterFormProps) => {
+
+  const [t] = useTranslation();
+
   const navigateToTermsOfUse = useCallback(() => {
     // navigate to terms of use
   }, []);
@@ -103,22 +111,24 @@ export const RegisterForm = ({
               setFieldValue('termsAccepted', !values.termsAccepted)
             }
             label={
-              <Text typography="body">
-                <>
-                  {i18n.t('register.accept')}
-                  <Text typography="body" onPress={navigateToTermsOfUse}>
-                    <Text
-                      typography="body"
-                      style={
-                        errors.termsAccepted && touched.termsAccepted
-                          ? styles.error
-                          : styles.link
-                      }>
-                      <> {i18n.t('register.termsOfUse')}</>
-                    </Text>
-                  </Text>
-                </>
-              </Text>
+              <View style={styles.row}>
+                <Text
+                  typography="body"
+                  fontWeight="medium"
+                  style={styles.paragraph}>
+                  {t('welcome.alreadyHaveAccount')}
+                </Text>
+                <Link
+                  text={t('register.termsOfUse')}
+                  color={colors.black}
+                  textStyle={
+                    errors.termsAccepted && touched.termsAccepted
+                      ? styles.error
+                      : 
+                      undefined
+                  }
+                  onPress={navigateToTermsOfUse} />
+              </View>
             }
             errorMessage={
               errors.termsAccepted &&
@@ -141,7 +151,7 @@ export const RegisterForm = ({
         </>
       );
     },
-    [navigateToTermsOfUse, isPending],
+    [navigateToTermsOfUse, isPending, t],
   );
 
   return (
@@ -155,18 +165,24 @@ export const RegisterForm = ({
 };
 
 interface IStyles {
+  row: ViewStyle;
   button: ViewStyle;
-  link: TextStyle;
   error: TextStyle;
+  paragraph: TextStyle
 }
 
 const stylesDef: IStyles = {
+  row: {
+    flexDirection: 'row',
+    paddingTop: 6,
+  },
   button: {
     marginTop: spacing.small,
     marginBottom: spacing.xLarge,
   },
-  link: {
-    color: colors.primary,
+  paragraph: {
+    lineHeight: spacing.large,
+    color: colors.textPrimary,
   },
   error: {
     color: colors.error,

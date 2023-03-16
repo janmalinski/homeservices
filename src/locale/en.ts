@@ -134,11 +134,26 @@ const translations = {
     signOutAction: 'Sign out',
     signOutDialogTitle: 'Sign out',
     signOutDialogDescription: 'Are you sure you want to sign out?',
+    yourAds: 'Your ads',
   },
   account: {
     account: 'Account',
     consentPhoneNumberVisibility:
       ' I would like to display my phone number to users',
+  },
+  userAdList: {
+    screenTitle: 'Your Ads',
+  },
+  adDetails: {
+    screenTitle: 'Ad Details',
+    published: 'Published',
+    availableFrom: 'Availiable from',
+    availableTo: 'Availiable to',
+    services: 'Services',
+    description: 'Description',
+    availability: 'Availibility',
+    negotiable: 'Negotiable',
+    typesOfEmployment: 'Types of employment',
   },
 };
 

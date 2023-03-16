@@ -13,18 +13,6 @@ const translations = {
     findHomeHelp: 'Znajdź pomoc domową w 10 minut',
     alreadyHaveAccount: 'Masz już konto?',
   },
-  settings: {
-    screenTitle: 'Ustawienia',
-    account: 'Konto',
-    signOutTitle: 'Wyloguj się',
-    signOutSubtitle: 'Po wylogowaniu się, musisz zalogować się ponownie',
-    signOutAction: 'Wyloguj',
-    signOutDialogTitle: 'Wyloguj się',
-    signOutDialogDescription: 'Czy na pewno chcesz się wylogować?',
-  },
-  account: {
-    account: 'Profil uzytkownika',
-  },
   location: {
     howCanWeHelpYou: 'Jak możemy Tobię pomóc?',
     location: 'Location',
@@ -110,6 +98,34 @@ const translations = {
     location: 'Location',
     detectLocation: 'Detect my location',
     setLocationManually: '',
+  },
+  settings: {
+    screenTitle: 'Ustawienia',
+    account: 'Konto',
+    signOutTitle: 'Wyloguj się',
+    signOutSubtitle: 'Po wylogowaniu się, musisz zalogować się ponownie',
+    signOutAction: 'Wyloguj',
+    signOutDialogTitle: 'Wyloguj się',
+    signOutDialogDescription: 'Czy na pewno chcesz się wylogować?',
+    yourAds: 'Twoje ogłoszenia',
+  },
+  account: {
+    account: 'Profil uzytkownika',
+    consentPhoneNumberVisibility:
+      ' I would like to display my phone number to users',
+  },
+  userAdList: {
+    screenTitle: 'Your Ads',
+  },
+  adDetails: {
+    published: 'Data dodania',
+    availableFrom: 'Dostępne od',
+    availableTo: 'Dostępne do',
+    services: 'Serwis',
+    description: 'Opis',
+    availability: 'Dostępność',
+    negotiable: 'Do uzgodnienia',
+    typesOfEmployment: 'Rodzaj zatrudnienia',
   },
 };
 

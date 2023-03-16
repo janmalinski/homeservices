@@ -15,8 +15,8 @@ import {
   textStyles,
   spacing,
 } from '@src/components';
-import TimeOfDayCheckboxes from './TimeOfDayCheckboxes';
-import { AdDto } from './ad.dto';
+import TimeOfDayCheckboxes from '../TimeOfDayCheckboxes';
+import { AdDto } from '../ad.dto';
 import { NavigationProp } from '@react-navigation/native';
 import { TNavParams } from '@src/navigation/RootNavigator';
 import { UserDto } from '@src/User/user.dto';
@@ -36,7 +36,6 @@ export interface IAdFormData {
   latitude: number;
   longitude: number;
   workingTime: UserDto.AvailabilityTime[];
-  id?: string;
 }
 
 export interface IAddFormProps {
@@ -69,7 +68,7 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().required('Description is required'),
 });
 
-export const AdForm = ({
+export const AdEditForm = ({
   initialValues,
   isPending,
   services,
@@ -173,23 +172,20 @@ export const AdForm = ({
     setFieldValue('workingTime', upadatedworkingTime);
   };
 
-  const navigateToMap = useCallback(
-    (values: any) => {
-      if (roles.length === 1) {
-        navigation.navigate('AdMap', {
-          redirectAfterSubmit: initialValues.id ? 'AdEdit' : 'AdCreate',
-          userRole: roles[0],
-          ad: values,
-        });
-      }
-    },
-    [initialValues, navigation, roles],
-  );
+  const navigateToMap = useCallback(() => {
+    if (roles.length === 1) {
+      navigation.navigate('AdMap', {
+        redirectAfterSubmit: 'AdCreate',
+        userRole: roles[0],
+      });
+    }
+  }, [navigation, roles]);
 
   const renderForm = useCallback(
     (formProps: FormikProps<IAdFormData>) => {
       const {
         handleChange,
+        handleBlur,
         setFieldValue,
         values,
         handleSubmit,
@@ -204,7 +200,7 @@ export const AdForm = ({
             {t('adCreate.employmentType')}
           </Text>
           <View style={[styles.row, styles.marginBottomRegular]}>
-            {typeemployments.map(typeemployment => (
+            {typeemployments?.map(typeemployment => (
               <Button
                 variant={
                   values.employmentTypeIds.includes(typeemployment.id)
@@ -357,16 +353,16 @@ export const AdForm = ({
                 }}
               />
             </View>
-            {values.setHoursWorkingTime.setHours && (
-              <TimeOfDayCheckboxes
-                setFieldValue={setFieldValue}
-                workingTime={values.workingTime}
-                handleOnPress={handleworkingTime}
-              />
-            )}
+            {/* { values.setHoursWorkingTime.setHours  && ( */}
+            <TimeOfDayCheckboxes
+              setFieldValue={setFieldValue}
+              workingTime={values.workingTime}
+              handleOnPress={handleworkingTime}
+            />
+            {/* )} */}
           </View>
           <View style={styles.marginBottomRegular}>
-            {address !== '' && (
+            {address !== null && (
               <TextInput
                 size="textArea"
                 numberOfLines={2}
@@ -388,7 +384,7 @@ export const AdForm = ({
               }
               buttonStyle={[styles.button, styles.marginTopXlarge]}
               title={i18n.t('location.detectLocation')}
-              onPress={() => navigateToMap(values)}
+              onPress={() => navigateToMap()}
             />
           </View>
           <View style={styles.marginBottomRegular}>
@@ -416,10 +412,7 @@ export const AdForm = ({
             onPress={handleSubmit}
             title={i18n.t('common.save')}
             buttonStyle={styles.button}
-            disabled={
-              (!isValid && initialValues.id === undefined) ||
-              (isPending && initialValues.id === undefined)
-            }
+            disabled={!isValid || isPending}
             isLoading={isPending}
           />
         </View>
@@ -434,7 +427,6 @@ export const AdForm = ({
       latitude,
       longitude,
       isPending,
-      initialValues.id,
       handleSetValue,
       navigateToMap,
     ],

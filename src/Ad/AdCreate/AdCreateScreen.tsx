@@ -130,7 +130,7 @@ export const AdCreateScreen = () => {
   );
 
   return (
-    <FullScreenTemplate safeArea padded>
+    <FullScreenTemplate safeArea paddedHotizontaly>
       {typesOfEmployment.length > 0 && services && services.length > 0 && (
         <AdForm
           initialValues={initialValues}

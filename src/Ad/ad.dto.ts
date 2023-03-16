@@ -1,7 +1,8 @@
+import { ChatDto } from '@src/Chat/chat.dto';
 import { UserDto } from '@src/User/user.dto';
 
 export namespace AdDto {
-  export type ServiceDetails = {
+  export type Service = {
     id: string;
     name: string;
   };
@@ -13,13 +14,22 @@ export namespace AdDto {
 
   export type AdDetails = {
     id: string;
+    userId: string;
     description: string;
-    services: ServiceDetails[];
+    services: Service[];
     typesOfEmployment: TypeOfEmployment[];
-    workingTimeNegotiable: boolean;
-    workingTime: UserDto.AvailabilityTime[];
     latitude: number;
     longitude: number;
-    address: number;
+    address: string;
+    createdAt: string;
+    availableFrom: string;
+    availableTo: string;
+    workingTimeNegotiable: boolean;
+    workingTime: UserDto.AvailabilityTime[];
+    availability: {
+      negotiable: boolean;
+      time: UserDto.AvailabilityTime[];
+    };
+    rooms: ChatDto.Room[];
   };
 }

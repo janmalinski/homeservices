@@ -56,7 +56,7 @@ export const AssessmentScreen = () => {
   }, [setMapButtonPressed, navigation, userRole]);
 
   return (
-    <FullScreenTemplate safeArea padded isLoading={isLoading}>
+    <FullScreenTemplate safeArea paddedHotizontaly isLoading={isLoading}>
       <View style={styles.container}>
         {roles?.length > 0 && (
           <Text typography="title3" style={styles.firstHeader}>

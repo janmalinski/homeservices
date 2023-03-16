@@ -1,13 +1,14 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation, useNavigationState } from '@react-navigation/native';
 
 import { Button, FullScreenTemplate } from '@src/components';
 import { LoginForm, ILoginFormData } from './LoginForm';
 import { useAppDispatch, useAppSelector } from '@src/store';
 import { loginThunk } from '../authStore';
 import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
+import { headerOptions } from '@src/navigation/RootNavigator';
 
 const initialValues: ILoginFormData = {
   email: '',
@@ -24,6 +25,21 @@ export const LoginScreen = () => {
 
   const isPending = useAppSelector(state => state.auth.loginPending);
 
+  const routes = useNavigationState(state => state.routes);
+
+  useEffect(() => {
+    if(routes[routes.length - 2].name !== 'VerifyRegistrationCode'){
+      navigation.setOptions({
+        ...headerOptions
+       })
+    } else {
+      navigation.setOptions({headerShown: false});
+      navigation.addListener('beforeRemove', e => {
+        e.preventDefault();
+      });
+    }
+  }, [navigation, routes])
+  
   const loginHandler = useCallback(
     (values: ILoginFormData) => {
       dispatch(loginThunk(values));
@@ -36,7 +52,7 @@ export const LoginScreen = () => {
   }, [navigation]);
 
   return (
-    <FullScreenTemplate safeArea padded>
+    <FullScreenTemplate safeArea paddedHotizontaly>
       <LoginForm
         initialValues={initialValues}
         onSubmit={loginHandler}

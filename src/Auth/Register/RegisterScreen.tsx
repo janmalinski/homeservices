@@ -19,7 +19,10 @@ const initialValues: IRegisterFormData = {
   termsAccepted: false,
   latitude: 0,
   longitude: 0,
-  userRole: '',
+  userRole: {
+    name: '',
+    id: ''
+  },
   language: '',
 };
 
@@ -47,13 +50,14 @@ export const RegisterScreen = () => {
       const {
         latitude,
         longitude,
-        userRole: { id },
+        userRole,
       } = route.params;
+
       const data = {
         ...values,
         latitude,
         longitude,
-        userRoleId: id,
+        userRoleId: userRole?.id as string,
         language,
       };
 
@@ -63,7 +67,7 @@ export const RegisterScreen = () => {
   );
 
   return (
-    <FullScreenTemplate safeArea padded>
+    <FullScreenTemplate safeArea paddedHotizontaly>
       <RegisterForm
         initialValues={initialValues}
         onSubmit={registerHandler}

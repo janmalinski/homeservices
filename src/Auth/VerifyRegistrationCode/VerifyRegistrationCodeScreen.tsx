@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
@@ -64,7 +63,7 @@ export const VerifyRegistrationCodeScreen = () => {
   );
 
   return (
-    <FullScreenTemplate safeArea padded>
+    <FullScreenTemplate safeArea paddedHotizontaly>
       <VerifyRegistrationCodeForm
         initialValues={initialValues}
         onSubmit={registerCodeSignUpHandler}

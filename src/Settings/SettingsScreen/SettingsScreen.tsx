@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { StyleSheet, View, ViewStyle } from 'react-native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 import { FullScreenTemplate, ListItem, WavyHeader } from '@src/components';
 import { useTranslation } from 'react-i18next';
@@ -7,70 +8,104 @@ import { spacing, colors } from '@src/components';
 import { UserProfilePicturePicker } from './UserProfilePicturePicker';
 import { useAppDispatch, useAppSelector } from '@src/store';
 import { fetchUserThunk } from '@src/User/userStore';
-// import { useScreenOptions } from 'app/lib/navigation';
-// import { actions, selectors } from 'app/store';
-// import * as Types from 'app/types';
-
-// import { UserProfilePicturePicker } from './components/UserProfilePicturePicker';
-
-// export type Props = Types.MainTabScreenProps<Types.Route.Settings>;
+import { TNavParams } from '@src/navigation/RootNavigator';
+import { DialogTemplate } from './DialogTemplate';
+import { logoutThunk } from '@src/Auth/authStore';
 
 export const SettingsScreen = () => {
+  const navigation = useNavigation<NavigationProp<TNavParams>>();
+  const [dialogVisible, setDialogVisible] = useState(false);
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(state => state.user.user);
-  // const token = useSelector(selectors.isLoggedIn);
-
-  // const openSignOutDialog = useCallback(() => {
-  //   navigation.navigate(Types.Route.SingOutDialog);
-  // }, []);
-
-  // const goToAccount = useCallback(() => {
-  //   navigation.navigate(Types.Route.Account);
-  // }, []);
-
-  // useScreenOptions({
-  //   headerColor: 'primary',
-  // });
 
   useEffect(() => {
-    dispatch(fetchUserThunk());
-  }, [dispatch]);
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(fetchUserThunk());
+    });
+    return unsubscribe;
+  }, [dispatch, navigation]);
 
   const Header = (
     <View style={styles.header}>
-      <WavyHeader
+      <WavyHeader 
         style={styles.wave}
         height={200}
         top={165}
         color={colors.blue400}
       />
-      <UserProfilePicturePicker initialImageURL={user?.avatarUrl as string} />
+      <UserProfilePicturePicker initialImageURL={user?.avatarUrl !== null ? user?.avatarUrl : undefined} />
     </View>
   );
 
-  const navigateToAccount = () => {};
+  const navigateToAccount = useCallback(() => navigation.navigate('Account' as any), [navigation]);
+
+  const navigateToSignOutDialog = useCallback(() => {
+    setDialogVisible(true);
+  }, []);
+
+  const navigateToUserAds = useCallback(() => {
+    navigation.navigate('UserAdList');
+  }, [navigation]);
+
+  const signOut = useCallback(() => {
+    dispatch(logoutThunk());
+  }, [dispatch]);
+
+  const goBack = useCallback(() => {
+    setDialogVisible(false);
+  }, []);
 
   return (
     <FullScreenTemplate
       header={Header}
-      padded
+      paddedHotizontaly
       bottomNavigationPad
       isLoading={false}>
       <ListItem
         rightComponent="chevron"
-        icon={{ name: 'person-outline' }}
         title={t('settings.account')}
-        subtitle="testowy"
-        onPress={() => navigateToAccount}
+        onPress={navigateToAccount}
         raised
+        style={styles.listItem}
+      />
+      <ListItem
+        rightComponent="chevron"
+        title={t('settings.yourAds')}
+        onPress={navigateToUserAds}
+        raised
+        style={styles.listItem}
+      />
+      {dialogVisible && (
+        <DialogTemplate
+          title={t('settings.signOutTitle')}
+          description={t('settings.signOutDialogDescription')}
+          proceedButtonLabel={t('settings.signOutAction')}
+          cancelButtonLabel={t('common.no')}
+          onProceed={signOut}
+          onCancel={goBack}
+          onBackdropPress={goBack}
+        />
+      )}
+        <ListItem
+        rightComponent="chevron"
+        title={t('settings.signOutTitle')}
+        onPress={navigateToSignOutDialog}
+        raised
+        style={styles.listItem}
       />
     </FullScreenTemplate>
   );
 };
 
-const styles = StyleSheet.create({
+interface IStyles {
+  header: ViewStyle;
+  wave: ViewStyle;
+  listItem: ViewStyle;
+}
+
+const stylesDef: IStyles = {
   header: {
     height: 280,
   },
@@ -81,4 +116,9 @@ const styles = StyleSheet.create({
     right: 0,
     marginHorizontal: -spacing.large,
   },
-});
+  listItem: {
+    marginVertical: spacing.small,
+  },
+};
+
+const styles = StyleSheet.create(stylesDef);

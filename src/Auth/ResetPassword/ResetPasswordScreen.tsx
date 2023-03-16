@@ -21,7 +21,7 @@ export const ResetPasswordScreen = () => {
   }, []);
 
   return (
-    <FullScreenTemplate safeArea padded>
+    <FullScreenTemplate safeArea paddedHotizontaly>
       <Text typography="body" style={styles.guideText}>
         {t('resetPassword.guide1')}
       </Text>

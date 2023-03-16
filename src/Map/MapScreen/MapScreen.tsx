@@ -155,7 +155,11 @@ export const MapScreen = () => {
 
   const getAddressFromCoords = async (coords: TLatitudeLongitude) => {
     const response = await Geocoder.from(coords);
-    return response.results[0].formatted_address;
+    const str = response.results[0].formatted_address;
+    const address = str
+      .substring(str.indexOf(',') + 1, str.lastIndexOf(','))
+      .trim();
+    return address;
   };
 
   const handleAddressChange = (details: GooglePlaceDetail) => {
@@ -186,8 +190,7 @@ export const MapScreen = () => {
 
   const handleConfirmLocation = async () => {
     const { latitude, longitude } = coordinates;
-    const { userRole, redirectAfterSubmit } = route.params;
-
+    const { userRole, redirectAfterSubmit, ad } = route.params;
     if (redirectAfterSubmit === 'Register') {
       navigation.navigate('Register', {
         latitude,
@@ -200,10 +203,23 @@ export const MapScreen = () => {
         longitude,
         address,
       });
+    } else if (redirectAfterSubmit === 'AdEdit') {
+      navigation.navigate('AdEdit', {
+        latitude,
+        longitude,
+        address,
+        ad
+      });
+    } else if (redirectAfterSubmit === 'Account') {
+      navigation.navigate('Account', {
+        latitude,
+        longitude,
+        address,
+      });
     }
   };
 
-  const userRole = route.params.userRole;
+  const userType = route.params.userRole;
   return (
     <FullScreenTemplate noScroll>
       {coordinates.latitude === 0 && coordinates.longitude === 0 ? (
@@ -215,7 +231,7 @@ export const MapScreen = () => {
           <View style={styles.searchInputContainer}>
             <View style={[styles.container, styles.questionContainer]}>
               <Text typography="title3" style={styles.questionText}>
-                {userRole.name === 'Client'
+                {userType?.name === 'Client'
                   ? t('map.whereAreYouLookingForHelp')
                   : t('map.whichAreYouWantToWork')}
               </Text>

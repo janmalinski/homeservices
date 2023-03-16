@@ -223,7 +223,7 @@ const authStore = createSlice({
       (state, { payload }) => {
         state.authTokenExpiredPending = false;
         state.authTokenExpiredError = null;
-        state.authTokenExpired = payload;
+        state.authTokenExpired = payload as boolean;
       },
     );
   },

@@ -3,6 +3,7 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+import i18n from 'i18next';
 
 import { AdListScreen } from '@src/Ad/AdList/AdListScreen';
 import { AdCreateScreen } from '@src/Ad/AdCreate/AdCreateScreen';
@@ -42,18 +43,23 @@ export const BottomTabsNavigator = () => {
   return (
     <BottomTabs.Navigator
       tabBar={renderTabBar}
-      screenOptions={{ headerShown: false }}>
+      >
       <BottomTabs.Screen
         name={bottomNavDef[0].routeName}
         component={AdListScreen}
+        options={{
+          title: i18n.t('adList.screenTitle')
+        }}
       />
       <BottomTabs.Screen
         name={bottomNavDef[1].routeName}
         component={AdCreateScreen}
+        options={{headerShown: false}}
       />
       <BottomTabs.Screen
         name={bottomNavDef[2].routeName}
         component={SettingsScreen}
+        options={{headerShown: false}}
       />
     </BottomTabs.Navigator>
   );

@@ -40,7 +40,7 @@ const stylesDef: IStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: TOAST_MIN_HEIGHT,
+    top: TOAST_MIN_HEIGHT - 10,
     right: TOAST_PADDING,
     overflow: 'visible',
     height: CLOSE_ICON_SIZE,

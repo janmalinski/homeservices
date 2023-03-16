@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { CLOSE_ICON_SIZE } from '../Constants';
-import { colors } from '@src/components';
+import { colors, spacing } from '@src/components';
 import styles from '../Styles';
 
 export const CloseButton = (props: { onPress: () => void }) => (
@@ -15,6 +15,7 @@ export const CloseButton = (props: { onPress: () => void }) => (
           name="times"
           color={colors.textPrimary}
           size={CLOSE_ICON_SIZE}
+          style={{marginBottom: spacing.regular, backgroundColor: colors.transparent}}
         />
       </>
     )}

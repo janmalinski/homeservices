@@ -1,19 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
-import { TypedUseSelectorHook } from 'react-redux';
-import { Middleware } from 'redux';
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 import assessment from '@src/Assessment/assessmentStore';
 import toast from '@src/Toast/toastStore';
 import auth from '@src/Auth/authStore';
 import user from '@src/User/userStore';
 import ad from '@src/Ad/adStore';
-
-let flipperMiddleware: Middleware;
-if (__DEV__) {
-  const createDebugger = require('redux-flipper').default;
-  flipperMiddleware = createDebugger();
-}
 
 const makeStore = () => {
   return configureStore({
@@ -24,8 +16,10 @@ const makeStore = () => {
       user,
       ad,
     },
-    middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(flipperMiddleware || []),
+    // middleware: (getDefaultMiddleware) => {
+    //   return getDefaultMiddleware().concat([someMiddleware])
+    // },
+    devTools: __DEV__,
   });
 };
 

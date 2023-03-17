@@ -28,7 +28,7 @@ export const LoginScreen = () => {
   const routes = useNavigationState(state => state.routes);
 
   useEffect(() => {
-    if(routes[routes.length - 2].name !== 'VerifyRegistrationCode'){
+    if(routes[routes.length - 2]?.name !== 'VerifyRegistrationCode'){
       navigation.setOptions({
         ...headerOptions
        })

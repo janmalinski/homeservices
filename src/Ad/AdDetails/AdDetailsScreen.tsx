@@ -54,10 +54,6 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
 
   const { isAuthor } = route.params;
 
-  const getUser = useCallback(async () => {
-    await dispatch(fetchUserThunk()).unwrap();
-  }, [dispatch]);
-
   const deleteAd = useCallback(() => {
     console.log('Id', id);
   }, [id]);
@@ -79,7 +75,7 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
   }, [navigation, user, id, rooms, userId]);
 
   useEffect(() => {
-    getUser();
+    dispatch(fetchUserThunk());
     navigation.setOptions({
       headerRight: () =>
         isAuthor ? (
@@ -121,7 +117,7 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
         />
       ),
     });
-  }, [navigation, deleteAd, editAd, isAuthor, getUser, navigateToChat]);
+  }, []);
 
   return (
     <FullScreenTemplate paddedHotizontaly>

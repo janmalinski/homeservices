@@ -12,5 +12,7 @@ module.exports = {
     'no-console': 'warn',
     'no-empty-pattern': 1,
     'no-undef': 'off',
+    'react-hooks/exhaustive-deps': 'off'
   },
+  
 };

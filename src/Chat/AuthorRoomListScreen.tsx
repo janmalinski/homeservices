@@ -14,7 +14,7 @@ interface IProps {
 export const AuthorRoomListScreen = ({route, navigation}: IProps) => {
 
   const navigateToRoom = (item: ChatDto.Room) => {
-    navigation.navigate('Chat', { authorId: item.room.author_id, userId: route.params.userId, adId: item.room.ad_id});
+    navigation.navigate('Chat', { authorId: item.room.author_id, userId: route.params.userId, adId: item.room.ad_id, roomId: item.room.id});
   }
 
   const renderItem = ({ item }: { item: ChatDto.Room }) => (
@@ -29,7 +29,7 @@ export const AuthorRoomListScreen = ({route, navigation}: IProps) => {
       style={styles.listItem}
     />
   );
-
+  
   return (
     <FullScreenTemplate
       safeArea

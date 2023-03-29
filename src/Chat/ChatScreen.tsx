@@ -15,7 +15,8 @@ const TEXT_INPUT_HEIGHT = 40;
 
 export const ChatScreen = () => {
 
-  const [roomId, setRoomId] = useState<string | null>(null);
+  const [roomName, setRoomName] = useState('');
+  const [currentRoomId, setCurrentRoomId] = useState('');
   const [messages, setMessages] = useState<ChatDto.Message[] | []>([]);
   const [textMessage, setTextMessage] = useState('');
   const [extraMarginBottom, setExtraMarginBottom] = useState(false)
@@ -27,25 +28,33 @@ export const ChatScreen = () => {
 
   const keyboardHeight = useKeyboardHeight();
  
-  socketRef.current = io(Config.DOMAIN_URL);
-
-  const { adId, authorId, userId} = route.params;
+  const { adId, authorId, userId, roomId} = route.params;
 
   const checkRoomMembersAndGetMessages = useCallback( async() => {
-      const id = await checkOrCreateRoom(adId, authorId, userId);
-      if(id) {
-        setRoomId(id)
-      } 
-  }, [setRoomId, adId, authorId, userId]);
+    if(roomId){
+      const data = await checkOrCreateRoom(adId, authorId, userId, roomId);
+      setCurrentRoomId(data.roomId)
+      setRoomName(`${data.authorId}--with--${data.userId}`);
+    } else {
+      const data = await checkOrCreateRoom(adId, authorId, userId);
+      setCurrentRoomId(data.roomId)
+      setRoomName(`${data.authorId}--with--${data.userId}`);
+    }
+  }, [setRoomName, adId, authorId, userId, roomId]);
 
   const getData = useCallback( async() => {
-    const data = await getMessages(roomId as string);
+    const data = await getMessages(currentRoomId as string);
       setMessages(data);
-  }, [setMessages, roomId]);
+  }, [setMessages, currentRoomId]);
+
+  useEffect(()=> {
+    socketRef.current = io(Config.DOMAIN_URL);
+    socketRef.current.connect();
+    return () => socketRef.current.disconnect();
+  }, []);
   
   useEffect(()=>{
-    socketRef.current.on("message", (message: ChatDto.Message) => {
-      console.log('MESSAGE', message)
+      socketRef.current.on("onMessage", (message: ChatDto.Message) => {
       setMessages(prevState => [...prevState, message]);
       scrollRef.current?.scrollToEnd()
     });
@@ -53,20 +62,32 @@ export const ChatScreen = () => {
   }, [checkRoomMembersAndGetMessages, socketRef, setMessages]);
 
   useEffect(() => {
-    if(roomId !== null){
-      socketRef.current.emit('join', roomId);
+    if(roomName !== ''){
+      socketRef.current.emit('join', roomName);
       getData();
     }
-  }, [roomId, getData])
+  }, [roomName, getData])
 
   const sendMessage = async () => {
     if(textMessage !== ''){
-      await postMessage(textMessage, roomId as string, userId);
-      setTextMessage('');
-      Keyboard.dismiss();
+      const res = await postMessage(textMessage, currentRoomId as string, userId);
+      if(res.status === 200){
+        const { message } = res.data;
+        const data = {
+          id: message.id,
+          text: message.text,
+          user_id: message.user_id,
+          createdAt: message.createdAt
+      };
+        socketRef.current.emit('emitMessage', data);
+        setMessages(prevState => [...prevState, data]);
+        setTextMessage('');
+        Keyboard.dismiss();
+      }
+      
   }
 };
-  
+
   return (
     <FullScreenTemplate
      safeArea

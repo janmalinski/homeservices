@@ -35,7 +35,6 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user.user);
-
   const avatarUri = URL + user?.avatarUrl;
 
   const {
@@ -53,26 +52,6 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
   } = route.params.ad;
 
   const { isAuthor } = route.params;
-
-  const deleteAd = useCallback(() => {
-    console.log('Id', id);
-  }, [id]);
-
-  const editAd = useCallback(() => {
-    navigation.navigate('AdEdit', { ad: route.params.ad });
-  }, [navigation, route.params.ad]);
-
-  const navigateToChat = useCallback(() => {
-    if (userId === user?.id) {
-      navigation.navigate('AuthorRoomList', { rooms, userId: user?.id });
-    } else {
-      navigation.navigate('Chat', {
-        authorId: userId,
-        userId: user?.id as string,
-        adId: id,
-      });
-    }
-  }, [navigation, user, id, rooms, userId]);
 
   useEffect(() => {
     dispatch(fetchUserThunk());
@@ -118,6 +97,25 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
       ),
     });
   }, []);
+
+  const deleteAd = useCallback(() => {
+  }, [id]);
+
+  const editAd = useCallback(() => {
+    navigation.navigate('AdEdit', { ad: route.params.ad });
+  }, [navigation, route.params.ad]);
+
+  const navigateToChat = useCallback(() => {
+    if (userId === user?.id && rooms.length > 0) {
+      navigation.navigate('AuthorRoomList', { rooms, userId: user?.id });
+    } else {
+      navigation.navigate('Chat', {
+        authorId: userId,
+        userId: user?.id as string,
+        adId: id,
+      });
+    };
+  }, [navigation, user, id, rooms, userId]);
 
   return (
     <FullScreenTemplate paddedHotizontaly>

@@ -35,7 +35,7 @@ import AdDetailsScreen from '@src/Ad/AdDetails/AdDetailsScreen';
 import { UserDto } from '@src/User/user.dto';
 import { AdEditScreen } from '@src/Ad/AdEdit/AdEditScreen';
 import { ChatScreen } from '@src/Chat/ChatScreen';
-import { AuthorRoomListScreen } from '@src/Chat/AuthorRoomListScreen'
+import { AuthorRoomListScreen } from '@src/Chat/AuthorRoomListScreen';
 import { ChatDto } from '@src/Chat/chat.dto';
 
 export type TMapScreenParams = {
@@ -57,7 +57,8 @@ export type TCoordinates = {
   longitudeDelta: number;
 };
 
-export interface IAccount extends Partial<Pick<TCoordinates, 'latitude' | 'longitude'>>  {
+export interface IAccount
+  extends Partial<Pick<TCoordinates, 'latitude' | 'longitude'>> {
   address?: string;
 }
 
@@ -82,9 +83,10 @@ export type TRootNavigatorParams = {
     authorId: string;
     userId: string;
     adId: string;
+    roomId?: string;
   };
   AuthorRoomList: {
-    rooms: ChatDto.Room[],
+    rooms: ChatDto.Room[];
     userId: string;
   };
   AdEdit: {
@@ -92,7 +94,7 @@ export type TRootNavigatorParams = {
     latitude?: number;
     longitude?: number;
     address?: string;
-  }
+  };
 };
 
 export type TNavParams = TRootNavigatorParams & TBottomTabsNavigatorParams;
@@ -111,7 +113,12 @@ export const dialogScreenOptions: StackNavigationOptions = {
   }),
 };
 
-export const headerOptions = { title: '', headerBackTitle: '', headerTintColor: colors.textPrimary, headerShadowVisible: false};
+export const headerOptions = {
+  title: '',
+  headerBackTitle: '',
+  headerTintColor: colors.textPrimary,
+  headerShadowVisible: false,
+};
 
 export const RootNavigator = () => {
   const [appState, setAppState] = useState(AppState.currentState);
@@ -149,11 +156,7 @@ export const RootNavigator = () => {
         component={AssessmentScreen}
         options={headerOptions}
       />
-      <Root.Screen
-        name="Map"
-        component={MapScreen}
-        options={headerOptions}
-      />
+      <Root.Screen name="Map" component={MapScreen} options={headerOptions} />
       <Root.Screen
         name="Register"
         component={RegisterScreen}
@@ -162,12 +165,9 @@ export const RootNavigator = () => {
       <Root.Screen
         name="VerifyRegistrationCode"
         component={VerifyRegistrationCodeScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
-      <Root.Screen
-        name="Login"
-        component={LoginScreen}
-      />
+      <Root.Screen name="Login" component={LoginScreen} />
       <Root.Screen
         name="ResetPassword"
         component={ResetPasswordScreen}
@@ -182,7 +182,7 @@ export const RootNavigator = () => {
         name="Tabs"
         component={BottomTabsNavigator}
         options={{
-          headerShown: false
+          headerShown: false,
         }}
       />
       <Root.Screen name="AdMap" component={MapScreen} />
@@ -220,7 +220,7 @@ export const RootNavigator = () => {
           headerShadowVisible: false,
         }}
       />
-       <Root.Screen
+      <Root.Screen
         name="Chat"
         component={ChatScreen}
         options={{
@@ -231,7 +231,7 @@ export const RootNavigator = () => {
           headerShadowVisible: false,
         }}
       />
-       <Root.Screen
+      <Root.Screen
         name="AuthorRoomList"
         component={AuthorRoomListScreen}
         options={{
@@ -246,7 +246,7 @@ export const RootNavigator = () => {
         name="AdEdit"
         component={AdEditScreen}
         options={{
-          presentation: 'modal'
+          presentation: 'modal',
         }}
       />
     </>
@@ -255,7 +255,7 @@ export const RootNavigator = () => {
   return (
     <>
       <NavigationContainer>
-        <Root.Navigator initialRouteName='Welcome'>
+        <Root.Navigator initialRouteName="Welcome">
           {token?.length > 0 ? authorizedScreens : welcomeScreens}
         </Root.Navigator>
         <GlobalToast />

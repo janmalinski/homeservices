@@ -31,18 +31,22 @@ export const AdListScreen = ({ route }: IProps) => {
     }
   }, [setAds, dispatch]);
 
-  const setUserAds = useCallback(async () => {
-    const userUpdatedAds = await dispatch(fetchUserThunk()).unwrap();
-    if (userUpdatedAds) {
-      setAds(userUpdatedAds.ads);
+  const getUser = async() => {
+    return await dispatch(fetchUserThunk()).unwrap();
+  } 
+
+  const setUserAds = useCallback(async (user:UserDto.userDetails) => {
+    if (user) {
+      setAds(user.ads);
     }
   }, [setAds, dispatch]);
 
-  const triggerOnFocus = useCallback(() => {
+  const triggerOnFocus = useCallback(async () => {
+    const user = await getUser();
     if (route.name === 'AdList') {
       setAllAds();
-    } else {
-      setUserAds();
+    } else if(user) {
+      setUserAds(user);
     }
   }, [route.name, setAllAds, setUserAds]);
 

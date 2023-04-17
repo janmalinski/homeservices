@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "homeservices.app"
-               BlueprintName = "homeservices"
-               ReferencedContainer = "container:homeservices.xcodeproj">
+               BuildableName = "homeservicesprovider.app"
+               BlueprintName = "homeservicesprovider"
+               ReferencedContainer = "container:homeservicesprovider.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "homeservicesTests.xctest"
-               BlueprintName = "homeservicesTests"
-               ReferencedContainer = "container:homeservices.xcodeproj">
+               BuildableName = "homeservicesproviderTests.xctest"
+               BlueprintName = "homeservicesproviderTests"
+               ReferencedContainer = "container:homeservicesprovider.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "homeservices.app"
-            BlueprintName = "homeservices"
-            ReferencedContainer = "container:homeservices.xcodeproj">
+            BuildableName = "homeservicesprovider.app"
+            BlueprintName = "homeservicesprovider"
+            ReferencedContainer = "container:homeservicesprovider.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "homeservices.app"
-            BlueprintName = "homeservices"
-            ReferencedContainer = "container:homeservices.xcodeproj">
+            BuildableName = "homeservicesprovider.app"
+            BlueprintName = "homeservicesprovider"
+            ReferencedContainer = "container:homeservicesprovider.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

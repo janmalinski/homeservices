@@ -1,4 +1,4 @@
-package com.homeservices.newarchitecture;
+package com.homeservicesprovider.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.homeservices.BuildConfig;
-import com.homeservices.newarchitecture.components.MainComponentsRegistry;
-import com.homeservices.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.homeservicesprovider.BuildConfig;
+import com.homeservicesprovider.newarchitecture.components.MainComponentsRegistry;
+import com.homeservicesprovider.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

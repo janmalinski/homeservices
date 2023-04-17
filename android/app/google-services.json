@@ -9,7 +9,7 @@
         "client_info": {
           "mobilesdk_app_id": "1:411562195295:android:99a3eb3c251ea66433deea",
           "android_client_info": {
-            "package_name": "com.homeservices"
+            "package_name": "com.homeservicesprovider"
           }
         },
         "oauth_client": [

@@ -1,4 +1,4 @@
-package com.homeservices;
+package com.homeservicesprovider;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -19,7 +19,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "homeservices";
+    return "homeservicesprovider";
   }
 
   /**

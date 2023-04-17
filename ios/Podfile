@@ -8,7 +8,7 @@ production = ENV["PRODUCTION"] == "1"
 
 use_frameworks! :linkage => :static
 
-target 'homeservices' do
+target 'homeservicesprovider' do
   
   $static_framework = []
   
@@ -55,7 +55,7 @@ target 'homeservices' do
 end
 
 
-  # target 'homeservicesTests' do
+  # target 'homeservicesproviderTests' do
   #   inherit! :complete
   #   # Pods for testing
   # end

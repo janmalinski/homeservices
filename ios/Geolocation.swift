@@ -1,6 +1,6 @@
 //
 //  Geolocation.swift
-//  homeservices
+//  homeservicesprovider
 //
 //  Created by Jan Malinski on 23/08/2022.
 //

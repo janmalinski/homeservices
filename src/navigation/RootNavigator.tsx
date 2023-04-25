@@ -80,10 +80,13 @@ export type TRootNavigatorParams = {
     isAuthor: boolean;
   };
   Chat: {
+    adId: string;
     authorId: string;
     userId: string;
-    adId: string;
     roomId?: string;
+    senderId?: string;
+    receiverId?: string;
+    redirectFromNotification?: boolean;
   };
   AuthorRoomList: {
     rooms: ChatDto.Room[];
@@ -156,7 +159,7 @@ export const RootNavigator = () => {
         component={AssessmentScreen}
         options={headerOptions}
       />
-      <Root.Screen name="Map" component={MapScreen} options={headerOptions} />
+      <Root.Screen name="Map" component={MapScreen} options={{headerTransparent: true, title: ''}} />
       <Root.Screen
         name="Register"
         component={RegisterScreen}

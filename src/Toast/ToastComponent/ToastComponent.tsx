@@ -156,6 +156,7 @@ export const ToastComponent = ({
             bottom: TOAST_MARGIN + bottomOffset,
           },
         ]}>
+        {isDismissable && <CloseButton onPress={onClose} />}
         <View style={styles.innerContainer}>
           <FontAwesome5Icon
             size={BIG_ICON_SIZE}
@@ -169,7 +170,7 @@ export const ToastComponent = ({
             <AdditionalButton text={buttonText} onPress={onButtonPressed} />
           </View>
         </View>
-        {isDismissable && <CloseButton onPress={onClose} />}
+        
       </Animated.View>
     </PanGestureHandler>
   );

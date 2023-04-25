@@ -13,6 +13,7 @@ import { convertDate } from '@src/helpers/convertDate';
 import { useAppDispatch } from '@src/store';
 import { fetchAdsThunk } from '../adStore';
 import { fetchUserThunk } from '@src/User/userStore';
+import useRegisterFCMToken from '@src/utils/hooks/useRegisterFCMToken';
 
 interface IProps {
   route: RouteProp<TNavParams, 'UserAdList' | 'AdList'>;
@@ -23,6 +24,7 @@ export const AdListScreen = ({ route }: IProps) => {
     useNavigation<NavigationProp<TNavParams, 'UserAdList' | 'AdList'>>();
   const [ads, setAds] = useState<UserDto.UserAd[] | []>([]);
   const dispatch = useAppDispatch();
+  useRegisterFCMToken();
 
   const setAllAds = useCallback(async () => {
     const allAds = await dispatch(fetchAdsThunk()).unwrap();

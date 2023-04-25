@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Keyboard, Platform } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import io from 'socket.io-client';
 import Config from 'react-native-config';
 
 import { TNavParams } from '@src/navigation/RootNavigator';
 import { getMessages, postMessage, checkOrCreateRoom } from './chatApi';
-import { FullScreenTemplate, spacing, colors, Icon } from '@src/components';
+import { spacing, colors, Icon } from '@src/components';
 import { ChatDto } from './chat.dto';
 import { useKeyboardHeight } from '@src/utils/hooks/useKeyboardHeight';
 
@@ -16,30 +16,44 @@ const TEXT_INPUT_HEIGHT = 40;
 export const ChatScreen = () => {
 
   const [roomName, setRoomName] = useState('');
+  const [receiverID, setReceiverID] = useState('');
+  const [ authorOfRoom, setAuthorOfRoom] = useState('');
+  const [ userOfRoom, setUserOfRoom] = useState('');
   const [currentRoomId, setCurrentRoomId] = useState('');
   const [messages, setMessages] = useState<ChatDto.Message[] | []>([]);
   const [textMessage, setTextMessage] = useState('');
-  const [extraMarginBottom, setExtraMarginBottom] = useState(false)
+  const [extraMarginBottom, setExtraMarginBottom] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
  
   const route = useRoute<RouteProp<TNavParams, 'Chat'>>();
   const scrollRef = useRef<ScrollView>(null);
-  const socketRef = useRef<any>(null);
-  const { bottom } = useSafeAreaInsets();
+  const socketRef = useRef<any>(undefined);
 
+  const { bottom } = useSafeAreaInsets();
   const keyboardHeight = useKeyboardHeight();
  
-  const { adId, authorId, userId, roomId} = route.params;
+  const { adId, authorId, userId, roomId, redirectFromNotification, senderId, receiverId } = route.params;
 
   const checkRoomMembersAndGetMessages = useCallback( async() => {
+    let data;
     if(roomId){
-      const data = await checkOrCreateRoom(adId, authorId, userId, roomId);
+      console.log('1')
+      data = await checkOrCreateRoom(adId, authorId, userId, roomId);
       setCurrentRoomId(data.roomId)
       setRoomName(`${data.authorId}--with--${data.userId}`);
     } else {
-      const data = await checkOrCreateRoom(adId, authorId, userId);
+      console.log('2')
+      data = await checkOrCreateRoom(adId, authorId, userId);
       setCurrentRoomId(data.roomId)
       setRoomName(`${data.authorId}--with--${data.userId}`);
     }
+    if(userId === data?.authorId) {
+      setReceiverID(data?.userId)
+    } else if(userId === data?.userId){
+      setReceiverID(data?.authorId);
+    }
+    setAuthorOfRoom(data.authorId);
+    setUserOfRoom(data.userId)
   }, [setRoomName, adId, authorId, userId, roomId]);
 
   const getData = useCallback( async() => {
@@ -70,8 +84,9 @@ export const ChatScreen = () => {
 
   const sendMessage = async () => {
     if(textMessage !== ''){
-      const res = await postMessage(textMessage, currentRoomId as string, userId);
+      const res = await postMessage(textMessage, currentRoomId as string, userId, receiverID, adId, authorOfRoom, userOfRoom);
       if(res.status === 200){
+        setMessageSent(true);
         const { message } = res.data;
         const data = {
           id: message.id,
@@ -84,16 +99,39 @@ export const ChatScreen = () => {
         setTextMessage('');
         Keyboard.dismiss();
       }
-      
   }
 };
 
+console.log('SENDER_ID', senderId)
+console.log('RECEIVER_ID', receiverId)
+console.log('edirectFromNotification', redirectFromNotification)
+
+
+
   return (
-    <FullScreenTemplate
-     safeArea
-     paddedHotizontaly
-     scrollRef={scrollRef}
-     footer={
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.white}}>
+      <ScrollView ref={scrollRef} scrollIndicatorInsets={{ right: 1 }} onContentSizeChange={() => scrollRef.current?.scrollToEnd()}>
+        {!redirectFromNotification ?  messages.map(message => (
+          <View key={message.id} style={styles.content}> 
+            <Text style={[styles.messageText, message.user_id === userId ? {backgroundColor: colors.primary, alignSelf: 'flex-end'} : {backgroundColor: colors.secondary }]}>{message.text}</Text>
+          </View>
+          ))
+          : 
+
+          null
+        //  !messageSent ? messages.map(message => (
+        //     <View key={message.id} style={styles.content}> 
+        //       <Text style={[styles.messageText, !messageSent && message.user_id === receiverId ? {backgroundColor: colors.primary, alignSelf: 'flex-end'} : {backgroundColor: colors.secondary }
+        //       ]}>{message.text}</Text>
+        //     </View>
+        //     :
+
+            
+
+
+        //     ))
+      }  
+    </ScrollView>
       <View style={[styles.textInputContainer, {bottom}, Platform.OS === 'ios' && extraMarginBottom && {marginBottom: keyboardHeight - TEXT_INPUT_HEIGHT}]}>
         <TextInput
           style={styles.textInput}
@@ -106,34 +144,21 @@ export const ChatScreen = () => {
         <View style={styles.texInputIconContainer}>
           <Icon name="send-outline" size={20} color={colors.black} onPress={sendMessage} />
         </View>
-      </View>
-    }
-    >
-
-      <View style={styles.container}>
-        {messages.map(message => (
-          <View key={message.id} style={styles.content}> 
-            <Text style={[styles.messageText, message.user_id === route.params.userId ? {backgroundColor: colors.primary, alignSelf: 'flex-end'} : {backgroundColor: colors.secondary }]}>{message.text}</Text>
-          </View>
-        ))}  
-      </View>
-  </FullScreenTemplate>
-  )
-};
+    </View>
+  </SafeAreaView>
+  )};
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: spacing.large
-  },
-  scrollView: {
-    marginHorizontal: spacing.large,
-  },
-  scrollViewContainer: {
-    flexGrow: 1
+    flex: 1,
+    backgroundColor: colors.white
   },
   content: {
     flex:1,
     justifyContent: 'space-between',
+    paddingBottom: spacing.xLarge,
+    paddingHorizontal: spacing.large,
+    backgroundColor: colors.white
   },
   messageText: {
     fontSize: 14,
@@ -147,6 +172,10 @@ const styles = StyleSheet.create({
   textInputContainer: {
     flex: 1,
     flexDirection: 'row',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   textInput: {
     flex: 0.9,

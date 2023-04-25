@@ -5,7 +5,7 @@ type TCheckOrCreateRoom = (adId: string, authorId: string, userId: string, roomI
 
 type TGetMessages = (roomId: string) => Promise<ChatDto.Message[]>;
 
-type TPostMessage = (text: string, roomId: string, senderId: string,) => Promise<any>;
+type TPostMessage = (text: string, roomId: string, senderId: string, receiverId: string, adId: string, authorOfRoom: string, userOfRoom: string) => Promise<any>;
 
 export const checkOrCreateRoom: TCheckOrCreateRoom = async( adId, authorId, userId, roomId) => {
   const response = await protectedApi.post(`/room/${adId}/${authorId}/${userId}/${roomId}`);
@@ -17,9 +17,13 @@ export const getMessages: TGetMessages = async(roomId: string) => {
   return response.data.messages;
 };
 
-export const postMessage: TPostMessage = async(text, roomId, senderId) => {
+export const postMessage: TPostMessage = async(text, roomId, senderId, receiverId, adId, authorOfRoom, userOfRoom) => {
   const response = await protectedApi.post(`/room/${roomId}/${senderId}`, {
         text,
+        receiverId,
+        adId,
+        authorOfRoom,
+        userOfRoom
       });
   return response;
 };

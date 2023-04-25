@@ -6,10 +6,8 @@ import { Provider } from 'react-redux';
 import { RootNavigator } from './navigation/RootNavigator';
 import { store } from './store';
 import './locale/i18nConfig';
-// import { useSendFCMToken } from './utils/hooks/useSendFCMToken';
 
 const App = () => {
-  // useSendFCMToken();
 
   return (
     <Provider store={store}>

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import messaging from '@react-native-firebase/messaging';
 
 import { register, verifyRegistrationCode, login } from './authApi';
 import {
@@ -21,6 +22,7 @@ export interface IAuthState {
   loginStatusChanged: boolean;
   logoutError: string | null;
   logoutPending: boolean;
+  logoutSuccess: boolean;
   authTokenExpiriesIn: number | null;
   authTokenExpiredError: string | null;
   authTokenExpiredPending: boolean;
@@ -39,6 +41,7 @@ const initialState: IAuthState = {
   loginStatusChanged: false,
   logoutError: null,
   logoutPending: false,
+  logoutSuccess: false,
   authTokenExpiriesIn: null,
   authTokenExpiredError: null,
   authTokenExpiredPending: false,
@@ -107,7 +110,8 @@ export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, thunkApi) => {
     try {
-      await accessTokenStorage.clearAll();
+      await accessTokenStorage.clearAll();      
+      await messaging().deleteToken();
     } catch (error) {
       //ADD SOME TRANSLATIONS  LATER
       thunkApi.dispatch(
@@ -190,6 +194,7 @@ const authStore = createSlice({
     builder.addCase(loginThunk.fulfilled, state => {
       state.loginPending = false;
       state.loginError = null;
+      state.logoutSuccess = false;
       state.loginStatusChanged = !state.loginStatusChanged;
       state.authTokenExpiriesIn = Math.floor(Date.now() / 1000) + 1440 * 60;
     });
@@ -204,6 +209,7 @@ const authStore = createSlice({
     builder.addCase(logoutThunk.fulfilled, state => {
       state.logoutPending = false;
       state.logoutError = null;
+      state.logoutSuccess = true;
       state.loginStatusChanged = !state.loginStatusChanged;
       state.authTokenExpiriesIn = null;
     });

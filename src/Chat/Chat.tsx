@@ -8,14 +8,13 @@ import { spacing } from '@src/components/designSystem/spacing';
 interface IProps {
     messages: ChatDto.Message[];
     userId: string;
-}
+};
 
 const Chat = ({messages, userId} : IProps) => (
-    messages.map(message => (
-        <View key={message.id} style={styles.content}> 
-          <Text style={[styles.messageText, message.user_id === userId ? {backgroundColor: colors.primary, alignSelf: 'flex-end'} : {backgroundColor: colors.secondary }]}>{message.text}</Text>
-        </View>
-)));
+  messages.map(message => ( <View key={message.id} style={styles.content}> 
+  <Text style={[styles.messageText, message.user_id === userId ? {backgroundColor: colors.primary, alignSelf: 'flex-end'} : {backgroundColor: colors.secondary }]}>{message.text}</Text>
+</View>))
+);
 
 
 export default Chat;

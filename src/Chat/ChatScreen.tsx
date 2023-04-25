@@ -10,6 +10,7 @@ import { getMessages, postMessage, checkOrCreateRoom } from './chatApi';
 import { spacing, colors, Icon } from '@src/components';
 import { ChatDto } from './chat.dto';
 import { useKeyboardHeight } from '@src/utils/hooks/useKeyboardHeight';
+import Chat from './Chat';
 
 const TEXT_INPUT_HEIGHT = 40;
 
@@ -23,7 +24,6 @@ export const ChatScreen = () => {
   const [messages, setMessages] = useState<ChatDto.Message[] | []>([]);
   const [textMessage, setTextMessage] = useState('');
   const [extraMarginBottom, setExtraMarginBottom] = useState(false);
-  const [messageSent, setMessageSent] = useState(false);
  
   const route = useRoute<RouteProp<TNavParams, 'Chat'>>();
   const scrollRef = useRef<ScrollView>(null);
@@ -37,12 +37,10 @@ export const ChatScreen = () => {
   const checkRoomMembersAndGetMessages = useCallback( async() => {
     let data;
     if(roomId){
-      console.log('1')
       data = await checkOrCreateRoom(adId, authorId, userId, roomId);
       setCurrentRoomId(data.roomId)
       setRoomName(`${data.authorId}--with--${data.userId}`);
     } else {
-      console.log('2')
       data = await checkOrCreateRoom(adId, authorId, userId);
       setCurrentRoomId(data.roomId)
       setRoomName(`${data.authorId}--with--${data.userId}`);
@@ -84,9 +82,8 @@ export const ChatScreen = () => {
 
   const sendMessage = async () => {
     if(textMessage !== ''){
-      const res = await postMessage(textMessage, currentRoomId as string, userId, receiverID, adId, authorOfRoom, userOfRoom);
+      const res = await postMessage(textMessage, currentRoomId as string, receiverId || userId, receiverID, adId, authorOfRoom, userOfRoom);
       if(res.status === 200){
-        setMessageSent(true);
         const { message } = res.data;
         const data = {
           id: message.id,
@@ -102,34 +99,13 @@ export const ChatScreen = () => {
   }
 };
 
-console.log('SENDER_ID', senderId)
-console.log('RECEIVER_ID', receiverId)
-console.log('edirectFromNotification', redirectFromNotification)
-
-
-
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.white}}>
       <ScrollView ref={scrollRef} scrollIndicatorInsets={{ right: 1 }} onContentSizeChange={() => scrollRef.current?.scrollToEnd()}>
-        {!redirectFromNotification ?  messages.map(message => (
-          <View key={message.id} style={styles.content}> 
-            <Text style={[styles.messageText, message.user_id === userId ? {backgroundColor: colors.primary, alignSelf: 'flex-end'} : {backgroundColor: colors.secondary }]}>{message.text}</Text>
-          </View>
-          ))
-          : 
-
-          null
-        //  !messageSent ? messages.map(message => (
-        //     <View key={message.id} style={styles.content}> 
-        //       <Text style={[styles.messageText, !messageSent && message.user_id === receiverId ? {backgroundColor: colors.primary, alignSelf: 'flex-end'} : {backgroundColor: colors.secondary }
-        //       ]}>{message.text}</Text>
-        //     </View>
-        //     :
-
-            
-
-
-        //     ))
+      {!redirectFromNotification ?  
+        <Chat messages={messages} userId={userId} />
+        : 
+        <Chat messages={messages} userId={receiverId!} />
       }  
     </ScrollView>
       <View style={[styles.textInputContainer, {bottom}, Platform.OS === 'ios' && extraMarginBottom && {marginBottom: keyboardHeight - TEXT_INPUT_HEIGHT}]}>

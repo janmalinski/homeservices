@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import Config from 'react-native-config';
 
 import { useAppSelector } from '@src/store';
+import { protectedApi } from '@src/Api/protectedApi';
 
 const useRegisterFCMToken = () => {
     const userId = useAppSelector(state => state.user.user?.id);
@@ -16,7 +16,7 @@ const useRegisterFCMToken = () => {
     
     const registerFCMToken = async() => {
         try {
-          await axios.post(`${Config.API_URL}/room/register-fcm-token`, { fcmToken, receiverId: userId });
+          await protectedApi.post(`${Config.API_URL}/room/register-fcm-token`, { fcmToken, receiverId: userId });
         } catch (error) {
           console.log('ERROR_SEND_FCM_TOKEN', error);
         }

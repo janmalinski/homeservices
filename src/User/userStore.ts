@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 import { showErrorToastAction } from '@src/Toast/toastStore';
 import { getUser, updateUser, uploadUserAvatar } from './userApi';
@@ -12,6 +12,7 @@ export interface IUserState {
   user: UserDto.userDetails | null;
   avatarPending: boolean;
   avatarError: string | null;
+  fcmToken: string | null;
 }
 
 const initialState: IUserState = {
@@ -22,6 +23,7 @@ const initialState: IUserState = {
   user: null,
   avatarPending: false,
   avatarError: null,
+  fcmToken: null,
 };
 
 interface IErrorStatus extends Error {
@@ -83,7 +85,17 @@ export const updateUserThunk = createAsyncThunk(
 const userStore = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setFcmTokenAction: (
+      state,
+      action: PayloadAction<string>,
+    ) => {
+      return {
+        ...state,
+        fcmToken: action.payload,
+      };
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchUserThunk.pending, state => {
       state.userFetchPending = true;
@@ -125,5 +137,9 @@ const userStore = createSlice({
     });
   },
 });
+
+export const {
+  setFcmTokenAction
+} = userStore.actions;
 
 export default userStore.reducer;

@@ -81,7 +81,7 @@ export const AdListScreen = ({ route }: IProps) => {
   );
 
   return (
-    <FullScreenTemplate paddedHotizontaly noScroll>
+    <FullScreenTemplate safeArea paddedHotizontaly noScroll>
       <FlatList
         keyExtractor={item => item.id}
         data={ads}

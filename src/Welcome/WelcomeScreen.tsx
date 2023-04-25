@@ -9,10 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { TRootNavigatorParams } from '@src/navigation/RootNavigator';
 import { Button, colors, Text, Link } from '@src/components';
 import { WelcomeScreenStyles as styles } from './WelcomeScreenStyles';
+import usePushNotifications from '@src/utils/hooks/usePushNotifications';
 
 export const WelcomeScreen = () => {
   const navigation = useNavigation<StackNavigationProp<TRootNavigatorParams>>();
   const [t] = useTranslation();
+  usePushNotifications();
 
   const navigateLoginScreen = useCallback(() => {
     navigation.navigate('Login');

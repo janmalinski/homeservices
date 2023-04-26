@@ -37,7 +37,7 @@ export const FullScreenTemplate: React.FC<IFullScreenTemplateProps> = ({
   const Container = noScroll ? View : KeyboardAvoidingComponent;
 
   return (
-    <RootView style={styles.mainContainer} edges={['top', 'bottom']}>
+    <RootView style={styles.mainContainer}>
       {header}
       {isLoading ? (
         <View style={styles.centeredContainer}>

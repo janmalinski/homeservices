@@ -84,9 +84,7 @@ export type TRootNavigatorParams = {
     authorId: string;
     userId: string;
     roomId?: string;
-    senderId?: string;
     receiverId?: string;
-    redirectFromNotification?: boolean;
   };
   AuthorRoomList: {
     rooms: ChatDto.Room[];

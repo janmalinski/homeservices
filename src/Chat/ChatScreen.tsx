@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, Keyboard, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView, TextInput, Keyboard, Platform } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -32,7 +32,7 @@ export const ChatScreen = () => {
   const { bottom } = useSafeAreaInsets();
   const keyboardHeight = useKeyboardHeight();
  
-  const { adId, authorId, userId, roomId, redirectFromNotification, senderId, receiverId } = route.params;
+  const { adId, authorId, userId, roomId, receiverId } = route.params;
 
   const checkRoomMembersAndGetMessages = useCallback( async() => {
     let data;
@@ -102,12 +102,8 @@ export const ChatScreen = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.white}}>
       <ScrollView ref={scrollRef} scrollIndicatorInsets={{ right: 1 }} onContentSizeChange={() => scrollRef.current?.scrollToEnd()}>
-      {!redirectFromNotification ?  
-        <Chat messages={messages} userId={userId} />
-        : 
-        <Chat messages={messages} userId={receiverId!} />
-      }  
-    </ScrollView>
+        <Chat messages={messages} userId={receiverId || userId} />
+      </ScrollView>
       <View style={[styles.textInputContainer, {bottom}, Platform.OS === 'ios' && extraMarginBottom && {marginBottom: keyboardHeight - TEXT_INPUT_HEIGHT}]}>
         <TextInput
           style={styles.textInput}

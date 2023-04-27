@@ -56,7 +56,7 @@ const usePushNotifications = () => {
        fcmUnsubscribe = messaging().onMessage(async remoteMessage => {
           const messageBody = remoteMessage?.notification?.body;
           const messageTitle = remoteMessage?.notification?.title;
-          const { authorId, userId, adId,  senderId, receiverId } = remoteMessage.data;
+          const { authorId, userId, adId, receiverId } = remoteMessage.data;
 
           Alert.alert(messageTitle as string, messageBody,  [
             {
@@ -68,9 +68,7 @@ const usePushNotifications = () => {
               authorId,
               userId,
               adId,
-              senderId,
               receiverId,
-              redirectFromNotification: true
             })},
           ])
        })

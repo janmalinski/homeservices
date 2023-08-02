@@ -1,3 +1,3 @@
 # homeservicesprovider
 
-private app - improving my skills in react native.
+private app - improving skills in react native.

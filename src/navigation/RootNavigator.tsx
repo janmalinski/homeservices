@@ -157,7 +157,7 @@ export const RootNavigator = () => {
         component={AssessmentScreen}
         options={headerOptions}
       />
-      <Root.Screen name="Map" component={MapScreen} options={{headerTransparent: true, title: ''}} />
+      <Root.Screen name="Map" component={MapScreen} options={{headerTransparent: true, title: '', headerBackTitleVisible: false, headerTintColor: colors.textPrimary}} />
       <Root.Screen
         name="Register"
         component={RegisterScreen}

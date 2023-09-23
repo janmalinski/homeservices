@@ -24,7 +24,7 @@ const stylesDef: IStyles = {
   },
   searchInputContainer: {
     position: 'absolute',
-    top: 50,
+    top: 100,
     left: 20,
     right: 20,
     zIndex: 100,
@@ -46,7 +46,8 @@ const stylesDef: IStyles = {
     marginBottom: spacing.xxLarge,
   },
   questionContainer: {
-    padding: 10,
+    paddingTop: 10,
+    paddingHorizontal: 10,
     backgroundColor: colors.white,
     borderRadius: 4,
     borderBottomColor: colors.black,

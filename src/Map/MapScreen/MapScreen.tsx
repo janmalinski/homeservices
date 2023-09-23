@@ -17,6 +17,7 @@ import {
   RouteProp,
   NavigationProp,
 } from '@react-navigation/native';
+import { useHeaderHeight } from '@react-navigation/elements';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -28,6 +29,7 @@ import { Map } from './Map';
 import { MapInput } from './MapInput';
 import { MapScreenStyles as styles } from './MapScreenStyles';
 import { GooglePlaceDetail } from 'react-native-google-places-autocomplete';
+
 
 export interface ICoordinates {
   latitude: number;
@@ -58,6 +60,8 @@ export const MapScreen = () => {
   const route = useRoute<RouteProp<TRootNavigatorParams, 'Map'>>();
 
   const [t] = useTranslation();
+
+  const headerHeight = useHeaderHeight();
 
   const hasLocationPermissionIOS = useCallback(async () => {
     const openSettings = () => {
@@ -228,7 +232,7 @@ export const MapScreen = () => {
         </View>
       ) : (
         <View style={styles.container}>
-          <View style={styles.searchInputContainer}>
+          <View style={[styles.searchInputContainer, {top: headerHeight}]}>
             <View style={[styles.container, styles.questionContainer]}>
               <Text typography="title3" style={styles.questionText}>
                 {userType?.name === 'Client'

@@ -119,6 +119,14 @@ export const headerOptions = {
   headerBackTitle: '',
   headerTintColor: colors.textPrimary,
   headerShadowVisible: false,
+  headerBackTitleVisible: false
+};
+
+const mapScreensOptions = {
+  headerTransparent: true,
+  title: '',
+  headerBackTitleVisible: false,
+  headerTintColor: colors.textPrimary,
 };
 
 export const RootNavigator = () => {
@@ -157,7 +165,7 @@ export const RootNavigator = () => {
         component={AssessmentScreen}
         options={headerOptions}
       />
-      <Root.Screen name="Map" component={MapScreen} options={{headerTransparent: true, title: '', headerBackTitleVisible: false, headerTintColor: colors.textPrimary}} />
+      <Root.Screen name="Map" component={MapScreen} options={mapScreensOptions} />
       <Root.Screen
         name="Register"
         component={RegisterScreen}
@@ -186,7 +194,7 @@ export const RootNavigator = () => {
           headerShown: false,
         }}
       />
-      <Root.Screen name="AdMap" component={MapScreen} />
+      <Root.Screen name="AdMap" component={MapScreen} options={mapScreensOptions} />
       <Root.Screen
         name="Account"
         component={AccountScreen}
@@ -198,7 +206,7 @@ export const RootNavigator = () => {
           headerShadowVisible: false,
         }}
       />
-      <Root.Screen name="AccountMap" component={MapScreen} />
+      <Root.Screen name="AccountMap" component={MapScreen} options={mapScreensOptions}/>
       <Root.Screen
         name="UserAdList"
         component={AdListScreen}

@@ -24,7 +24,6 @@ const stylesDef: IStyles = {
   },
   searchInputContainer: {
     position: 'absolute',
-    top: 100,
     left: 20,
     right: 20,
     zIndex: 100,

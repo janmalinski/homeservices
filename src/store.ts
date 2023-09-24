@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
+import { Platform } from 'react-native';
 
 import assessment from '@src/Assessment/assessmentStore';
 import toast from '@src/Toast/toastStore';
@@ -16,10 +17,22 @@ const makeStore = () => {
       user,
       ad,
     },
-    // middleware: (getDefaultMiddleware) => {
-    //   return getDefaultMiddleware().concat([someMiddleware])
-    // },
-    devTools: __DEV__,
+    middleware: (getDefaultMiddleware) => {
+      const middlewares = getDefaultMiddleware({
+        // https://github.com/reduxjs/redux-toolkit/issues/415
+        immutableCheck: false,
+      });
+     
+        
+        if (Platform.OS === 'android' && __DEV__ ) {
+          const createDebugger = require("redux-flipper").default;
+          middlewares.push(createDebugger());
+         
+        } 
+        return middlewares;
+      
+    },
+    // devTools: __DEV__,
   });
 };
 

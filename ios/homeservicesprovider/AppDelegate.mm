@@ -1,5 +1,5 @@
 #import <GoogleMaps/GoogleMaps.h>
-#import "ReactNativeConfig.h"
+#import "RNCConfig.h"
 
 #import "AppDelegate.h"
 #import <Firebase.h>
@@ -19,7 +19,7 @@
 #import <React/RCTSurfacePresenterBridgeAdapter.h>
 #import <ReactCommon/RCTTurboModuleManager.h>
 
-#import <react/config/ReactNativeConfig.h>
+#import <react/config/RNCConfig.h>
 
 static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 
@@ -37,7 +37,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 [FIRApp configure];
-[GMSServices provideAPIKey:[ReactNativeConfig envFor:@"GOOGLE_API_KEY"]];
+[GMSServices provideAPIKey:[RNCConfig envFor:@"GOOGLE_API_KEY"]];
 
   RCTAppSetupPrepareApp(application);
 

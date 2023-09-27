@@ -57,7 +57,7 @@ export const AccountScreen = () => {
     },
     [dispatch, navigation],
   );
-
+  
   return (
     <FullScreenTemplate paddedHotizontaly>
       <AccountForm

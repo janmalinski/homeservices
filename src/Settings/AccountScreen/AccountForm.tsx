@@ -35,7 +35,9 @@ export interface IAccountFormProps {
   latitude?: number;
   longitude?: number;
   address?: string;
-  onSubmit: (values: IAccountFormData) => void;
+  onSubmit: (
+    values: IAccountFormData
+  ) => void;
 }
 
 const phoneRegExp =
@@ -90,7 +92,7 @@ export const AccountForm = ({
     },
     [],
   );
-  0;
+  
   const navigateToMap = useCallback(() => {
     navigation.navigate('AccountMap', {
       redirectAfterSubmit: 'Account',
@@ -107,8 +109,9 @@ export const AccountForm = ({
         handleSubmit,
         errors,
         touched,
+        isValid
       } = formProps;
-
+      
       return (
         <View>
           <TextInput
@@ -193,12 +196,14 @@ export const AccountForm = ({
             title={i18n.t('location.detectLocation')}
             onPress={navigateToMap}
           />
-
           <Button
             onPress={handleSubmit}
             title={i18n.t('common.save')}
             buttonStyle={styles.button}
             isLoading={isPending}
+            disabled={
+              !isValid && latitude === 0 && longitude === 0 || isPending
+            }
           />
         </View>
       );

@@ -32,7 +32,7 @@ const makeStore = () => {
         return middlewares;
       
     },
-    // devTools: __DEV__,
+    devTools: __DEV__,
   });
 };
 

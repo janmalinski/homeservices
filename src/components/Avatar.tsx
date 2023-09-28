@@ -18,14 +18,11 @@ export const Avatar = ({ uri, loading, editable }: IAvatarProps) => {
         <Spinner />
       </View>
     );
-  }
-
-if (uri !== undefined) {
-  return <Image source={{ uri: uri }} style={styles.container} />;
-}
-  return (
+  };
+ 
+ return (
     <View style={styles.container}>
-     {editable && <Icon name="person-circle-outline" size={64} style={styles.icon} />} 
+     {uri === undefined && editable ? <Icon name="person-circle-outline" size={64} style={styles.icon} /> : <Image source={{ uri: uri }} style={styles.container} />} 
     </View>
   );
 };

@@ -55,7 +55,7 @@ export const UserProfilePicturePicker = ({
 
   return (
     <View style={styles.container}>
-      <Avatar uri={imageURL} loading={loading} editable />
+      <Avatar uri={!!initialImageURL ? imageURL : undefined} loading={loading} editable />
       <Icon
         size={28}
         name="pencil"

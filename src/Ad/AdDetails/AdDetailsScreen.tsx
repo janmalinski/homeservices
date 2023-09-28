@@ -35,7 +35,7 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user.user);
-  const avatarUri = URL + user?.avatarUrl;
+  const avatarUri = !!user?.avatarUrl  ? URL + user.avatarUrl : undefined;
 
   const {
     id,
@@ -72,7 +72,7 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
               name="trash-outline"
               color={colors.black}
               size={20}
-              onPress={() => deleteAd()}
+              onPress={deleteAd}
             />
           </View>
         ) : (
@@ -99,6 +99,7 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
   }, []);
 
   const deleteAd = useCallback(() => {
+
   }, [id]);
 
   const editAd = useCallback(() => {
@@ -132,6 +133,13 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
               {t('adDetails.availableTo') + ': ' + convertDate(availableTo)}
             </Text>
           )}
+          <View style={styles.avatarNameContainer}>
+            {!!avatarUri && <Image
+              source={{ uri: avatarUri }}
+              style={styles.avatarContainer as any}
+            />}
+            <Text typography="body">{user?.name}</Text>
+          </View>
           {user?.phoneNumberConsent && (
             <Text typography="body">{user?.phoneNumber}</Text>
           )}
@@ -139,15 +147,6 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
             <Text typography="body" style={styles.addressText}>
               {address}
             </Text>
-          </View>
-        </View>
-        <View>
-          <Image
-            source={{ uri: avatarUri }}
-            style={styles.avatarContainer as any}
-          />
-          <View style={[styles.nameContainer]}>
-            <Text typography="body">{user?.name}</Text>
           </View>
         </View>
       </View>
@@ -200,6 +199,7 @@ interface IStyles {
   addressText: TextStyle;
   addressContainer: ViewStyle;
   avatarContainer: ViewStyle;
+  avatarNameContainer: ViewStyle;
   nameContainer: ViewStyle;
   iconsContainer: ViewStyle;
   editIcon: ViewStyle;
@@ -223,6 +223,10 @@ const stylesDef: IStyles = {
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  avatarNameContainer: { 
+    alignItems: 'center',
+    width: 64
   },
   nameContainer: {
     justifyContent: 'center',

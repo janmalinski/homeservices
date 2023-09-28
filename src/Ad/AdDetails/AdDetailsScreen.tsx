@@ -35,11 +35,9 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user.user);
-  const avatarUri = !!user?.avatarUrl  ? URL + user.avatarUrl : undefined;
 
   const {
     id,
-    address,
     description,
     availability,
     availableFrom,
@@ -49,7 +47,14 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
     createdAt,
     userId,
     rooms,
+    authorName,
+    authorAvatar,
+    authorPhoneNumberConsent,
+    authorPhoneNumber,
+    authorAddress
   } = route.params.ad;
+
+  const avatarUri = !!authorAvatar ? URL + authorAvatar : undefined;
 
   const { isAuthor } = route.params;
 
@@ -138,14 +143,14 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
               source={{ uri: avatarUri }}
               style={styles.avatarContainer as any}
             />}
-            <Text typography="body">{user?.name}</Text>
+            <Text typography="body">{authorName}</Text>
           </View>
-          {user?.phoneNumberConsent && (
-            <Text typography="body">{user?.phoneNumber}</Text>
+          {authorPhoneNumberConsent && (
+            <Text typography="body">{authorPhoneNumber}</Text>
           )}
           <View style={styles.addressContainer}>
             <Text typography="body" style={styles.addressText}>
-              {address}
+              {authorAddress}
             </Text>
           </View>
         </View>

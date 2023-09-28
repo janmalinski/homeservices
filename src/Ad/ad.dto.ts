@@ -31,5 +31,10 @@ export namespace AdDto {
       time: UserDto.AvailabilityTime[];
     };
     rooms: ChatDto.Room[];
+    authorName: string,
+    authorAvatar: string,
+    authorPhoneNumberConsent: boolean;
+    authorPhoneNumber: string;
+    authorAddress: string;
   };
 }

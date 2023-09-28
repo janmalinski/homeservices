@@ -25,7 +25,6 @@ export namespace UserDto {
     description: string;
     availableFrom: string;
     availableTo: string;
-    address: string;
     services: AdDto.Service[];
     typesOfEmployment: AdDto.TypeOfEmployment[];
     availability: {
@@ -36,6 +35,11 @@ export namespace UserDto {
     latitude: number;
     longitude: number;
     rooms: ChatDto.Room[];
+    authorName: string;
+    authorAvatar: string;
+    authorPhoneNumberConsent: boolean;
+    authorPhoneNumber: string;
+    authorAddress: string;
   };
 
   export type userDetails = {

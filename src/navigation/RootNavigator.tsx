@@ -85,6 +85,7 @@ export type TRootNavigatorParams = {
     userId: string;
     roomId?: string;
     receiverId?: string;
+    participantName?: string;
   };
   AuthorRoomList: {
     rooms: ChatDto.Room[];
@@ -232,13 +233,7 @@ export const RootNavigator = () => {
       <Root.Screen
         name="Chat"
         component={ChatScreen}
-        options={{
-          headerShown: true,
-          headerTitle: '',
-          headerBackTitle: t('adDetails.screenTitle'),
-          headerTintColor: colors.black,
-          headerShadowVisible: false,
-        }}
+        options={headerOptions}
       />
       <Root.Screen
         name="AuthorRoomList"

@@ -1,6 +1,6 @@
 import { StyleSheet, View, ScrollView, TextInput, Keyboard, Platform } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import io from 'socket.io-client';
 import Config from 'react-native-config';
@@ -18,13 +18,14 @@ export const ChatScreen = () => {
 
   const [roomName, setRoomName] = useState('');
   const [receiverID, setReceiverID] = useState('');
-  const [ authorOfRoom, setAuthorOfRoom] = useState('');
-  const [ userOfRoom, setUserOfRoom] = useState('');
+  const [authorOfRoom, setAuthorOfRoom] = useState('');
+  const [userOfRoom, setUserOfRoom] = useState('');
   const [currentRoomId, setCurrentRoomId] = useState('');
   const [messages, setMessages] = useState<ChatDto.Message[] | []>([]);
   const [textMessage, setTextMessage] = useState('');
   const [extraMarginBottom, setExtraMarginBottom] = useState(false);
- 
+
+  const navigation = useNavigation();
   const route = useRoute<RouteProp<TNavParams, 'Chat'>>();
   const scrollRef = useRef<ScrollView>(null);
   const socketRef = useRef<any>(undefined);
@@ -32,7 +33,7 @@ export const ChatScreen = () => {
   const { bottom } = useSafeAreaInsets();
   const keyboardHeight = useKeyboardHeight();
  
-  const { adId, authorId, userId, roomId, receiverId } = route.params;
+  const { adId, authorId, userId, roomId, receiverId, participantName } = route.params;
 
   const checkRoomMembersAndGetMessages = useCallback( async() => {
     let data;
@@ -59,8 +60,14 @@ export const ChatScreen = () => {
       setMessages(data);
   }, [setMessages, currentRoomId]);
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: participantName
+    });
+  }, [participantName]);
+
   useEffect(()=> {
-    socketRef.current = io(Config.DOMAIN_URL);
+    socketRef.current = io(Config.DOMAIN_URL as string);
     socketRef.current.connect();
     return () => socketRef.current.disconnect();
   }, []);

@@ -14,7 +14,7 @@ interface IProps {
 export const AuthorRoomListScreen = ({route, navigation}: IProps) => {
 
   const navigateToRoom = (item: ChatDto.Room) => {
-    navigation.navigate('Chat', { authorId: item.room.author_id, userId: route.params.userId, adId: item.room.ad_id, roomId: item.room.id});
+    navigation.navigate('Chat', { authorId: item.room.author_id, userId: route.params.userId, adId: item.room.ad_id, roomId: item.room.id, participantName: item.room.participant_name});
   }
 
   const renderItem = ({ item }: { item: ChatDto.Room }) => (
@@ -37,7 +37,7 @@ export const AuthorRoomListScreen = ({route, navigation}: IProps) => {
       noScroll
     >
       <FlatList
-        data={route.params.rooms}
+        data={[...route.params.rooms].reverse()}
         keyExtractor={item => item.room.id}
         renderItem={renderItem}
         />

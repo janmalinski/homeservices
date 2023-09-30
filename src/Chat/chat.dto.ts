@@ -13,6 +13,7 @@ export namespace ChatDto {
       ad_id: string;
       author_id: string;
       user_id: string;
+      participant_name: string;
       created_at: string;
     }
     user: {

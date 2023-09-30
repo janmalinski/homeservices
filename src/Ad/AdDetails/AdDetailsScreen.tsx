@@ -112,13 +112,18 @@ const AdDetailsScreen = ({ route, navigation }: IProps) => {
   }, [navigation, route.params.ad]);
 
   const navigateToChat = useCallback(() => {
+
+
+
     if (userId === user?.id && rooms.length > 0) {
       navigation.navigate('AuthorRoomList', { rooms, userId: user?.id });
     } else {
+      const participantName = rooms.filter(item => item.room.ad_id === id && item.room.author_id === userId && !!item.user.id)[0].room.participant_name;
       navigation.navigate('Chat', {
         authorId: userId,
         userId: user?.id as string,
         adId: id,
+        participantName 
       });
     };
   }, [navigation, user, id, rooms, userId]);
